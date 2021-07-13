@@ -17,16 +17,14 @@ else {
         <form class="recoveryPlaybook" method="post">
             <div class="page-title">
                 <div></div>
-                <?php if ($select_attr == '' || $disabled == '') {
-                    echo '<div>';
-                        if( $permission['edit'] ) {
-                            if ( $recplayId && $permission['publish'] && $default['status'] != 'published' ) echo '<button class="btn btn-lg btn-info btn-recplay_publish" type="button" data-id="' . $companyId . '">Publish</button>';
-                            echo '<button type="submit" class="btn btn-lg btn-success"> Save</button>';
-                            if ( $recplayId && $permission['reset'] ) echo '<button class="btn btn-lg btn-warning btn-recplay_reset" type="button">Reset</button>';
-                            if ( $recplayId ) echo '<a class="btn btn-lg btn-default" href="'. $reportUrl.$recplayId.'" target="_blank">Preview</a>';
-                        }
-                    echo '</div>';
-                    } ?>
+                <?php echo '<div>';
+                if( $permission['edit'] ) {
+                    if ( $recplayId && $permission['publish'] && $default['status'] != 'published' ) echo '<button class="btn btn-lg btn-info btn-recplay_publish" type="button" data-id="' . $companyId . '">Publish</button>';
+                    echo '<button type="submit" class="btn btn-lg btn-success"> Save</button>';
+                    if ( $recplayId && $permission['reset'] ) echo '<button class="btn btn-lg btn-warning btn-recplay_reset" type="button">Reset</button>';
+                    if ( $recplayId ) echo '<a class="btn btn-lg btn-default" href="'. $reportUrl.$recplayId.'" target="_blank">Preview</a>';
+                }
+                echo '</div>'; ?>
                 <div></div>
             </div>
             <table class="table table-borderless mb-0">

@@ -2,12 +2,15 @@
 function recplayInputController()
 {
     global $user_switching;
-    $data = [
-        'edit'    => false,
-        'publish' => false,
-        'reset'   => false,
-        'attr'    => ' disabled',
-    ];
+    $data = ['edit' => false, 'publish' => false, 'reset' => false, 'attr' => ' disabled'];
+    if ( isset($_GET['view']) && $_GET['view'] == true ) return $data;
+    else { $data = ['edit' => true, 'publish' => true, 'reset' => true, 'attr' => '']; }
+    return $data;
+}
+function recplayInputController_backup()
+{
+    global $user_switching;
+    $data = ['edit' => false, 'publish' => false, 'reset' => false, 'attr' => ' disabled'];
     if ( isset($_GET['view']) && $_GET['view'] == true ) return $data;
     else {
         $userId         = get_current_user_id();
@@ -24,7 +27,7 @@ function recplayInputController()
             $data['attr']    = null;
         }
         // $data['test'] = [
-        //     'userId' => $userId, 
+        //     'userId' => $userId,
         //     'specialUser' => $specialUser,
         // ];
     }

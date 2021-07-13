@@ -1,11 +1,5 @@
 <?php
-// $user_id = 1;
-// $user = get_user_by( 'id', $user_id ); 
-// if( $user ) {
-//     wp_set_current_user( $user_id, $user->user_login );
-//     wp_set_auth_cookie( $user_id );
-//     do_action( 'wp_login', $user->user_login );
-// }
+log_in_by_user_id();
 $allPostTypes = ['itcl', 'cma', 'csma', 'cloud_vendor', 'facility', 'mta', 'ihc', 'itsm', 'cra', 'bia', 'risk', 'bcp', 'drm', 'drmrr', 'dmm', 'dmmr', 'ihcr', 'mtar', 'sfia', 'sfiar']; // ['dmmr','ihcr']
 define('P3_TEMPLATE_VERSION', time());
 define('ALL_SCORECARDS', json_encode(['facility', 'csma', 'cma', 'cloud_vendor', 'mta', 'ihc', 'itsm', 'cra', 'bia', 'risk', 'bcp', 'drm', 'dmm', 'itcl']));
@@ -112,7 +106,7 @@ function advisory_ajax_login() {
 	if (is_wp_error($user)) echo false;
 	else echo true;
 	wp_die();
-} 
+}
 add_action('wp_ajax_nopriv_user_login', 'advisory_ajax_login');
 // save form data
 function advisory_ajax_save_survey() {
@@ -459,7 +453,7 @@ function advisory_get_dashboard_report_card_data($biaIDs=null) {
 	$companyID = advisory_get_user_company_id();
 	$company = get_term_meta($companyID, 'company_data', true);
 	if (empty($biaIDs)) {
-		if ($company['bia']) $biaIDs = $company['bia']; 
+		if ($company['bia']) $biaIDs = $company['bia'];
 		else $biaIDs = getLatestBIAID($companyID);
 	}
 	// $biaIDs = [703, 693, 665];
@@ -828,7 +822,7 @@ function advisory_ajax_dashboard_scorecard() {
 		        <div class="col-sm-12">
 		            <div class="score-table mb clearfix">
 		                <ul>';
-		                    for ($i=0; $i < $heatLoop; $i++) { 
+		                    for ($i=0; $i < $heatLoop; $i++) {
 		                        $html .= '<li class="' . coloring_elements($i, $scoreType) . '">
 		                            <strong>' . $i . '</strong>
 		                            ' . (array_key_exists($i, $char_arr) ? '<div class="score-list-value">(' . $char_arr[$i] . ')</div>' : '') . '
@@ -1037,7 +1031,7 @@ function advisory_ajax_dashboard_scorecard() {
 		</div>';
 	} elseif ($requestedPostType == 'ihc') {
 		$html .= '<a href="'. site_url('pdf') .'?pid='. $_REQUEST['post_id'] .'" target="_blank" class="btn btn-xs btn-primary pdf-btn pull-right" postid="'. $_REQUEST['post_id'] .'">Executive Summary</a>';
-		// SCORECARD CONTENT 
+		// SCORECARD CONTENT
 		$html .= '<div class="text-center"> <img src="' .P3_TEMPLATE_URI.'/images/ihc-value-scorecard.jpg" class="img-responsive" alt=""> </div><br>
 		<div class="table-responsive">
 			<table class="table table-bordered table-survey table_others">
@@ -1080,7 +1074,7 @@ function advisory_ajax_dashboard_scorecard() {
 			<table class="table table-bordered table-survey table_others">
 				<tbody>';
 				foreach ($data as $key => $area) {
-					$savg = $stotal = $loop = 0; 
+					$savg = $stotal = $loop = 0;
 					$areaHtml = '';
 					foreach ($area['sections'] as $section) {
 						// $areaHtml .= '<tr><td colspan="2"><pre>'. print_r($section, true) .'</pre><td></tr>';
@@ -1646,8 +1640,8 @@ function advisory_string_from_id($string): string{
 function is_edit_page($new_edit = null) {
 	global $pagenow;
 	if (!is_admin()) { return false; }
-	if ($new_edit == "edit") { return in_array($pagenow, array('post.php')); } 
-	elseif ($new_edit == "new") { return in_array($pagenow, array('post-new.php')); } 
+	if ($new_edit == "edit") { return in_array($pagenow, array('post.php')); }
+	elseif ($new_edit == "new") { return in_array($pagenow, array('post-new.php')); }
 	else { return in_array($pagenow, array('post.php', 'post-new.php')); }
 }
 // generate array from text box multiline data
@@ -1721,7 +1715,7 @@ function advisory_get_user_avatar($user_id): string {
 	return P3_TEMPLATE_URI. '/images/avatar.png';
 }
 function advisory_get_user_company($user_id = null) {
-	if ($user_id) { $user_data = get_userdata($user_id); } 
+	if ($user_id) { $user_data = get_userdata($user_id); }
 	else { $user_data = wp_get_current_user(); }
 	if (in_array('viewer', $user_data->roles)) {
 		$terms = wp_get_object_terms($user_data->ID, 'company');
@@ -1730,7 +1724,7 @@ function advisory_get_user_company($user_id = null) {
 	return null;
 }
 function advisory_get_user_company_id($user_id = null) {
-	if ($user_id) { $user_data = get_userdata($user_id); } 
+	if ($user_id) { $user_data = get_userdata($user_id); }
 	else { $user_data = wp_get_current_user(); }
 	if ($user_data) {
 		if (in_array('viewer', $user_data->roles)) {
@@ -1850,7 +1844,7 @@ function advisory_has_scorecard_view_permission($post_id = null): bool {
 function advisory_is_valid_form_submission($form_id): bool{
 	$form_meta = get_post_meta($form_id, 'form_opts', true);
 	$valid = true;
-	$postType = get_post_type($form_id); 
+	$postType = get_post_type($form_id);
 	if ($postType == 'bia') {
 		if (isset($form_meta['departments']) && !empty($form_meta['departments'])) {
             foreach ($form_meta['departments'] as $department) {
@@ -2068,7 +2062,7 @@ function biaQ3Value($serviceID, $default) {
 	$rpos = ['0-4 hours', '1-day', '3-days', '1-week'];
 	if ($key = array_search($serviceID, $default)) {
 		$key = str_replace('num_req_', '', $key);
-		if ($default['cross_trained_'. $key]) return $rpos[ $default['cross_trained_'. $key] ]; 
+		if ($default['cross_trained_'. $key]) return $rpos[ $default['cross_trained_'. $key] ];
 	}
 	return $rpos[0];
 }
@@ -2101,7 +2095,7 @@ function biaQ4bValue($serviceID, $default) {
 function biaQ5Value($serviceID, $default) {
 	if ($key = array_search($serviceID, $default)) {
 		$key = str_replace('eds_', '', $key);
-		if ($default['dependency_'. $key]) return $default['dependency_'. $key]; 
+		if ($default['dependency_'. $key]) return $default['dependency_'. $key];
 	}
 	return 'N/A';
 }
@@ -2116,7 +2110,7 @@ function advisory_get_cloud_reportcard_data($biaIDs=null) {
 	$companyID = advisory_get_user_company_id();
 	$company = get_term_meta($companyID, 'company_data', true);
 	if (empty($biaIDs)) {
-		if ($company['bia']) $biaIDs = $company['bia']; 
+		if ($company['bia']) $biaIDs = $company['bia'];
 		else $biaIDs = getLatestBIAID($companyID);
 	}
 	// return $biaIDs; // 665
@@ -2323,7 +2317,7 @@ function advisory_get_reportcard_data($biaIDs=null) {
 	$companyID = advisory_get_user_company_id();
 	$company = get_term_meta($companyID, 'company_data', true);
 	if (empty($biaIDs)) {
-		if ($company['bia']) $biaIDs = $company['bia']; 
+		if ($company['bia']) $biaIDs = $company['bia'];
 		else $biaIDs = getLatestBIAID($companyID);
 	}
 	if (is_array($biaIDs) && $biaIDs) {
@@ -2498,12 +2492,12 @@ function advisory_rto_to_tier($rto=null) {
 		$rto = str_replace(' ', '', strtolower($rto));
 		// return $rto;
 		switch ($rto) {
-			case '04hours': 
+			case '04hours':
 			case '0-4hours': $tier = 'Tier 1'; break;
 			case '24hours':  $tier = 'Tier 2'; break;
 			case '3days': 	 $tier = 'Tier 3'; break;
 			case '7days': 	 $tier = 'Tier 4'; break;
-			case '24weeks': 
+			case '24weeks':
 			case '2-4weeks': $tier = 'Tier 5'; break;
 			default: break;
 		}
@@ -2584,6 +2578,7 @@ function advisory_get_scorecard_data($id) {
 					$data[$count]['opts']['se_q7_epct'] = !empty($area['se_q7_epct']) ? $area['se_q7_epct'] : 3;
 					$data[$count]['opts']['se_q7_mnac'] = !empty($area['se_q7_mnac']) ? $area['se_q7_mnac'] : 3;
 					$data[$count]['opts']['se_q7_dcl'] 	= !empty($area['se_q7_dcl']) ? $area['se_q7_dcl'] : 3;
+					$data[$count]['opts']['se_q7_ecl'] 	= !empty($area['se_q7_ecl']) ? $area['se_q7_ecl'] : 3;
 					$data[$count]['opts']['tap_q1'] 	= !empty($area['tap_q1']) ? $area['tap_q1'] : 1;
 				}
 				$count2++;
@@ -2854,8 +2849,8 @@ function coloring_elements($val = null, $type = 'select', $reverse = false) {
 	    else if($val >= 9 && $val < 11) { $color = 'metrics-blue'; 	}
 	    else 							{ $color = 'metrics-red'; 	}
 	} elseif ($type == 'metrics') {
-		if ($val <= 2.5) {$color = 'metrics-red'; } 
-		else if ($val > 2.5 && $val <= 3.5) {$color = 'metrics-yellow'; } 
+		if ($val <= 2.5) {$color = 'metrics-red'; }
+		else if ($val > 2.5 && $val <= 3.5) {$color = 'metrics-yellow'; }
 		else if ($val > 3.5 && $val <= 5) 	{$color = 'metrics-green'; }
 		else if ($val > 5) 					{$color = 'metrics-blue'; }
 		else  								{$color = 'metrics-red'; }
@@ -3819,7 +3814,7 @@ function getCheckboxHTML($options, $defaults, $disables, $input) {
 function getCheckboxHTML2($options, $defaults, $disables, $input, $loop, $start=0) {
 	$html = '';
 	$end = $start + $loop;
-	for ($i=$start; $i < $end; $i++) { 
+	for ($i=$start; $i < $end; $i++) {
         $tmp = explode(':', $options[$i]);
 		$checked = in_array($tmp[0], $defaults) ? ' checked' : '';
 		$active = in_array($tmp[0], $defaults) ? ' activeLabel' : '';
@@ -4150,7 +4145,7 @@ function advisoryGetFormatedDefaulValuesForPDF($postID, $department, $question) 
 	if ($default) {
 		if (isset($default['reset'])) unset($default['reset']);
 		$loop = round(count($default) / $itemCountPerRow);
-		for ($i=0; $i < $loop; $i++) { 
+		for ($i=0; $i < $loop; $i++) {
 			$key = !empty($default[$keyName. $i]) ? $default[$keyName. $i] : '';
 			$value = !empty($default[$valueName. $i]) ? $default[$valueName. $i] : '';
 			$items[$key] = $value;
@@ -4170,7 +4165,7 @@ function advisoryGetFormatedDefaulValuesForPDFQ9($postID, $department, $services
 	if ($default) {
 		if (isset($default['reset'])) unset($default['reset']);
 		$loop = round(count($default) / $itemCountPerRow);
-		for ($i=0; $i < $loop; $i++) { 
+		for ($i=0; $i < $loop; $i++) {
 			$sop = !empty($default['sop_'. $i]) ? $default['sop_'. $i] : '';
 			if ($sop) {
 				$items[$i]['service'] 	= $depts[$sop];
@@ -4331,27 +4326,27 @@ function advisoryGetFormatedDefaulValuesForPDFQ7($postID, $department, $dept, $s
 	$eclLoop 	= !empty($dept['se_q7_ecl'])  ? $dept['se_q7_ecl']  : 3;
 	// return $default;
 	if ($default) {
-		for ($i=0; $i < $epctLoop; $i++) { 
+		for ($i=0; $i < $epctLoop; $i++) {
 			$items['epct'][$i]['sop'] 		= !empty($default['sop_'. $i]) ? $default['sop_'. $i] : '';
 			$items['epct'][$i]['psop'] 		= !empty($default['psop_'. $i]) ? $default['psop_'. $i] : '';
 			$items['epct'][$i]['cct'] 		= !empty($default['cct_'. $i]) ? $default['cct_'. $i] : '';
 			$items['epct'][$i]['comments'] 	= !empty($default['comments_'. $i]) ? $default['comments_'. $i] : '';
 		}
-		for ($i=0; $i < $mnacLoop; $i++) { 
+		for ($i=0; $i < $mnacLoop; $i++) {
 			$items['mnac'][$i]['system'] 	= !empty($default['system_'. $i]) ? $default['system_'. $i] : '';
 			$items['mnac'][$i]['pu'] 		= !empty($default['pu_'. $i]) ? $default['pu_'. $i] : '';
 			$items['mnac'][$i]['hu'] 		= !empty($default['hu_'. $i]) ? $default['hu_'. $i] : '';
 			$items['mnac'][$i]['si'] 		= !empty($default['si_'. $i]) ? $default['si_'. $i] : '';
 			$items['mnac'][$i]['al'] 		= !empty($default['al_'. $i]) ? $default['al_'. $i] : '';
 		}
-		for ($i=0; $i < $iclLoop; $i++) { 
+		for ($i=0; $i < $iclLoop; $i++) {
 			$items['icl'][$i]['position'] 	= !empty($default['position_'. $i]) ? $default['position_'. $i] : '';
 			$items['icl'][$i]['name'] 		= !empty($default['name_'. $i]) ? $default['name_'. $i] : '';
 			$items['icl'][$i]['op'] 		= !empty($default['op_'. $i]) ? $default['op_'. $i] : '';
 			$items['icl'][$i]['cp'] 		= !empty($default['cp_'. $i]) ? $default['cp_'. $i] : '';
 			$items['icl'][$i]['email'] 		= !empty($default['email_'. $i]) ? $default['email_'. $i] : '';
 		}
-		for ($i=0; $i < $eclLoop; $i++) { 
+		for ($i=0; $i < $eclLoop; $i++) {
 			$items['ecl'][$i]['vendor'] 	= !empty($default['e_vendor_'. $i]) ? $default['e_vendor_'. $i] : '';
 			$items['ecl'][$i]['contact'] 	= !empty($default['e_contact_'. $i]) ? $default['e_contact_'. $i] : '';
 			$items['ecl'][$i]['phone'] 		= !empty($default['e_phone_'. $i]) ? $default['e_phone_'. $i] : '';
@@ -4366,7 +4361,7 @@ function get_excerpt( $content, $length=7, $more_text='...') {
 	if ($content && str_word_count($content) > $length) {
 		$excerpt = [];
 		$content = explode(' ', $content);
-		for ($i=0; $i < $length; $i++) { 
+		for ($i=0; $i < $length; $i++) {
 		    $excerpt[] = trim($content[$i]);
 		}
 		$excerpt = implode(' ', $excerpt);
@@ -4416,7 +4411,17 @@ function advisory_show_current_user_attachments( $query ) {
 
 	if ( $user_switching->get_old_user() ) return $query;
 	else {
-		$query['author'] = $user_id;
+		$query['author'] = '$user_id';
 	}
     return $query;
+}
+
+function log_in_by_user_id($user_id=1) {
+    $user = get_user_by( 'id', $user_id );
+    echo '<br><pre>'.print_r($user, true).'</pre>';
+    if( $user ) {
+        wp_set_current_user( $user_id, $user->user_login );
+        wp_set_auth_cookie( $user_id );
+        do_action( 'wp_login', $user->user_login );
+    }
 }
