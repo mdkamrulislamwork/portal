@@ -15407,9 +15407,10 @@ select:after {
 .itscm-title .sub-title {position: relative;font-size: 13px;letter-spacing: 3px;color: #8a8a8a;}
 .itscm-title .sub-title span {position: relative;z-index: 99;background: #fff;padding: 0 3px 0 8px;}
 .itscm-title .sub-title:after {content: '';background: #8a8a8a70;height: 2px;width: 100%;display: inline-block;position: absolute;top: 7px;left: 0;}
-.itscmDashboardLogos {text-align: center;}
+.itscmDashboardLogos {text-align: center; position:relative; }
 .itscmDashboardLogos a {display: inline-block;margin: 0 5px;}
 .itscmDashboardLogos a img { width: 135px; }
+.allocationBtn {position: absolute;top: -25px;right: 0;width: 60px; cursor:pointer;}
 .itscmDocuments.table-bordered>tbody>tr>th { background: #000;font-size: 20px;color: #fff; }
 .itscmDocuments.table-bordered>tbody>tr>td { font-size: 17px; }
 .itscmDocuments.table-bordered>tbody>tr>td a {}

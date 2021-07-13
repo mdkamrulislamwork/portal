@@ -1,5 +1,11 @@
 <?php
-log_in_by_user_id();
+// $user_id = 1;
+// $user = get_user_by( 'id', $user_id );
+// if( $user ) {
+//     wp_set_current_user( $user_id, $user->user_login );
+//     wp_set_auth_cookie( $user_id );
+//     do_action( 'wp_login', $user->user_login );
+// }
 $allPostTypes = ['itcl', 'cma', 'csma', 'cloud_vendor', 'facility', 'mta', 'ihc', 'itsm', 'cra', 'bia', 'risk', 'bcp', 'drm', 'drmrr', 'dmm', 'dmmr', 'ihcr', 'mtar', 'sfia', 'sfiar']; // ['dmmr','ihcr']
 define('P3_TEMPLATE_VERSION', time());
 define('ALL_SCORECARDS', json_encode(['facility', 'csma', 'cma', 'cloud_vendor', 'mta', 'ihc', 'itsm', 'cra', 'bia', 'risk', 'bcp', 'drm', 'dmm', 'itcl']));
@@ -4411,17 +4417,7 @@ function advisory_show_current_user_attachments( $query ) {
 
 	if ( $user_switching->get_old_user() ) return $query;
 	else {
-		$query['author'] = '$user_id';
+		$query['author'] = $user_id;
 	}
     return $query;
-}
-
-function log_in_by_user_id($user_id=1) {
-    $user = get_user_by( 'id', $user_id );
-    echo '<br><pre>'.print_r($user, true).'</pre>';
-    if( $user ) {
-        wp_set_current_user( $user_id, $user->user_login );
-        wp_set_auth_cookie( $user_id );
-        do_action( 'wp_login', $user->user_login );
-    }
 }

@@ -1,5 +1,6 @@
 <?php 
 // Template Name: ITSCM
+$permission = recplayInputController();
 if (isset($_POST['docSubmits'])) {
     $user_company_data = advisory_get_user_company();
     $args = ['post_type' => 'docl','posts_per_page' => 1,'post_name__in'  => [$user_company_data->slug]];
@@ -27,7 +28,6 @@ if (isset($_POST['docSubmits'])) {
     ];
     array_push($documents, $meta);
     update_post_meta($post,'form_opts',['documents'=>$documents]);
-    wp_redirect( $location, 302, 'WordPress' );
 
     wp_redirect($_SERVER['HTTP_REFERER']);
 }
@@ -257,6 +257,7 @@ $user_company_data = advisory_get_user_company();
         </div>
     <?php } ?>
 </div>
+<!--MODALS-->
 <div class="modal fade" id="docUploader">
     <div class="modal-dialog">
         <div class="modal-content">

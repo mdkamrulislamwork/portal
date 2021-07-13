@@ -6,6 +6,8 @@
             <a href="javascript:;"><img src="<?php echo IMAGE_DIR_URL.'dashboard/itscm/disaster_management_forms.png'; ?>" class="img-responsive comingSoon" alt=""></a>
             <a href="<?php echo site_url('recovery-playbook') ?>"><img src="<?php echo IMAGE_DIR_URL.'dashboard/itscm/recovery_playbook.png'; ?>" class="img-responsive" alt=""></a>
             <a href="javascript:;"><img src="<?php echo IMAGE_DIR_URL.'dashboard/itscm/tabletop_exercise_handbook.png'; ?>" class="img-responsive" alt="" data-toggle="modal" data-target="#tableTop"></a>
+            <img src="<?php echo IMAGE_DIR_URL.'dashboard/itscm/allocation.png'; ?>" class="img-responsive allocationBtn orderRestoration">
         </div>
     </div>
 </div>
+<?php require_once P3_TEMPLATE_PATH .'/includes/modals/_order_restoration.php'; ?>
