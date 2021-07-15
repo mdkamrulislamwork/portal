@@ -110,7 +110,7 @@ function recplayGetPublishedItems($companyId=0)
 	global $wpdb;
 	if ( !$companyId ) $companyId = advisory_get_user_company_id();
 	$table = 'recovery_playbook';
-	$result = $wpdb->get_results('SELECT id, serial_no FROM `'.$table.'` WHERE status = "published" AND company_id = '.$companyId.' ORDER BY `serial_no` ASC', ARRAY_A);
+	$result = $wpdb->get_results('SELECT id, serial_no, app_name FROM `'.$table.'` WHERE status = "published" AND company_id = '.$companyId.' ORDER BY `serial_no` ASC', ARRAY_A);
 	return $result;
 }
 function recplayGetCurrentItems($companyId=0)

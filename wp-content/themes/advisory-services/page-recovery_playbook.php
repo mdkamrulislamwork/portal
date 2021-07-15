@@ -30,7 +30,7 @@ else {
             <table class="table table-borderless mb-0">
                 <tr>
                     <td class="bg-palm-leaf mainTitle" style="width: 700px;"> System/Application Recovery Playbook </td>
-                    <td style="text-align: center;width: 55px;padding: 0;"> <img src="<?php echo IMAGE_DIR_URL.'recovery_playbook/order_of_restoration.png'; ?>" style="height: 45px;cursor: pointer;" class="orderRestoration"> </td>
+                    <td style="text-align:center;width:55px;padding:0;"> <img src="<?php echo IMAGE_DIR_URL.'recovery_playbook/p.png'; ?>" style="height: 45px;cursor: pointer;" class="orderRestoration"> </td>
                     <td class=""> </td>
                     <td class="bg-dark-yellow" style="width: 115px;"> Playbook ID# </td>
                     <td class="bg-black" style="width: 65px; padding: 0; text-align: center;"> <?php echo ( !empty($default['serial_no']) ? 'PL-'.$default['serial_no'] : 'N/A' ) ?> </td>
@@ -39,19 +39,20 @@ else {
             <div class="note"><strong>Note: </strong> This Playbook should be used with the Disaster Management Forms</div>
             
             <table class="table table-sp">
-                <tr> <td colspan="2" class="bg-black title">Support Profile</td> </tr>
+                <tr> <td colspan="4" class="bg-black title">Support Profile</td> </tr>
                 <tr>
                     <td class="bg-light-grey" style="width: 220px;"> System/Application Name: </td>
-                    <td class="no-padding"> <?php echo recplayInputText('app_name', $default, $permission) ?> </td>
-
-                </tr>
-            </table>
-            <table class="table table-sp">
-                <tr>
+                    <td class="no-padding" style="width: 500px;"> <?php echo recplayInputText('app_name', $default, $permission) ?> </td>
                     <td class="bg-light-grey" style="width: 100px;">Description:</td>
                     <td class="no-padding"><?php echo recplayInputText('app_desc', $default, $permission) ?></td>
                 </tr>
             </table>
+<!--            <table class="table table-sp">-->
+<!--                <tr>-->
+<!--                    <td class="bg-light-grey" style="width: 100px;">Description:</td>-->
+<!--                    <td class="no-padding">--><?php //echo recplayInputText('app_desc', $default, $permission) ?><!--</td>-->
+<!--                </tr>-->
+<!--            </table>-->
             <table class="table table-sp">
                 <tr>
                     <td class="bg-light-grey" style="width: 190px;">Vendor Name/Contact: </td>
@@ -98,11 +99,7 @@ else {
                 </tr>
             </table>
             <div class="bg-black title"> Additional Considerations Checklist (if applicable) </div>
-            <div class="note">
-                Please check appropriate items if required for the full recovery of the system/application 
-             
-               
-            </div>
+            <div class="note">Please check appropriate items if required for the full recovery of the system/application</div>
             <table class="table table-borderless">
                 <tr>
                     <td class="bg-dark-grey" style="width:240px; color: #fff; padding: 2px">
@@ -146,9 +143,7 @@ else {
         </form>
     </div>
     <?php echo commentModal(); ?>
-    <?php // echo orderRestorationModal(); 
-    require_once P3_TEMPLATE_PATH .'/includes/modals/_order_restoration.php';
-    ?>
+    <?php require_once P3_TEMPLATE_PATH .'/includes/modals/_order_restoration.php'; ?>
     <script src="<?php echo P3_TEMPLATE_URI. '/js/plugins/jquery.tinymce.min.js'; ?>"></script>
     <script>
     jQuery(function($) {

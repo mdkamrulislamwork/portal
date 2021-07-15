@@ -6,11 +6,12 @@ function orderRestorationAll() {
 }
 function orderRestorationAllWithPlaybookSi() { 
     global $wpdb;
-    $sql = 'SELECT *  FROM `order_of_restoration` WHERE `company_id` = '.advisory_get_user_company_id().' ORDER BY `serial_no` ASC';
+    //$sql = 'SELECT *  FROM `order_of_restoration` WHERE `company_id` = '.advisory_get_user_company_id().' ORDER BY `serial_no` ASC';
     $sql = '';
     $sql .= ' SELECT';
     $sql .= ' oor.id as id, oor.company_id as company_id, oor.serial_no as serial_no, oor.activity as activity,';
-    $sql .= ' oor.playbook_id as playbook_id, oor.description as description, oor.notes as notes, rp.serial_no as playbook_si';
+    $sql .= ' oor.playbook_id as playbook_id, oor.description as description, oor.notes as notes, rp.serial_no as playbook_si, rp.app_name as app_name';
+
     $sql .= ' FROM order_of_restoration as oor LEFT JOIN recovery_playbook AS rp ON oor.playbook_id = rp.id';
     $sql .= ' WHERE oor.company_id = '.advisory_get_user_company_id();
     $sql .= ' ORDER BY oor.serial_no ASC';
@@ -20,8 +21,10 @@ function orderRestorationGetDataById($id=0)
 {
     global $wpdb;
     $table = 'order_of_restoration';
-    $result = $wpdb->get_row('SELECT * FROM `'.$table.'` WHERE id = '.$id);
-    return $result;
+    $data = $wpdb->get_row('SELECT * FROM `'.$table.'` WHERE id = '.$id);
+    if ( $data->playbook_id ) $recovery_playbook = $wpdb->get_row('SELECT * FROM `recovery_playbook` WHERE id = '.$data->playbook_id);
+    if ($recovery_playbook->id) $data->app_name = $recovery_playbook->app_name;
+    return $data;
 }
 function orderRestorationNextId($companyId=0)
 {
@@ -72,17 +75,18 @@ function advisory_ajax_orderRestorationAdd()
                 $str .= '<option>Select</option>';
                 if ( !empty($playbooks) ) {
                     foreach ($playbooks as $playbook) {
-                        $str .= '<option value="'.$playbook['id'].'">PL-'.$playbook['serial_no'].'</option>';
+                        $str .= '<option value="'.$playbook['id'].'" app_name="'.$playbook['app_name'].'">PL-'.$playbook['serial_no'].'</option>';
                     }
                 }
             $str .= '</select>';
         $str .= '</td>';
-        $str .= '<td class="no-padding"><textarea class="activity"></textarea></td>';
+    $str .= '<td class="no-padding app_name"></td>';
+    $str .= '<td class="no-padding"><textarea class="activity"></textarea></td>';
         $str .= '<td class="no-padding"><textarea class="description"></textarea></td>';
         $str .= '<td class="no-padding bg-green orderRestorationNotes"><textarea class="hidden notes"></textarea></td>';
         $str .= '<td class="no-padding text-center">';
             $str .= '<button type="button" class="btn btn-sm btn-success btn-orderRestorationSave" title="Save"><span class="fa fa-lg fa-floppy-o""></span></button>';
-            $str .= '<button type="button" class="btn btn-sm btn-danger btn-orderRestorationCancel"><span class="fa fa-lg fa-trash"></span></button>';
+            $str .= '<button type="button" class="btn btn-sm btn-danger btn-orderRestorationCancel"><span class="fa fa-lg fa-close"></span></button>';
         $str .= '</td>';
     $str .= '</tr>';
     echo $str;
@@ -129,17 +133,18 @@ function advisory_ajax_orderRestorationEdit()
                     if ( !empty($playbooks) ) {
                         foreach ($playbooks as $playbook) {
                             $isSelected = $playbook['id'] == $orderRestoration->playbook_id ? ' selected' : '';
-                            $str .= '<option value="'.$playbook['id'].'"'.$isSelected.'>PL-'.$playbook['serial_no'].'</option>';
+                            $str .= '<option value="'.$playbook['id'].'"'.$isSelected.' app_name="'.$playbook['app_name'].'">PL-'.$playbook['serial_no'].'</option>';
                         }
                     }
                 $str .= '</select>';
             $str .= '</td>';
+            $str .= '<td class="no-padding app_name">'.$orderRestoration->app_name.'</td>';
             $str .= '<td class="no-padding"><textarea class="activity">'.$orderRestoration->activity.'</textarea></td>';
             $str .= '<td class="no-padding"><textarea class="description">'.$orderRestoration->description.'</textarea></td>';
             $str .= '<td class="no-padding '.$notesClass.' orderRestorationNotes"><textarea class="hidden notes">'.$orderRestoration->notes.'</textarea></td>';
             $str .= '<td class="no-padding text-center">';
                 $str .= '<button type="button" class="btn btn-sm btn-success btn-orderRestorationSave" title="Save"><span class="fa fa-lg fa-floppy-o""></span></button>';
-                $str .= '<button type="button" class="btn btn-sm btn-danger btn-orderRestorationCancel"><span class="fa fa-lg fa-trash"></span></button>';
+                $str .= '<button type="button" class="btn btn-sm btn-danger btn-orderRestorationCancel"><span class="fa fa-lg fa-close"></span></button>';
             $str .= '</td>';
         $str .= '</tr>';
         echo $str;
@@ -211,7 +216,9 @@ function orderRestorationItemsHtml()
             $str .= '<tr class="orderRestorationItem orderRestorationItem'.$orderRestoration->id.'" data-id="'.$orderRestoration->id.'">';
                 $str .= '<td class="bg-black">RT-'.$orderRestoration->serial_no.'</td>';
                 $str .= '<td>'.( !empty($orderRestoration->playbook_si) ? 'PL-'.$orderRestoration->playbook_si : 'N/A').'</td>';
-                $str .= '<td>'.$orderRestoration->activity.'</td>';
+//            $str .= '<td class="app_name"><pre>'.print_r($orderRestoration, true).'</pre></td>';
+            $str .= '<td>'.$orderRestoration->app_name.'</td>';
+            $str .= '<td>'.$orderRestoration->activity.'</td>';
                 $str .= '<td>'.$orderRestoration->description.'</td>';
                 $str .= '<td class="ortCommentView '.$ortCommentClass.'"><textarea class="hidden">'.$orderRestoration->notes.'</textarea></td>';
                 $str .= '<td class="no-padding text-center">';

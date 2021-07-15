@@ -6,7 +6,7 @@
     #orderRestorationModal .table-bordered textarea:focus {outline: none;}
 </style>
 <div class="modal fade" id="orderRestorationModal">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog modal-xlg">
     	<div class="modal-content modal-inverse">
         	<div class="modal-header">
             	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -26,20 +26,15 @@
                         <tr>
                             <td class="bg-palm-leaf title" style="padding: 0; text-align: center; width: 70px;">Ref.#</td>
                             <td class="bg-palm-leaf title" style="padding: 0; text-align: center; width: 100px;">Playbook</td>
-                            <td class="bg-palm-leaf title">Activity</td>
+                            <td class="bg-palm-leaf title" style="padding: 0; text-align: center; width: 265px;">Playbook System/Application</td>
+                            <td class="bg-palm-leaf title" style="width: 200px;">Activity</td>
                             <td class="bg-palm-leaf title">System/Service Description</td>
-                            <td class="bg-palm-leaf title" style="width: 75px;">Notes </td>
-                            <?php if ($permission['edit']) {
-                                echo '<td class="bg-palm-leaf title" style="padding-right: 5px;width:110px"><button type="button" class="btn btn-sm btn-success pull-right btn-orderRestorationAdd"><span class="fa fa-lg fa-plus"></span> Add New</button></td>';
-                            } else {
-                                echo '<td class="bg-palm-leaf title" style="padding-right: 5px;width:50px"></td>';
-                            } ?>
-                            
+                            <td class="bg-palm-leaf title" style="width: 75px;">Notes</td>
+                            <?php if ($permission['edit']) { echo '<td class="bg-palm-leaf title" style="padding-right: 5px;width:110px"><button type="button" class="btn btn-sm btn-success pull-right btn-orderRestorationAdd"><span class="fa fa-lg fa-plus"></span> Add New</button></td>';
+                            } else { echo '<td class="bg-palm-leaf title" style="padding-right: 5px;width:50px"></td>'; } ?>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php echo orderRestorationItemsHtml(); ?>
-                    </tbody>
+                    <tbody><?php echo orderRestorationItemsHtml(); ?></tbody>
                 </table> 
             </div>
         	<div class="modal-footer"> <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> </div>
@@ -51,14 +46,12 @@
 <script>
 jQuery(function($) {
     "use strict"
-
     const permission = <?php echo json_encode($permission) ?>;
     const orderRestorationModal = $('#orderRestorationModal');
     const orderRestorationNotesModal = $('#orderRestorationNotesModal');
     const orderRestorationNotesModalSaveBtn = orderRestorationNotesModal.find('.saveBtn');
     const orderRestorationNotesViewModal = $('#orderRestorationNotesViewModal');
 
-    
     // POPUP COMMENTS
     $(document).on('click', '.ortCommentView', function(event) {
         event.preventDefault();
@@ -128,6 +121,12 @@ jQuery(function($) {
         $('.orderRestorationItem').removeClass('hidden');
         statusMessage(true, 'Operation cancelled');
     })
+
+    $(document).on('change', '.orderRestorationInput select.playbook_id', function(event) {
+        event.preventDefault();
+        let app_name = $(this).children(':selected').attr('app_name');
+        $(this).parents('tr').find('.app_name').text(app_name);
+    });
     $(document).on('click', '.btn-orderRestorationSave', function(e) {
         e.preventDefault();
         let button = $(this);
