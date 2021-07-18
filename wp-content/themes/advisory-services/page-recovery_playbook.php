@@ -30,7 +30,7 @@ else {
             <table class="table table-borderless mb-0">
                 <tr>
                     <td class="bg-palm-leaf mainTitle" style="width: 700px;"> System/Application Recovery Playbook </td>
-                    <td style="text-align:center;width:55px;padding:0;"> <img src="<?php echo IMAGE_DIR_URL.'recovery_playbook/p.png'; ?>" style="height: 45px;cursor: pointer;" class="orderRestoration"> </td>
+                    <td style="text-align:center;width:55px;padding:0;"> <img src="<?php echo IMAGE_DIR_URL.'recovery_playbook/p.png'; ?>" style="height: 45px;cursor: pointer;" class="currentPlaybooks"> </td>
                     <td class=""> </td>
                     <td class="bg-dark-yellow" style="width: 115px;"> Playbook ID# </td>
                     <td class="bg-black" style="width: 65px; padding: 0; text-align: center;"> <?php echo ( !empty($default['serial_no']) ? 'PL-'.$default['serial_no'] : 'N/A' ) ?> </td>
@@ -143,7 +143,8 @@ else {
         </form>
     </div>
     <?php echo commentModal(); ?>
-    <?php require_once P3_TEMPLATE_PATH .'/includes/modals/_order_restoration.php'; ?>
+    <?php //require_once P3_TEMPLATE_PATH .'/includes/modals/_order_restoration.php'; ?>
+    <?php require_once P3_TEMPLATE_PATH .'/includes/modals/_current_playbooks.php'; ?>
     <script src="<?php echo P3_TEMPLATE_URI. '/js/plugins/jquery.tinymce.min.js'; ?>"></script>
     <script>
     jQuery(function($) {
