@@ -11,9 +11,9 @@ $responses = ['0'=>'N/A', '1'=>'NO', '2'=>'YES', '3' => 'PARTIAL'];
 $scores = ['0' => 'N/A', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'];
 $company = advisory_get_user_company();
 $titleBg = csmaFunctionBackground($areaId);
-// echo '<br><pre>'.print_r('var', true).'</pre>'; exit();
 
-$domains = cloudVendorDomains($opts);
+$domains = cloud_vendorDomains($opts);
+// echo '<br><pre>'.print_r($domains, true).'</pre>'; exit();
 ?>
 <script src="<?php echo P3_TEMPLATE_URI. '/js/plugins/jquery.tinymce.min.js'; ?>"></script>
 <div class="content-wrapper">
@@ -43,16 +43,15 @@ $domains = cloudVendorDomains($opts);
         echo '<div class="card-body"> ';
             echo '<div class="row">';
                 echo '<div class="col-sm-4">';
-                    echo '<img src="'.IMAGE_DIR_URL.'cloud-vendor/governences.png" usemap="#image-map">';
+                    echo '<img src="'.IMAGE_DIR_URL.'cloud-vendor/banner-left.png" usemap="#image-map" style="margin-top:100px">';
                     echo '<map name="image-map">';
-                        echo '<area href="'.$domains[1].'" coords="503,452,459,411,426,389,201,163,234,134,269,108,303,87,333,71,357,58,388,44,424,30,467,16,509,9,551,2,599,1,640,2,683,2,729,8,787,22,840,39,891,61,942,90,981,115,1017,144,1041,163,816,388,782,411,737,451,693,430,648,417,594,415,548,429" shape="poly">';
-                        echo '<area href="'.$domains[2].'" coords="787,503,800,523,810,546,817,572,822,596,823,622,822,650,818,674,808,698,799,716,788,736,831,779,852,816,1076,1039,1112,1001,1142,958,1169,910,1195,856,1216,799,1230,736,1239,674,1241,621,1239,567,1229,494,1217,450,1196,387,1170,331,1147,289,1115,244,1078,200,854,425,832,459" shape="poly">';
-                        echo '<area href="'.$domains[3].'" coords="201,1076,425,851,459,829,503,786,520,794,532,803,545,808,561,813,578,817,592,818,613,821,637,822,663,817,685,813,703,805,724,794,738,784,778,825,783,831,815,850,1040,1075,1020,1093,1001,1109,980,1127,959,1140,934,1155,908,1171,883,1183,864,1193,842,1201,818,1210,791,1218,758,1227,722,1231,690,1237,650,1241,589,1240,545,1235,511,1232,465,1222,404,1201,329,1170,267,1131" shape="poly">';
-                        echo '<area href="'.$domains[4].'" coords="165,1040,390,815,409,782,454,736,442,716,432,698,424,676,417,650,415,631,415,612,416,594,420,577,425,557,433,539,444,516,455,503,411,459,390,425,165,200,136,232,105,273,82,311,57,360,32,424,13,498,1,580,2,657,14,747,39,837,80,925,112,978" shape="poly">';
-                        echo '<area href="'.$domains[5].'" coords="457,736,435,697,424,660,421,622,421,595,427,568,439,532,456,505,475,483,496,464,514,450,539,438,559,430,582,424,611,420,639,419,663,422,683,429,706,439,727,451,750,467,771,487,792,515,806,545,817,583,821,630,814,673,804,701,787,734,766,759,738,782,707,801,678,813,661,815,639,821,611,818,583,815,551,808,517,791,487,769" shape="poly">';
+                        echo '<area target="_self" alt="Governance" title="Governance" href="'.$domains[1].'" coords="506,456,459,413,421,388,202,167,238,132,298,92,345,67,405,44,481,19,541,9,608,1,666,1,741,12,806,27,862,46,906,67,936,84,974,109,996,126,1026,153,1040,163,816,389,784,411,738,459,705,436,668,422,618,417,571,421" shape="poly">';
+                        echo '<area target="_self" alt="Operations" title="Operations" href="'.$domains[2].'" coords="786,506,830,462,852,427,1078,199,1103,230,1127,263,1144,291,1164,320,1184,360,1200,398,1214,436,1228,497,1238,551,1238,603,1238,678,1229,738,1210,812,1191,862,1165,917,1140,960,1109,1000,1076,1041,853,817,832,784,786,738,811,693,823,641,820,587,809,544" shape="poly">';
+                        echo '<area target="_self" alt="Security &amp; Risk Management" title="Security &amp; Risk Management" href="'.$domains[3].'" coords="738,789,781,826,815,850,1041,1079,987,1122,929,1160,876,1185,821,1209,754,1226,686,1239,626,1239,560,1238,494,1229,420,1210,351,1181,293,1145,246,1115,201,1079,425,851,460,828,504,787,542,806,590,820,632,822,684,814,716,799" shape="poly">';
+                        echo '<area target="_self" alt="People &amp; Process" title="People &amp; Process" href="'.$domains[4].'" coords="456,738,413,782,389,816,167,1041,121,990,88,940,58,880,35,825,18,768,9,714,2,658,2,603,4,552,14,485,33,427,49,380,71,336,95,289,123,252,163,197,391,426,411,459,456,503,433,542,419,609,422,660,432,699" shape="poly">';
                     echo '</map>';
                 echo '</div>';
-                echo '<div class="col-sm-8"><img src="'.IMAGE_DIR_URL.'cloud-vendor/banner-right.jpg" style="margin-top:50px"></div>';
+                echo '<div class="col-sm-8"><img src="'.IMAGE_DIR_URL.'cloud-vendor/banner-right.png" style="margin-top:0px"></div>';
             echo '</div>';
         echo '</div> ';
     echo '</div>';
@@ -65,8 +64,8 @@ $domains = cloudVendorDomains($opts);
                     $str .= '<div class="table-responsive">';
                         $str .= '<table class="table table-csmaFunction">';
                             $str .= '<tr>';
-                            $str .= '<td class="functionTitle"><h2 class="title">Function: '.$area_meta['name'].' </h2>'.( !empty($area_meta['desc']) ? '<p class="subTitle">'.$area_meta['desc'].'</p>' : '' ).'</td>';
-                            $str .= '<td class="csmaFuncAvg"><h4 class="title"> Function Average: </h4><span data-toggle="tooltip" data-placement="left" title=""></span></td>';
+                            $str .= '<td class="functionTitle"><h2 class="title">Category: '.$area_meta['name'].' </h2>'.( !empty($area_meta['desc']) ? '<p class="subTitle">'.$area_meta['desc'].'</p>' : '' ).'</td>';
+                            $str .= '<td class="csmaFuncAvg"><h4 class="title"> Category Average: </h4><span data-toggle="tooltip" data-placement="left" title=""></span></td>';
                             $str .= '</tr>';
                         $str .= '</table>';
                     $str .= '</div>';
@@ -90,11 +89,11 @@ $domains = cloudVendorDomains($opts);
                                 $str .= '<table>';
                                     $str .= '<tr>';
                                     $str .= '<td class="csmaCatTitle '.$titleBg['cat'].'">';
-                                        $str .= '<h4 class="title">Category: '. $threatCat['name'] .'</h4>';
+                                        $str .= '<h4 class="title">Control Domain: '. $threatCat['name'] .'</h4>';
                                         if (!empty($threatCat['desc'])) $str .= '<p class="subTitle">'.$threatCat['desc'].'</p>';
                                     $str .= '</td>';
                                     $str .= '<td class="csmaCatAvg">';
-                                        $str .= '<h4 class="title"> Category Average: </h4>';
+                                        $str .= '<h4 class="title"> Control Domain Average: </h4>';
                                         $str .= '<span class="'.$catAvgStatus['cls'].'" data-toggle="tooltip" data-placement="left" title="'.$catAvg.'">'.$catAvgStatus['text'].'</span>';
                                         $str .= '<input type="hidden" name="avg" value="'.$catAvg.'">';
                                     $str .= '</td>';
@@ -109,7 +108,7 @@ $domains = cloudVendorDomains($opts);
                                     $questionId = $threatId .'_'. $threatSi.'_question';
                                     if ( !empty($opts[$questionId]) ) {
                                         $threat['weight'] = !empty($threat['weight']) ? $threat['weight'] : 0;
-                                        $desc = !empty($threat['desc']) && !empty(trim($threat['desc'])) ? ' <small>( '.$threat['desc'].' )' : '';
+                                        $desc = !empty($threat['desc']) && !empty(trim($threat['desc'])) ? ' <hr style="margin: 5px 0;"><small>'.$threat['desc'].'</small>' : '';
                                         $controlStatementAvg = !empty($default[$questionId.'_avg']) ? $default[$questionId.'_avg'] : 0;
                                         $defaultWeight = !empty($default[$questionId.'_weight']) ? $default[$questionId.'_weight'] : $threat['weight'];
                                         $controlStatementAvgStatus = csmaAvgStatus($controlStatementAvg);
@@ -124,13 +123,14 @@ $domains = cloudVendorDomains($opts);
                                                         <thead>';
                                                             $str .= '<tr class="controlStatementRating">';
                                                                 $str .= '<td colspan="5" class="no-border pl-0">';
+                                                                    // $str .= '<div>Control Domain: '.$threat['name'].'</div>';
                                                                     $str .= '<strong><big>Maturity Rating: </big> <span class="csmaControlStatementAvgStatus '.$controlStatementAvgStatus['cls'].'" data-toggle="tooltip" data-placement="right" title="'.$controlStatementAvg.'"> '.$controlStatementAvgStatus['text'].' </span></strong>';
                                                                     $str .= '<input type="hidden" name="'.$questionId.'_avg" class="csmaControlStatementAvg" value="'.$controlStatementAvg.'">';
                                                                     $str .= '<input type="hidden" name="'.$questionId.'_weight" class="weight" value="'.$defaultWeight.'" baseweight="'.$threat['weight'].'">';
                                                                 $str .= '</td>';
                                                             $str .= '</tr>';
                                                             $str .= '<tr>';
-                                                                $str .= '<th colspan="5" class="t-heading-dark controlStatementWrapper"><strong>Control Statement: '.$threat['name'].'</strong>'. $desc .'</th>';
+                                                                $str .= '<th colspan="5" class="t-heading-dark controlStatementWrapper"><strong>Control Statement(s): '.$threat['name'].'</strong>'. $desc .'</th>';
                                                             $str .= '</tr>';
                                                         $str .= '</thead>';
                                                         $str .= '<tbody>';
@@ -356,10 +356,10 @@ get_footer(); ?>
         let activeStatements = form.find('.innerCard').not('.inactive');
 
         activeStatements.each(function() {
-            let statementAvg = parseFloat($(this).find('.csmaControlStatementAvg').val())
+            let statementAvg = parseFloat($(this).find('.csmaControlStatementAvg').val());
             let weight = parseFloat($(this).find('.weight').val());
             total += statementAvg * (weight / 100);
-            // console.log( {'statementAvg' : statementAvg, 'weight' : weight} )
+            // console.log( {'statementAvg' : statementAvg, 'weight' : weight} );
         })
         if ( total ) total = total.toFixed(1);
         // ADD CLASS AND STATUS
@@ -367,7 +367,7 @@ get_footer(); ?>
 
         catAvg.find('span').removeClass().addClass(status.cls).text(status.text).attr('data-original-title',total);
         catAvg.find('input').val(total);
-        // console.log( {'total' : total} )
+        // console.log( {'total' : total} );
     }
     function csmaAvgStatus(total) {
         let status = {};

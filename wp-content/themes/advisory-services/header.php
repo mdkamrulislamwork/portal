@@ -4,7 +4,7 @@
 global $sfia_premission;
 global $post;
 if ( $post->post_type == 'cloud_vendor' ) {
-    if ( !cloudVendorHasPermission() ) wp_safe_redirect(404);
+    if ( !cloud_vendorHasPermission() ) wp_safe_redirect(404);
 } else if ( $post->post_type == 'csma' ) {
     if ( !cmaHasPermission() ) wp_safe_redirect(404);
 } else if ( $post->post_type == 'cma' ) {
@@ -306,7 +306,7 @@ if ($user_company_data) {
                     echo '<li><a href="'. admin_url('edit.php?post_type=risk') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-forms.png"> Risk</a></li>';
                     echo '<li><a href="'. admin_url('edit.php?post_type=bcp') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-forms.png"> BCP Assessment</a></li>';
                     echo '<li><a href="'. admin_url('edit.php?post_type=facility') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-forms.png"> Facility Risk</a></li>';
-                    echo '<li><a href="'. admin_url('edit.php?post_type=cloud_vendor') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-forms.png"> Cloud Vendor Risk</a></li>';
+                    echo '<li><a href="'. admin_url('edit.php?post_type=cloud_vendor') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-forms.png"> Cloud Vendor Maturity</a></li>';
                     echo '<li><a href="'. admin_url('edit.php?post_type=cma') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-forms.png"> Cloud Maturity</a></li>';
                     echo '<li><a href="'. admin_url('edit.php?post_type=csma') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-forms.png"> Cybersecurity Maturity</a></li>';
                     echo '<li><a href="'. admin_url('edit.php?post_type=drm') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-forms.png"> DR Maturity</a></li>';

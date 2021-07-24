@@ -60,7 +60,7 @@ $options[] = array(
 					'button_title' => 'Add New',
 					'accordion_title' => 'Add New Area',
 					'fields' => array(
-						['id' => 'name', 'type' => 'text', 'title' => 'Name',], 
+						['id' => 'name', 'type' => 'text', 'title' => 'Name',],
 						['id' => 'icon_menu', 'type' => 'upload', 'title' => 'Icon (Menu)',],
 						['id' => 'icon_title', 'type' => 'upload', 'title' => 'Icon (Title)',],
 					),
@@ -502,11 +502,11 @@ $options[] = array(
 							'type' => 'upload',
 							'title' => 'Document',
 						),
-						array( 
-							'id' => 'date_picker', 
-							'type' => 'text', 
-							'title' => __( 'Upload Date', 'date' ), 
-							'attributes' => array( 'type' => 'date', ), 
+						array(
+							'id' => 'date_picker',
+							'type' => 'text',
+							'title' => __( 'Upload Date', 'date' ),
+							'attributes' => array( 'type' => 'date', ),
 						),
 						array(
 							'id' => 'comments',
@@ -907,27 +907,27 @@ $options[] = [
 		],
 		[
 			'name' => 'areas',
-			'title' => 'Vendors',
+			'title' => 'Categories',
 			'fields' => [
-				['type' => 'notice', 'class' => 'danger', 'content' => 'Create Vendors and save. Then create Threat cats, Statements and Questions'],
+				['type' => 'notice', 'class' => 'danger', 'content' => 'Create Functions and save.'],
 				[
 					'id' => 'areas',
 					'type' => 'group',
-					'title' => 'Vendors',
-					'desc' => 'Each Facility name should be unique',
+					'title' => 'Categories',
+					'desc' => 'Each entry name should be unique',
 					'button_title' => 'Add New',
 					'accordion_title' => 'Add New Area',
 					'fields' => [
 						[ 'id' => 'name', 'type' => 'text', 'title' => 'Name'],
+						[ 'id' => 'desc', 'type' => 'textarea', 'title' => 'Description'],
 						[ 'id' => 'base', 'type' => 'number', 'title' => 'Base']
 					],
 				]
 			]
 		],
-		['name' => 'threatcats', 'title' => 'Primary Domains', 'fields' => advisory_generate_cloudVendor_form_threatcats()],
-		['name' => 'threats', 'title' => 'Control Domains', 'fields' => advisory_generate_cloudVendor_form_threats()],
-		['name' => 'statements', 'title' => 'Statements', 'fields' => advisory_generate_cloudVendor_form_questions()],
-		['name' => 'questions', 'title' => 'Statement Questions', 'fields' => advisory_generate_cloudVendor_form_question_helpers()]
+		['name' => 'threatcats', 'title' => 'Control Domains', 'fields' => csma_form_threatcats()],
+		['name' => 'threats', 'title' => 'Control Statements', 'fields' => csma_form_threats()],
+		['name' => 'statements', 'title' => 'Questions', 'fields' => csma_form_statements()],
 	]
 ];
 // -----------------------------------------
@@ -974,7 +974,7 @@ $options[] = [
 	]
 ];
 // -----------------------------------------
-// Cybersecurity Assessment                -
+// Cyber security Assessment                -
 // -----------------------------------------
 $options[] = [
 	'id' => 'form_opts',
@@ -1388,7 +1388,7 @@ $options[] = array(
 				['id' => 'display_name', 'type' => 'text', 'title' => 'Display Name', ],
 				['id' => 'desc', 'type' => 'text', 'title' => 'Description', ],
 				// ['id' => 'icon', 'type' => 'upload', 'title' => 'Icon', ],
-			] 
+			]
 		],
 		[
 			'name' => 'areas',
@@ -1403,7 +1403,7 @@ $options[] = array(
 					'button_title' => 'Add New',
 					'accordion_title' => 'Add New Category',
 					'fields' => [
-						['id' => 'name', 'type' => 'text', 'title' => 'Name',], 
+						['id' => 'name', 'type' => 'text', 'title' => 'Name',],
 						['id' => 'icon_menu', 'type' => 'upload', 'title' => 'Icon (Menu)',],
 						['id' => 'icon_title', 'type' => 'upload', 'title' => 'Icon (Title)',]
 					],
@@ -1431,7 +1431,7 @@ $options[] = array(
 				['id' => 'display_name', 'type' => 'text', 'title' => 'Display Name', ],
 				['id' => 'desc', 'type' => 'text', 'title' => 'Description', ],
 				// ['id' => 'icon', 'type' => 'upload', 'title' => 'Icon', ],
-			] 
+			]
 		],
 	),
 );
@@ -1467,7 +1467,7 @@ $options[] = array(
 					'button_title' => 'Add New',
 					'accordion_title' => 'Add New Area',
 					'fields' => [
-						['id' => 'name', 'type' => 'text', 'title' => 'Name'], 
+						['id' => 'name', 'type' => 'text', 'title' => 'Name'],
 						['id' => 'desc', 'type' => 'text', 'title' => 'Description']
 					]
 				]

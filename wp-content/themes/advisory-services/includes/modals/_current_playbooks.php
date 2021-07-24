@@ -24,7 +24,7 @@ $playbookLink = site_url('/recovery-playbook/');
         foreach ($playbooks as $playbook) {
             $title = 'title';
             echo '<tr class="playbook playbook_'.$playbook->id.'">';
-            echo '<td class="no-padding text-center">PL-'. ($playbook->id * 10) .'</td>';
+            echo '<td class="no-padding text-center">PL-'. $playbook->serial_no .'</td>';
             echo '<td>'. $playbook->app_name .'</td>';
             echo '<td>'. date( get_option('date_format'), strtotime($playbook->published_at) ) .'</td>';
             echo '<td class="text-right">';

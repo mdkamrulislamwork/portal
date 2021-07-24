@@ -229,13 +229,13 @@ function advisory_init() {
 		'exclude_from_search' => true,
 		'supports' => array('title'),
 	));
-	// Cloud Vendor Risk
+	// Cloud Vendor Maturity
 	// @since 9.0
 	register_post_type('cloud_vendor', array(
 		'labels' => array(
-			'name' => _x('Cloud Vendor Risk', 'post type general name', 'advisory'),
-			'singular_name' => _x('Cloud Vendor Risk', 'post type singular name', 'advisory'),
-			'menu_name' => _x('Cloud Vendor Risk', 'admin menu', 'advisory'),
+			'name' => _x('Cloud Vendor Maturity', 'post type general name', 'advisory'),
+			'singular_name' => _x('Cloud Vendor Maturity', 'post type singular name', 'advisory'),
+			'menu_name' => _x('Cloud Vendor Maturity', 'admin menu', 'advisory'),
 			'name_admin_bar' => _x('Risk', 'add new on admin bar', 'advisory'),
 			'add_new' => _x('Add New', 'Cloud Vendor', 'advisory'),
 			'add_new_item' => __('Add New Risk', 'advisory'),
@@ -252,7 +252,7 @@ function advisory_init() {
 		'exclude_from_search' => true,
 		'supports' => array('title'),
 	));
-	// Cloud Maturity Aseessment
+	// Cloud Maturity Assessment
 	// @since 9.0
 	register_post_type('cma', array(
 		'labels' => array(
@@ -275,7 +275,7 @@ function advisory_init() {
 		'exclude_from_search' => true,
 		'supports' => array('title'),
 	));
-	// Cybersecurity Maturity Aseessment
+	// Cybersecurity Maturity Assessment
 	// @since 9.0
 	register_post_type('csma', array(
 		'labels' => array(
