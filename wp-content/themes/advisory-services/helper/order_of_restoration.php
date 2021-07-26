@@ -1,10 +1,10 @@
-<?php 
+<?php
 // ORDER OF RESTORATION
-function orderRestorationAll() { 
+function orderRestorationAll() {
     global $wpdb;
     return $wpdb->get_results('SELECT *  FROM `order_of_restoration` WHERE `company_id` = '.advisory_get_user_company_id().' ORDER BY `serial_no` ASC');
 }
-function orderRestorationAllWithPlaybookSi() { 
+function orderRestorationAllWithPlaybookSi() {
     global $wpdb;
     //$sql = 'SELECT *  FROM `order_of_restoration` WHERE `company_id` = '.advisory_get_user_company_id().' ORDER BY `serial_no` ASC';
     $sql = '';
@@ -63,7 +63,7 @@ function orderRestorationModal($size="modal-lg")
 	return $str;
 }
 add_action('wp_ajax_orderRestorationAdd', 'advisory_ajax_orderRestorationAdd');
-function advisory_ajax_orderRestorationAdd() 
+function advisory_ajax_orderRestorationAdd()
 {
     check_ajax_referer('advisory_nonce', 'security');
     $playbooks = recplayGetPublishedItems();
@@ -93,7 +93,7 @@ function advisory_ajax_orderRestorationAdd()
     wp_die();
 }
 add_action('wp_ajax_orderRestorationSave', 'advisory_ajax_orderRestorationSave');
-function advisory_ajax_orderRestorationSave() 
+function advisory_ajax_orderRestorationSave()
 {
     check_ajax_referer('advisory_nonce', 'security');
     global $wpdb;
@@ -116,7 +116,7 @@ function advisory_ajax_orderRestorationSave()
     wp_send_json( false );
 }
 add_action('wp_ajax_orderRestorationEdit', 'advisory_ajax_orderRestorationEdit');
-function advisory_ajax_orderRestorationEdit() 
+function advisory_ajax_orderRestorationEdit()
 {
     check_ajax_referer('advisory_nonce', 'security');
     $orderRestorationId = !empty($_REQUEST['id']) ? $_REQUEST['id'] : 0;
@@ -133,12 +133,11 @@ function advisory_ajax_orderRestorationEdit()
                     if ( !empty($playbooks) ) {
                         foreach ($playbooks as $playbook) {
                             $isSelected = $playbook['id'] == $orderRestoration->playbook_id ? ' selected' : '';
-                            $str .= '<option value="'.$playbook['id'].'"'.$isSelected.' app_name="'.$playbook['app_name'].'">PL-'.$playbook['serial_no'].'</option>';
+                            $str .= '<option value="'.$playbook['id'].'"'.$isSelected.' app_name="'.$playbook['app_name'].'">PL-'.$playbook['serial_no'].' ('.$playbook['app_name'].')</option>';
                         }
                     }
                 $str .= '</select>';
             $str .= '</td>';
-            $str .= '<td class="no-padding app_name">'.$orderRestoration->app_name.'</td>';
             $str .= '<td class="no-padding"><textarea class="activity">'.$orderRestoration->activity.'</textarea></td>';
             $str .= '<td class="no-padding"><textarea class="description">'.$orderRestoration->description.'</textarea></td>';
             $str .= '<td class="no-padding '.$notesClass.' orderRestorationNotes"><textarea class="hidden notes">'.$orderRestoration->notes.'</textarea></td>';
@@ -213,11 +212,11 @@ function orderRestorationItemsHtml()
         $reportUrl = site_url('recovery-playbook-report/').'?id=';
         foreach ($orderRestorations as $orderRestoration) {
             $ortCommentClass = !empty($orderRestoration->notes) ? 'bg-red' : 'bg-green';
+            $playbook_number = !empty($orderRestoration->playbook_si) ? 'PL-'.$orderRestoration->playbook_si : 'N/A';
+            $app_name = !empty($orderRestoration->app_name) ? ' ('.$orderRestoration->app_name.')' : '';
             $str .= '<tr class="orderRestorationItem orderRestorationItem'.$orderRestoration->id.'" data-id="'.$orderRestoration->id.'">';
                 $str .= '<td class="bg-black">RT-'.$orderRestoration->serial_no.'</td>';
-                $str .= '<td>'.( !empty($orderRestoration->playbook_si) ? 'PL-'.$orderRestoration->playbook_si : 'N/A').'</td>';
-//            $str .= '<td class="app_name"><pre>'.print_r($orderRestoration, true).'</pre></td>';
-            $str .= '<td>'.$orderRestoration->app_name.'</td>';
+                $str .= '<td>'.$playbook_number.$app_name.'</td>';
             $str .= '<td>'.$orderRestoration->activity.'</td>';
                 $str .= '<td>'.$orderRestoration->description.'</td>';
                 $str .= '<td class="ortCommentView '.$ortCommentClass.'"><textarea class="hidden">'.$orderRestoration->notes.'</textarea></td>';

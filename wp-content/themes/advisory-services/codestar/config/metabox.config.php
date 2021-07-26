@@ -925,9 +925,9 @@ $options[] = [
 				]
 			]
 		],
-		['name' => 'threatcats', 'title' => 'Control Domains', 'fields' => csma_form_threatcats()],
-		['name' => 'threats', 'title' => 'Control Statements', 'fields' => csma_form_threats()],
-		['name' => 'statements', 'title' => 'Questions', 'fields' => csma_form_statements()],
+		['name' => 'threatcats', 'title' => 'Control Domains', 'fields' => cloud_vendor_form_threatcats()],
+		['name' => 'threats', 'title' => 'Control Statements', 'fields' => cloud_vendor_form_threats()],
+		['name' => 'statements', 'title' => 'Questions', 'fields' => cloud_vendor_form_statements()],
 	]
 ];
 // -----------------------------------------

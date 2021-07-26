@@ -50,8 +50,8 @@ function cloud_vendor_form_threats()
                                 'button_title' => 'Add New',
                                 'accordion_title' => 'Add New',
                                 'fields' => [
-                                    ['id' => 'weight', 'type' => 'number', 'title' => 'Weight', 'default' => 100],
                                     ['id' => 'name', 'type' => 'text', 'title' => 'Name'],
+                                    ['id' => 'weight', 'type' => 'number', 'title' => 'Weight', 'default' => 100],
                                     ['id' => 'desc', 'type' => 'textarea', 'title' => 'Desc'],
                                 ]
                             );

@@ -25,8 +25,7 @@
                     <thead>
                         <tr>
                             <td class="bg-palm-leaf title" style="padding: 0; text-align: center; width: 70px;">Ref.#</td>
-                            <td class="bg-palm-leaf title" style="padding: 0; text-align: center; width: 100px;">Playbook</td>
-                            <td class="bg-palm-leaf title" style="padding: 0; text-align: center; width: 265px;">Playbook System/Application</td>
+                            <td class="bg-palm-leaf title" style="padding: 0; text-align: center; width: 265px;">Playbook</td>
                             <td class="bg-palm-leaf title" style="width: 200px;">Activity</td>
                             <td class="bg-palm-leaf title">System/Service Description</td>
                             <td class="bg-palm-leaf title" style="width: 75px;">Notes</td>

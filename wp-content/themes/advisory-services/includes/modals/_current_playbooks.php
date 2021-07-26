@@ -1,5 +1,5 @@
 <?php
-$playbooks = recplayGetCurrentItems($user_company_id);
+$playbooks = recplayGetCurrentItems();
 $playbookPermission = recplayInputController();
 $playbookLink = site_url('/recovery-playbook/');
 // echo '<br><pre>'.print_r($playbooks, true).'</pre>';
