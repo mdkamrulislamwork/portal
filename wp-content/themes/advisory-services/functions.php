@@ -754,7 +754,7 @@ function advisory_ajax_dashboard_scorecard() {
 	$html = '';
 	$requestedPostType = get_post_type($_REQUEST['post_id']);
 	$data = advisory_get_scorecard_data($_REQUEST['post_id']);
-	// $html = '<br><pre>'.print_r($data, true).'</pre>';
+	// $html = '<br><pre>'.print_r($data, true).'</pre>';return $html;
 	$tmp_fields = [];
 	$allRisks =  json_decode(ALL_RISKS);
 	if ($requestedPostType == 'bia') {
@@ -801,7 +801,8 @@ function advisory_ajax_dashboard_scorecard() {
 	            </table>
 	        </div>';
         }
-	} elseif (in_array($requestedPostType, $allRisks)) {
+	}
+	elseif (in_array($requestedPostType, $allRisks)) {
 		$avg = [];
         $char_arr = [];
         $char = 'A';
@@ -886,7 +887,8 @@ function advisory_ajax_dashboard_scorecard() {
 	            </table>
 	        </div>
 	    </div>';
-	} elseif ( $requestedPostType == 'facility' ) {
+	}
+	elseif ( $requestedPostType == 'facility' ) {
 		$avg = [];
         $char_arr = [];
         $char = 'A';
@@ -954,7 +956,8 @@ function advisory_ajax_dashboard_scorecard() {
 	            </table>
 	        </div>
 	    </div>';
-	} elseif ($requestedPostType == 'itsm') {
+	}
+	elseif ($requestedPostType == 'itsm') {
 		$html .= '<div class="text-center"> <img src="' .P3_TEMPLATE_URI.'/images/value-scorecard.jpg" class="img-responsive" alt=""> </div><br>
 		<div class="table-responsive">
 			<table class="table table-bordered table-survey table_itsm">
@@ -994,7 +997,8 @@ function advisory_ajax_dashboard_scorecard() {
 				$html .= '</tbody>
 			</table>
 		</div>';
-	} elseif ($requestedPostType == 'drm') {
+	}
+	elseif ($requestedPostType == 'drm') {
 		$html .= '<div class="text-center"> <img src="' .P3_TEMPLATE_URI.'/images/drm-value-scorecard.jpg" class="img-responsive" alt=""> </div><br>
 		<div class="table-responsive">
 			<table class="table table-bordered table-survey table_drm">
@@ -1035,7 +1039,8 @@ function advisory_ajax_dashboard_scorecard() {
 				$html .= '</tbody>
 			</table>
 		</div>';
-	} elseif ($requestedPostType == 'ihc') {
+	}
+	elseif ($requestedPostType == 'ihc') {
 		$html .= '<a href="'. site_url('pdf') .'?pid='. $_REQUEST['post_id'] .'" target="_blank" class="btn btn-xs btn-primary pdf-btn pull-right" postid="'. $_REQUEST['post_id'] .'">Executive Summary</a>';
 		// SCORECARD CONTENT
 		$html .= '<div class="text-center"> <img src="' .P3_TEMPLATE_URI.'/images/ihc-value-scorecard.jpg" class="img-responsive" alt=""> </div><br>
@@ -1074,7 +1079,8 @@ function advisory_ajax_dashboard_scorecard() {
 				$html .= '</tbody>
 			</table>
 		</div>';
-	} elseif ($requestedPostType == 'mta') {
+	}
+	elseif ($requestedPostType == 'mta') {
 		$registerLink = home_url('mta-register/');
 		$html .= '<div class="table-responsive">
 			<table class="table table-bordered table-survey table_others">
@@ -1121,7 +1127,8 @@ function advisory_ajax_dashboard_scorecard() {
 				$html .= '</tbody>
 			</table>
 		</div>';
-	} elseif ($requestedPostType == 'dmm') {
+	}
+	elseif ($requestedPostType == 'dmm') {
 		$html .= '<div class="text-center"> <img src="' .P3_TEMPLATE_URI.'/images/value_scorecard_heading_dmm.jpg" class="img-responsive" alt=""> </div><br>
 		<div class="table-responsive">
 			<table class="table table-bordered table-survey table_others">
@@ -1161,7 +1168,8 @@ function advisory_ajax_dashboard_scorecard() {
 				$html .= '</tbody>
 			</table>
 		</div>';
-	} elseif ($requestedPostType == 'itcl') {
+	}
+	elseif ($requestedPostType == 'itcl') {
 		$default = advisory_form_default_values($_REQUEST['post_id'], 'security');
         // $html .= help($default,false);
 	    $date = !empty($default['date']) ? ' – '.date(get_option( 'date_format'), strtotime($default['date'])) : '';
@@ -1400,7 +1408,8 @@ function advisory_ajax_dashboard_scorecard() {
                 $html .= '</tr>';
             $html .= '</table>';
         $html .= '</div>';
-	} elseif ($requestedPostType == 'cma') {
+	}
+	elseif ($requestedPostType == 'cma') {
 		// $html .= '<br><pre>'. print_r($data, true) .'</pre>';
 		if ( !empty($data) ) {
 			$html .= '<div class="card-header-tabs-line scorecard-tab pb-8">';
@@ -1435,7 +1444,8 @@ function advisory_ajax_dashboard_scorecard() {
 			    $html .= '</table>';
 			$html .= '</div>';
 		}
-	} elseif ($requestedPostType == 'csma') {
+	}
+	elseif ($requestedPostType == 'csma') {
 		// $html .= '<br><pre>'. print_r($data, true) .'</pre>';
 		if ( !empty($data) ) {
 			$html .= advisory_scorecard_header('Cybersecurity Assessment');
@@ -1465,43 +1475,31 @@ function advisory_ajax_dashboard_scorecard() {
 			    $html .= '</table>';
 			$html .= '</div>';
 		}
-	} elseif ($requestedPostType == 'cloud_vendor') {
+	}
+	elseif ($requestedPostType == 'cloud_vendor') {
 		// $html .= '<br><pre>'. print_r($data, true) .'</pre>';
-		if ( !empty($data) && false) {
-			$html .= '<div class="card-header-tabs-line scorecard-tab pb-8">';
-		        $html .= '<div class="custom-title">';
-					$html .= '<h1 class="title">Value scorecard</h1>';
-					$html .= '<h6 class="sub-title"><span>Cloud Vendor Assessment</span></h6>';
-				$html .= '</div>';
-			$html .= '</div>';
+		if ( !empty($data) ) {
+			$html .= advisory_scorecard_header('Cybersecurity Assessment');
 			$html .= '<div class="table-responsive">';
-			    $html .= '<table class="table table-bordered table-survey table_others">';
+			$html .= '<div class="text-right mb-3"><button class="btn btn-primary" style="font-size:26px" data-toggle="modal" data-target="#cyberNote" ><i class="fa fa-info-circle"></i></button></div> ';
+			    $html .= '<table class="table table-bordered">';
 			        $html .= '<tbody>';
 						foreach ($data as $areaId => $area) {
-				            if ( !empty($area['threatcats']) ) {
-					            $html .= '<tr>';
-					                $html .= '<th colspan="2" class="t-heading-dark"><big>'.$area['name'].'</big></th>';
-					            $html .= '</tr>';
-				            	foreach ($area['threatcats'] as $threatcat) {
-				            		if ( !empty($threatcat['threats']) ) {
+							//$reportLink = site_url('cybersecurity-report/').'?pid='.base64_encode($_REQUEST['post_id']).'&area='.base64_encode($areaId);
+							$reportLink = '#';
+				            $html .= '<tr>';
+				                $html .= '<th class="'.$area['color']['func'].'" style="text-transform: uppercase; font-size: 18px;color:#fff;">'.$area['name'].'</th>';
+				                $html .= '<th class="'.$area['color']['func'].'" style="text-transform: uppercase; font-size: 18px;color:#fff;text-align:center;">Rating</th>';
+				                $html .= '<th class="csmaReport '.$area['color']['func'].'" style="text-align:center;padding: 0;"><a href="'.$reportLink.'" style="display: block;" title="'.$area['name'].' Report" target="_blank"><img src="'.IMAGE_DIR_URL.'pdf/power.png" style="height:35px;"></a></th>';
+				                // $html .= '<th class="csmaReport '.$area['color']['func'].'" style="font-size: 29px;text-align:center;padding: 0;background:#000;"><a href="'.$reportLink.'" style="color: #fff; display: block;" title="'.$area['name'].' Report" target="_blank"><span class="fa fa-file-pdf-o" aria-hidden="true"></span></a></th>';
+				            $html .= '</tr>';
+				            if ( !empty($area['cats'])) {
+				            	foreach ($area['cats'] as $cat) {
 						            $html .= '<tr>';
-						                $html .= '<th class="t-heading-dark"><span>'.$threatcat['name'].'</span></th>';
-						                $html .= '<th class="t-heading-dark text-center" style="width:80px;">Maturity Rating</th>';
+						                $html .= '<th class="t-heading-dark">'.$cat['name'].'</th>';
+						                $html .= '<th class="'.$cat['avg']['cls'].' text-center" style="width:115px;line-height: 27px;color: #000;">'.$cat['avg']['text'].'</th>';
+						                $html .= '<th class="'.$cat['avg']['cls'].' text-center" style="width:20px;line-height: 27px;color: #000;">'.$cat['avg']['count'].'</th>';
 						            $html .= '</tr>';
-						            	foreach ($threatcat['threats'] as $threat) {
-								            if ( !empty($threat) ) {
-								            	// $html .= '<tr>';
-									            //     $html .= '<th class="t-heading-dark"><big>Control Domain: '.$threat['name'].' </big></th>';
-									            //     $html .= '<th class="t-heading-dark text-center" style="width:80px;">Maturity Rating</th>';
-									            // $html .= '</tr>';
-							            		$avg = !empty($threat['avg']) ? $threat['avg'] : '1.0';
-									            $html .= '<tr>';
-									                $html .= '<th class="">'.$threat['name'].' <small>'.$threat['desc'].'</small></th>';
-									                $html .= '<th class="text-center '.cmaAvgBackground($avg).'">'.$avg.'</th>';
-									            $html .= '</tr>';
-								            }
-						            	}
-				            		}
 				            	}
 				            }
 						}
@@ -1509,7 +1507,8 @@ function advisory_ajax_dashboard_scorecard() {
 			    $html .= '</table>';
 			$html .= '</div>';
 		}
-	} else {
+	}
+	else {
 		$html .= '<div class="text-center">';
        if($requestedPostType == 'cra') $html .= '<img src="' .P3_TEMPLATE_URI.'/images/value_scorecard_cloud_readiness.jpg" class="img-responsive" alt="">';
        else $html .= '<img src="' .P3_TEMPLATE_URI.'/images/value-scorecard.jpg" class="img-responsive" alt="">';
@@ -2588,7 +2587,8 @@ function advisory_get_scorecard_data($id) {
 					$data[$count]['opts']['tap_q1'] 	= !empty($area['tap_q1']) ? $area['tap_q1'] : 1;
 				}
 				$count2++;
-			} elseif (in_array($requestedPostType, $allRisks)) {
+			}
+			elseif (in_array($requestedPostType, $allRisks)) {
 				$data[$count]['name'] = $area['name'];
 				$data[$count]['icon'] = $area['icon_menu'];
 				$cat_id = advisory_id_from_string($area['name']);
@@ -2604,7 +2604,8 @@ function advisory_get_scorecard_data($id) {
 						$count2++;
                     }
                 }
-			} elseif ( $requestedPostType == 'facility' ) {
+			}
+			elseif ( $requestedPostType == 'facility' ) {
 				$data[$count]['name'] = $area['name'];
 				$data[$count]['icon'] = $area['icon_menu'];
 				$threatCatId = 'area_'.$areaSi . '_threatcat';
@@ -2621,7 +2622,8 @@ function advisory_get_scorecard_data($id) {
 						$count2++;
 					}
                 }
-			} else if ($requestedPostType == 'mta') {
+			}
+			else if ($requestedPostType == 'mta') {
 				if (!empty($_REQUEST['area_id']) && $_REQUEST['area_id'] != advisory_id_from_string($area['name']) ) continue;
 				$data[$count]['name'] = $area['name'];
 				$data[$count]['icon'] = $area['icon_menu'];
@@ -2669,7 +2671,8 @@ function advisory_get_scorecard_data($id) {
 						$count2++;
 					}
 				}
-			} else if ($requestedPostType == 'cma') {
+			}
+			else if ($requestedPostType == 'cma') {
 				if (!empty($_REQUEST['area_id']) && $_REQUEST['area_id'] != advisory_id_from_string($area['name']) ) continue;
 				$data[$count]['name'] = $area['name'];
 				$data[$count]['desc'] = $area['desc'];
@@ -2688,7 +2691,8 @@ function advisory_get_scorecard_data($id) {
 						}
 					}
 				}
-			} else if ($requestedPostType == 'csma') {
+			}
+			else if ($requestedPostType == 'csma') {
 				if (!empty($_REQUEST['area_id']) && $_REQUEST['area_id'] != advisory_id_from_string($area['name']) ) continue;
 				$data[$areaSi]['name'] = $area['name'];
 				$data[$areaSi]['color'] = csmaFunctionBackground($areaSi);
@@ -2704,7 +2708,25 @@ function advisory_get_scorecard_data($id) {
 						}
 					}
 				}
-			} else if ($requestedPostType == 'cloud_vendor') {
+			}
+			else if ($requestedPostType == 'cloud_vendor') {
+				if (!empty($_REQUEST['area_id']) && $_REQUEST['area_id'] != advisory_id_from_string($area['name']) ) continue;
+				$data[$areaSi]['name'] = $area['name'];
+				$data[$areaSi]['color'] = csmaFunctionBackground($areaSi);
+				$threatCatId = 'area_'.$areaSi . '_threatcat';
+				if ( $threatsCats = $form_data[$threatCatId] ) {
+					foreach ( $threatsCats as $threatCatSi => $threatCat ) {
+						if ( !empty($threatCat['name']) ) {
+							$threatId = $threatCatId.'_'.$threatCatSi.'_threat';
+            				$default = advisory_form_default_values($id, $threatId);
+							$data[$areaSi]['cats'][$count2]['name'] = $threatCat['name'];
+							$data[$areaSi]['cats'][$count2]['avg'] = !empty($default['avg']) ? csmaAvgStatus($default['avg']) : csmaAvgStatus(0);
+							$count2++;
+						}
+					}
+				}
+			}
+			else if ($requestedPostType == 'cloud_vendor2') {
 				if (!empty($_REQUEST['area_id']) && $_REQUEST['area_id'] != advisory_id_from_string($area['name']) ) continue;
 				$data[$areaSi]['name'] = $area['name'];
 				$threatCatId = 'area_'.$areaSi . '_threatcat';
@@ -2728,7 +2750,8 @@ function advisory_get_scorecard_data($id) {
 						}
 					}
 				}
-			} else {
+			}
+			else {
 				$data[$count]['name'] = $area['name'];
 				$data[$count]['icon'] = $area['icon_menu'];
 				$sections = 'sections_' . advisory_id_from_string($area['name']);

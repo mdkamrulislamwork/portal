@@ -39,7 +39,7 @@ function cloud_vendor_form_threats()
         if ( !empty($meta['areas']) ) {
             foreach ( $meta['areas'] as $areaSi => $area ) {
                 $data[] = ['type' => 'subheading', 'content' => $area['name']];
-                $threatCatId = 'area_'.$areaSi . '_threatcat';
+                $threatCatId = 'area_'.$areaSi .'_threatcat';
                 if ( $threatsCats = @$meta[$threatCatId] ) {
                     foreach ( $threatsCats as $threatCatSi => $threatCat ) {
                         if ( !empty($threatCat['name']) ) {
