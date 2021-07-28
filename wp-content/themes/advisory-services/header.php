@@ -275,6 +275,7 @@ if ($user_company_data) {
                     getArchivedMenuFor('facility', 'Facility Risk Register', 'Facility Risk Register', 'icon-facility.png');
                     // getArchivedMenuFor('cloud_vendor', 'Cloud Vendor Risk Register', 'Cloud Vendor Risk Register', 'icon-cloud_vendor.png');
                     csmaArchivedMenu();
+                    cloud_vendor_archived_menu();
                     getDynamicRegisterMenuFor('drmrr', 'DRM Register', 'DRM Register', 'icon-drmrr.png');
                     getDynamicRegisterMenuFor('dmmr', 'DMM Register', 'DMM Register', 'icon-rrR.png');
                     if ($dashboard) getDynamicRegisterMenuFor('mtar', 'MTA Register', 'MTA Register', 'icon-ihcr.png');

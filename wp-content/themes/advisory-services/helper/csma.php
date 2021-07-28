@@ -596,7 +596,7 @@ function csma_pdf_get_data($postId=0, $areaId=0)
         $data['date'] = get_the_time(get_option( 'date_format'), $postId);
         $data['company'] = !empty($company->name) ? $company->name : '';
         $data['function']['bg'] = $headerBg['func'];
-        $data['test'] = ['registerId' => $registerId];
+        //$data['test'] = ['registerId' => $registerId];
     }
     return $data;
 }

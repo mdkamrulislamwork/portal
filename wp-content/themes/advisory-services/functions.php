@@ -1479,7 +1479,7 @@ function advisory_ajax_dashboard_scorecard() {
 	elseif ($requestedPostType == 'cloud_vendor') {
 		// $html .= '<br><pre>'. print_r($data, true) .'</pre>';
 		if ( !empty($data) ) {
-			$html .= advisory_scorecard_header('Cybersecurity Assessment');
+			$html .= advisory_scorecard_header('Cloud Vendor Assessment');
 			$html .= '<div class="table-responsive">';
 			$html .= '<div class="text-right mb-3"><button class="btn btn-primary" style="font-size:26px" data-toggle="modal" data-target="#cyberNote" ><i class="fa fa-info-circle"></i></button></div> ';
 			    $html .= '<table class="table table-bordered">';

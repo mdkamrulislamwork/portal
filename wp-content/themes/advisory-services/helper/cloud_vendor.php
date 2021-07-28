@@ -371,7 +371,7 @@ function cloud_vendorInputController()
     }
     return $data;
 }
-function cloud_vendorFunctionBackground($functionId = 1)
+function cloudVendorFunctionBackground($functionId = 1)
 {
     $data = null;
     if ( $functionId == 5 ) $data = ['func' => 'bg-dark-olive', 'cat' => 'bg-light-olive'];
@@ -394,7 +394,7 @@ function cloud_vendorScoreBg($score=0)
     }
     return $cl;
 }
-function cloud_vendorAvgStatus($avg=0)
+function cloudVendorAvgStatus($avg=0)
 {
     $data['count'] = floatval($avg);
     if ( $avg >= 5 )        { $data['cls'] = 'bg-dark-blue'; $data['text'] = 'OPTIMIZED'; }
@@ -410,7 +410,7 @@ function cloud_vendorResponseBg(int $response=0)
     else if ( $response == 3 ) return 'bg-yellow';
     else return 'bg-red';
 }
-function cloud_vendorCsSummary($opts, $questionId, $default)
+function cloudVendorCsSummary($opts, $questionId, $default)
 {
     $str = null;
     // $str .= '<br><pre>'.print_r($opts[$questionId], true).'</pre>';
@@ -425,7 +425,7 @@ function cloud_vendorCsSummary($opts, $questionId, $default)
                     $comment = !empty($default[$ansId.'_comment']) ? $default[$ansId.'_comment'] : 'N/A';
                     $str .= '<tr>';
                         $str .= '<th class="t-heading-dark"><big>'.$questionSi.'. '.$question['name'].'</big></th>';
-                        $str .= '<td class="text-center bg-black"><big>'.$responses[$response].'</big></td>';
+                        $str .= '<td class="text-center bg-black"><big>'.@$responses[$response].'</big></td>';
                     $str .= '</tr>';
                     $str .= '<tr>';
                         $str .= '<td colspan="2"><big><strong>Comment: </strong></big>'.$comment.'</td>';
@@ -461,10 +461,10 @@ function cloud_vendor_ajax_reset()
     }
     wp_send_json(false);
 }
-function cloud_vendorArchivedMenu() {
+function cloud_vendor_archived_menu() {
     $postType = 'cloud_vendor';
-    $title='Cybersecurity Register';
-    $pageTitle='Cybersecurity Register';
+    $title='Cloud Vendor Register';
+    $pageTitle='Cloud Vendor Register';
     $image = '<img src="'.P3_TEMPLATE_URI.'/images/registers/icon-blue-dark.png" alt="'. @$title .' Icon">';
     $page = get_page_by_title($pageTitle);
     if ( $page ) {
@@ -476,10 +476,7 @@ function cloud_vendorArchivedMenu() {
                 'post_type' => $postType,
                 'post_status' => 'archived',
                 'posts_per_page' => 1,
-                'meta_query' => [[
-                    'key' => 'assigned_company',
-                    'value' => $companyId,
-                ]],
+                'meta_query' => [['key' => 'assigned_company', 'value' => $companyId]],
                 'fields' => 'ids',
             ]);
             if ($id->found_posts > 0) $rr_form_id = $id->posts;
@@ -520,7 +517,7 @@ function cloud_vendorRegisterData($post_id)
     }
     return $data;
 }
-function cloud_vendorGetActiveOrArchivedAssessmentId()
+function cloudVendorGetActiveOrArchivedAssessmentId()
 {
     $company_id = advisory_get_user_company_id();
     if (advisory_metrics_in_progress($company_id, array('cloud_vendor'))) {
@@ -538,13 +535,13 @@ function cloud_vendorGetActiveOrArchivedAssessmentId()
     if ( !empty($form_id[0]) ) return $form_id[0];
     return false;
 }
-function cloud_vendorPriorityBg($value=0)
+function cloudVendorPriorityBg($value=0)
 {
     if ( $value >= 3 )      { return 'bg-red'; }
     else if ( $value >= 2 ) { return 'bg-yellow'; }
     else                    { return 'bg-green'; }
 }
-function cloud_vendorrInputController()
+function cloudVendorRgeisterInputController()
 {
     global $user_switching;
     $data = [
@@ -603,7 +600,7 @@ function cloud_vendor_pdf_get_data($postId=0, $areaId=0)
 
         // SUMMARY
         $summaries = advisory_form_default_values( $company->term_id, 'area_'.$areaId.'_comments');
-        $headerBg = cloud_vendorFunctionBackground($areaId);
+        $headerBg = cloudVendorFunctionBackground($areaId);
         $data['summaries'] = !empty(trim($summaries['comment_1'])) || !empty(trim($summaries['comment_2'])) ? $summaries : false;
         $data['function'] = $opts['areas'][$areaId];
         $data['avg'] = cloud_vendorAvgStatus($avg);
