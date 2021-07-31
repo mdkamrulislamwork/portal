@@ -273,7 +273,7 @@ if ($user_company_data) {
                     getArchivedMenuFor('risk', 'DR Risk Register', 'Risk Register', 'icon-rr.png', false);
                     getArchivedMenuFor('bcp', 'BCP Register', 'BCP Register', 'registers/icon-red-dark.png', false);
                     getArchivedMenuFor('facility', 'Facility Risk Register', 'Facility Risk Register', 'icon-facility.png');
-                    // getArchivedMenuFor('cloud_vendor', 'Cloud Vendor Risk Register', 'Cloud Vendor Risk Register', 'icon-cloud_vendor.png');
+                    //getArchivedMenuFor('cloud_vendor', 'Cloud Vendor Risk Register', 'Cloud Vendor Risk Register', 'icon-cloud_vendor.png');
                     csmaArchivedMenu();
                     cloud_vendor_archived_menu();
                     getDynamicRegisterMenuFor('drmrr', 'DRM Register', 'DRM Register', 'icon-drmrr.png');

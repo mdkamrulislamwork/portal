@@ -27,7 +27,7 @@
                                         foreach (advisory_template_areas($post_id) as $areaSi => $area) {
                                             // $areaId = $post_type == 'csma' ? $areaSi : advisory_id_from_string($area);
                                             // echo '<li><a href="'. $permalink .'?view=true&area='. $areaId .'" target="_blank">'. $area .'</a></li>';
-                                                $areaId = $post_type == 'cma' || $post_type == 'csma' ? $areaSi : advisory_id_from_string($area);
+                                            $areaId = $post_type == 'cma' || $post_type == 'csma'  || $post_type == 'cloud_vendor' ? $areaSi : advisory_id_from_string($area);
                                             echo '<li><a href="'. $permalink .'?view=true&area='. $areaId .'" target="_blank">'. $area .'</a></li>';
                                         }
                                     echo '</ul>
@@ -37,7 +37,7 @@
                                         <a class="btn btn-warning dropdown-toggle" href="#" data-toggle="dropdown"><span class="fa fa-edit"></span></a>
                                         <ul class="dropdown-menu">';
                                             foreach (advisory_template_areas($post_id) as $areaSi => $area) {
-                                                $areaId = $post_type == 'cma' || $post_type == 'csma' ? $areaSi : advisory_id_from_string($area);
+                                                $areaId = $post_type == 'cma' || $post_type == 'csma'  || $post_type == 'cloud_vendor' ? $areaSi : advisory_id_from_string($area);
                                                 echo '<li><a href="'. $permalink .'?edit=true&area='.$areaId.'" target="_blank">'. $area .'</a></li>';
                                             }
                                         echo '</ul>

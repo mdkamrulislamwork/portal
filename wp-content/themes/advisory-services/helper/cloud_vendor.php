@@ -334,7 +334,7 @@ function cloud_vendorSidebarMenu($form, $areaParam=null)
     }
     return false;
 }
-function cloud_vendorInputController()
+function cloudVendorInputController()
 {
     global $user_switching;
     $data = [
@@ -381,7 +381,7 @@ function cloudVendorFunctionBackground($functionId = 1)
     else $data = ['func' => 'bg-dark-blue', 'cat' => 'bg-blue'];
     return $data;
 }
-function cloud_vendorScoreBg($score=0)
+function cloudVendorScoreBg($score=0)
 {
     $cl = '';
     switch (intval($score)) {
@@ -465,7 +465,7 @@ function cloud_vendor_archived_menu() {
     $postType = 'cloud_vendor';
     $title='Cloud Vendor Register';
     $pageTitle='Cloud Vendor Register';
-    $image = '<img src="'.P3_TEMPLATE_URI.'/images/registers/icon-blue-dark.png" alt="'. @$title .' Icon">';
+    $image = '<img src="'.P3_TEMPLATE_URI.'/images/icon-cloud_vendor.png" alt="'. @$title .' Icon">';
     $page = get_page_by_title($pageTitle);
     if ( $page ) {
         $companyId = advisory_get_user_company_id();
@@ -599,15 +599,14 @@ function cloud_vendor_pdf_get_data($postId=0, $areaId=0)
         $avg = number_format(array_sum($averages) / count($averages), 1);
 
         // SUMMARY
-        $summaries = advisory_form_default_values( $company->term_id, 'area_'.$areaId.'_comments');
+        $summaries = advisory_form_default_values( '32218'.$company->term_id, 'area_'.$areaId.'_comments');
         $headerBg = cloudVendorFunctionBackground($areaId);
         $data['summaries'] = !empty(trim($summaries['comment_1'])) || !empty(trim($summaries['comment_2'])) ? $summaries : false;
         $data['function'] = $opts['areas'][$areaId];
-        $data['avg'] = cloud_vendorAvgStatus($avg);
+        $data['avg'] = cloudVendorAvgStatus($avg);
         $data['date'] = get_the_time(get_option( 'date_format'), $postId);
         $data['company'] = !empty($company->name) ? $company->name : '';
         $data['function']['bg'] = $headerBg['func'];
-        $data['test'] = ['registerId' => $registerId];
     }
     return $data;
 }

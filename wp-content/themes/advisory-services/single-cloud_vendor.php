@@ -5,7 +5,7 @@ $areaId = !empty($_GET['area']) ? $_GET['area'] : 1;
 $threatCatId = 'area_'.$areaId.'_threatcat';
 $opts = get_post_meta($post->ID, 'form_opts', true);
 $area_meta = !empty($opts['areas'][$areaId]) ? $opts['areas'][$areaId] : null;
-$permission = csmaInputController();
+$permission = cloudVendorInputController();
 $areaIcon = !empty($area_meta['icon_title']) ? '<img src="'. $area_meta['icon_title'] .'">' : '<img src="'. IMAGE_DIR_URL .'icon-csma.png">';
 $responses = ['0'=>'N/A', '1'=>'NO', '2'=>'YES', '3' => 'PARTIAL'];
 $scores = ['0' => 'N/A', '1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5'];
@@ -26,8 +26,8 @@ $domains = cloud_vendorDomains($opts);
                     if ( advisory_is_valid_form_submission($post->ID) ) echo '<a class="btn btn-lg btn-info btn-publish" href="javascript:;" data-id="' . $post->ID . '">Publish</a>';
                     // else echo '<a class="btn btn-lg btn-default btn-publish" href="javascript:;" data-id="' . $post->ID . '">Publish</a>';
                 }
-                echo '<a class="btn btn-lg btn-success csma-save-all" data-id="'. $post->ID .'" href="javascript:;">Save All</a>';
-                if ( $permission['publish'] ) echo '<a class="btn btn-lg btn-warning csma-reset-all" data-id="'. $post->ID .'" href="javascript:;">Reset</a>';
+                echo '<a class="btn btn-lg btn-success cloudVendor-save-all" data-id="'. $post->ID .'" href="javascript:;">Save All</a>';
+                if ( $permission['publish'] ) echo '<a class="btn btn-lg btn-warning cloudVendor-reset-all" data-id="'. $post->ID .'" href="javascript:;">Reset</a>';
             echo '</div>';
         } ?>
         <div>
@@ -65,7 +65,7 @@ $domains = cloud_vendorDomains($opts);
                         $str .= '<table class="table table-csmaFunction">';
                             $str .= '<tr>';
                             $str .= '<td class="functionTitle"><h2 class="title">Category: '.$area_meta['name'].' </h2>'.( !empty($area_meta['desc']) ? '<p class="subTitle">'.$area_meta['desc'].'</p>' : '' ).'</td>';
-                            $str .= '<td class="csmaFuncAvg"><h4 class="title"> Category Average: </h4><span data-toggle="tooltip" data-placement="left" title=""></span></td>';
+                            $str .= '<td class="cloudVendorFuncAvg"><h4 class="title"> Category Average: </h4><span data-toggle="tooltip" data-placement="left" title=""></span></td>';
                             $str .= '</tr>';
                         $str .= '</table>';
                     $str .= '</div>';
@@ -79,7 +79,7 @@ $domains = cloud_vendorDomains($opts);
             $default = advisory_form_default_values($post->ID, $threatId);
             // $str .= '<br>'.$post->ID.' == '.$threatId.'<pre>'.print_r($default, true).'</pre>';
             $catAvg = !empty($default['avg']) && $default['avg'] != 'NaN' ? $default['avg'] : 0;
-            $catAvgStatus = csmaAvgStatus($catAvg);
+            $catAvgStatus = cloudVendorAvgStatus($catAvg);
             $comment = !empty($default['comment']) ? $default['comment'] : null;
             $str .= '<div class="row">';
                 $str .= '<div class="col-md-12">';
@@ -92,7 +92,7 @@ $domains = cloud_vendorDomains($opts);
                                         $str .= '<h4 class="title">Control Domain: '. $threatCat['name'] .'</h4>';
                                         if (!empty($threatCat['desc'])) $str .= '<p class="subTitle">'.$threatCat['desc'].'</p>';
                                     $str .= '</td>';
-                                    $str .= '<td class="csmaCatAvg">';
+                                    $str .= '<td class="cloudVendorCatAvg">';
                                         $str .= '<h4 class="title"> Control Domain Average: </h4>';
                                         $str .= '<span class="'.$catAvgStatus['cls'].'" data-toggle="tooltip" data-placement="left" title="'.$catAvg.'">'.$catAvgStatus['text'].'</span>';
                                         $str .= '<input type="hidden" name="avg" value="'.$catAvg.'">';
@@ -111,7 +111,7 @@ $domains = cloud_vendorDomains($opts);
                                         $desc = !empty($threat['desc']) && !empty(trim($threat['desc'])) ? ' <hr style="margin: 5px 0;"><small>'.$threat['desc'].'</small>' : '';
                                         $controlStatementAvg = !empty($default[$questionId.'_avg']) ? $default[$questionId.'_avg'] : 0;
                                         $defaultWeight = !empty($default[$questionId.'_weight']) ? $default[$questionId.'_weight'] : $threat['weight'];
-                                        $controlStatementAvgStatus = csmaAvgStatus($controlStatementAvg);
+                                        $controlStatementAvgStatus = cloudVendorAvgStatus($controlStatementAvg);
                                         $questionCounter = 1;
 
                                         // $str .= '<br><pre>'.print_r($default, true).'</pre>';
@@ -124,8 +124,8 @@ $domains = cloud_vendorDomains($opts);
                                                             $str .= '<tr class="controlStatementRating">';
                                                                 $str .= '<td colspan="5" class="no-border pl-0">';
                                                                     // $str .= '<div>Control Domain: '.$threat['name'].'</div>';
-                                                                    $str .= '<strong><big>Maturity Rating: </big> <span class="csmaControlStatementAvgStatus '.$controlStatementAvgStatus['cls'].'" data-toggle="tooltip" data-placement="right" title="'.$controlStatementAvg.'"> '.$controlStatementAvgStatus['text'].' </span></strong>';
-                                                                    $str .= '<input type="hidden" name="'.$questionId.'_avg" class="csmaControlStatementAvg" value="'.$controlStatementAvg.'">';
+                                                                    $str .= '<strong><big>Maturity Rating: </big> <span class="cloudVendorControlStatementAvgStatus '.$controlStatementAvgStatus['cls'].'" data-toggle="tooltip" data-placement="right" title="'.$controlStatementAvg.'"> '.$controlStatementAvgStatus['text'].' </span></strong>';
+                                                                    $str .= '<input type="hidden" name="'.$questionId.'_avg" class="cloudVendorControlStatementAvg" value="'.$controlStatementAvg.'">';
                                                                     $str .= '<input type="hidden" name="'.$questionId.'_weight" class="weight" value="'.$defaultWeight.'" baseweight="'.$threat['weight'].'">';
                                                                 $str .= '</td>';
                                                             $str .= '</tr>';
@@ -150,7 +150,7 @@ $domains = cloud_vendorDomains($opts);
                                                                         $str .= '<span class="index">'. $questionCounter . '. </span><span class="name">'.$question['name'].'</span>';
                                                                     $str .= '</td>';
                                                                     $str .= '<td class="no-padding bg-black response">'. advisory_opt_select($ansId.'_response', $ansId.'_response', '', $permission['attr'], $responses, $defaultResponse) .'</td>';
-                                                                    $str .= '<td class="no-padding score '.csmaScoreBg($defaultScore).'">'. advisory_opt_select($ansId.'_score', $ansId.'_score', '', $permission['attr'], $scores, $defaultScore) .'</td>';
+                                                                    $str .= '<td class="no-padding score '.cloudVendorScoreBg($defaultScore).'">'. advisory_opt_select($ansId.'_score', $ansId.'_score', '', $permission['attr'], $scores, $defaultScore) .'</td>';
                                                                     $str .= '<td class="bigComment pointer '.($defaultComment ? 'bg-red':'bg-green').'" isactive="'.$permission['attr'].'"><textarea class="hidden commentText" name="'.$ansId.'_comment" title="Comment">' . $defaultComment . '</textarea></td>';
                                                                 $str .= '</tr>';
                                                                 $questionCounter++;
@@ -180,21 +180,21 @@ get_footer(); ?>
     const commentModal = $('#commentModal');
     const commentSave = commentModal.find('.saveBtn');
     const commentEdit = commentModal.find('.editBtn');
-    csmaFunctionAvg();
+    cloudVendorFunctionAvg();
     $(document).on( 'change', '.score select', function() {
         let element = $(this);
-        csmaScoreBg(element);
-        csmaControlStagementAvg(element);
-        csmaCategoryAvg(element);
-        csmaFunctionAvg();
+        cloudVendorScoreBg(element);
+        cloudVendorControlStagementAvg(element);
+        cloudVendorCategoryAvg(element);
+        cloudVendorFunctionAvg();
     })
-    $(document).on( 'click', '.csma-save-all', function(e) {
+    $(document).on( 'click', '.cloudVendor-save-all', function(e) {
         e.preventDefault();
         $('form').find('.btn-success').each(function(){
             $(this).click();
         })
     })
-    $(document).on( 'click', '.csma-reset-all', function(e) {
+    $(document).on( 'click', '.cloudVendor-reset-all', function(e) {
         e.preventDefault();
         let button = $(this);
         let postId = parseInt(button.attr('data-id'));
@@ -211,7 +211,7 @@ get_footer(); ?>
             }, function() {
                 jQuery.ajax({
                     type: 'POST',
-                    url: object.ajaxurl + '?action=reset_csma',
+                    url: object.ajaxurl + '?action=reset_cloud_vendor',
                     cache: false,
                     data: {id: postId, security: object.ajax_nonce },
                     beforeSend: function() { button.attr('disabled', true); },
@@ -277,7 +277,7 @@ get_footer(); ?>
         $('.bigComment.active').removeClass('active');
         $(this).find('textarea').val('');
     });
-    function csmaScoreBg(button) {
+    function cloudVendorScoreBg(button) {
         let baseCls = 'no-padding score';
         let cls = ''
         switch (parseInt(button.val())) {
@@ -290,7 +290,7 @@ get_footer(); ?>
         }
         button.parent('td').removeClass().addClass(baseCls+' '+cls);
     }
-    function csmaControlStagementAvg(element) {
+    function cloudVendorControlStagementAvg(element) {
         var total = 0, counter = 0, avg = 0, cls = null, status = null;
         var table = element.parents('table');
         let questionContainers = table.find('.questionContainer');
@@ -304,13 +304,13 @@ get_footer(); ?>
         })
         if ( total ) avg = (total / counter).toFixed(1);
         // WEIGHT DISTRIBUTION
-        csmaDistributeWeight(element, avg);
+        cloudVendorDistributeWeight(element, avg);
         // ADD CLASS AND STATUS
-        status = csmaAvgStatus(avg);
-        table.find('.csmaControlStatementAvgStatus').removeClass().addClass('csmaControlStatementAvgStatus '+ status.cls).text(status.text).attr('data-original-title',avg);
-        table.find('.csmaControlStatementAvg').val(avg);
+        status = cloudVendorAvgStatus(avg);
+        table.find('.cloudVendorControlStatementAvgStatus').removeClass().addClass('cloudVendorControlStatementAvgStatus '+ status.cls).text(status.text).attr('data-original-title',avg);
+        table.find('.cloudVendorControlStatementAvg').val(avg);
     }
-    function csmaDistributeWeight(element, avg) {
+    function cloudVendorDistributeWeight(element, avg) {
         // CHANGE STATUS
         if ( avg <= 0 ) element.parents('.innerCard').addClass('inactive');
         else element.parents('.innerCard').removeClass('inactive');
@@ -349,27 +349,27 @@ get_footer(); ?>
         // );
         // return false;
     }
-    function csmaCategoryAvg(element) {
+    function cloudVendorCategoryAvg(element) {
         var total = 0, cls = null, status = null;
         let form = element.parents('form');
-        let catAvg = form.find('.csmaCatAvg');
+        let catAvg = form.find('.cloudVendorCatAvg');
         let activeStatements = form.find('.innerCard').not('.inactive');
 
         activeStatements.each(function() {
-            let statementAvg = parseFloat($(this).find('.csmaControlStatementAvg').val());
+            let statementAvg = parseFloat($(this).find('.cloudVendorControlStatementAvg').val());
             let weight = parseFloat($(this).find('.weight').val());
             total += statementAvg * (weight / 100);
             // console.log( {'statementAvg' : statementAvg, 'weight' : weight} );
         })
         if ( total ) total = total.toFixed(1);
         // ADD CLASS AND STATUS
-        status = csmaAvgStatus(total);
+        status = cloudVendorAvgStatus(total);
 
         catAvg.find('span').removeClass().addClass(status.cls).text(status.text).attr('data-original-title',total);
         catAvg.find('input').val(total);
         // console.log( {'total' : total} );
     }
-    function csmaAvgStatus(total) {
+    function cloudVendorAvgStatus(total) {
         let status = {};
         if ( total >= 5 )       { status.cls = 'bg-dark-blue'; status.text = 'OPTIMIZED'; }
         else if ( total >= 4 )  { status.cls = 'bg-light-blue'; status.text = 'MANAGED'; }
@@ -378,17 +378,17 @@ get_footer(); ?>
         else                    { status.cls = 'bg-red'; status.text = 'INITIAL'; }
         return status;
     }
-    function csmaFunctionAvg() {
+    function cloudVendorFunctionAvg() {
         var counter=0, total = 0, avg = 0;
-        $('.csmaCatAvg input').each(function() {
+        $('.cloudVendorCatAvg input').each(function() {
             total += parseFloat($(this).val());
             counter++;
             // console.log( parseFloat($(this).val()) );
         })
         if ( total ) avg = (total / counter).toFixed(1);
-        var status = csmaAvgStatus(avg);
+        var status = cloudVendorAvgStatus(avg);
         // console.log( {'total':total, 'counter':counter, 'avg':avg, 'status':status} );
-        $('.csmaFuncAvg span').removeClass().addClass(status.cls).text(status.text).attr('data-original-title',avg);
+        $('.cloudVendorFuncAvg span').removeClass().addClass(status.cls).text(status.text).attr('data-original-title',avg);
     }
     function tinymce() {
         tinyMCE.init({

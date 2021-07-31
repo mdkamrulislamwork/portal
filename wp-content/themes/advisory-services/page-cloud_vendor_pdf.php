@@ -5,7 +5,7 @@ use Dompdf\Dompdf;
 $postId = !empty($_GET['pid']) ? base64_decode($_GET['pid']) : false;
 $areaId = !empty($_GET['area']) ? base64_decode($_GET['area']) : false;
 
-$data = csma_pdf_get_data($postId, $areaId);
+$data = cloud_vendor_pdf_get_data($postId, $areaId);
 // echo '<br><pre>'.print_r($data, true).'</pre>'; exit();
 
 $filename   = "Cloud Vendor Report";
@@ -48,7 +48,6 @@ if ($data) {
        
     $str .= '</style>';
     $str .= '<div class="container" style="margin: 0 auto;">';
-        // $str .= csma_pdf_header($data);
         $str .= '<table style="width: 100%;">';
             $str .= '<tr>';
                 $str .= '<td style="border-left: 0;text-align:center;width:100px;"><img src="'.IMAGE_DIR_URL.'dashboard/cybersecurity.png" style="height: 100px;weight:auto; "></td>';
@@ -56,8 +55,8 @@ if ($data) {
                     $str .= '<p style="font-size:18px;">'.$data['company'].'</p>';
                     $str .= '<p style="margin-top:5px;font-size:14px;">Cloud Maturity Executive Summary</p>';
                     $str .= '<p style="margin-top:5px;font-size:14px;">'.$data['date'].'</p>';
-                    $str .= '<div style="margin-left:150px;text-align:center;width:100px;">';
-                        $str .= '<p style="font-size:12px;color:000;">Category Average:</p>';
+                    $str .= '<div style="margin-left:150px;text-align:center;width:110px;">';
+                        $str .= '<p style="font-size:12px;">Category Average:</p>';
                         $str .= '<p class="'.($data['avg']['cls'] ? $data['avg']['cls'] : '').'" style="margin: 2px auto 0 auto;font-size:11px;padding:5px 10px; border-radius:3px;width:70px;">'.($data['avg']['text'] ? $data['avg']['text'] : '').'</p>';
                     $str .= '</div>';
                 $str .= '</td>';
