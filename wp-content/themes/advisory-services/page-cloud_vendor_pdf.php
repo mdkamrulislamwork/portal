@@ -16,7 +16,7 @@ if ($data) {
     
     $str .= '<style type="text/css">';
         $str .= '@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");';
-        $str .= '*{font-family: "Roboto", sans-serif !important;line-height:1.1;}';
+        $str .= ' *{font-family: "Roboto", sans-serif !important;line-height:1.1;font-size: 11px; font-weight:bold;}';
         $str .= '*{margin: 0;padding: 0;line-height:1.1;}';
         $str .= 'body { margin: 0;padding: 0; font-size:14px;}';
         $str .= 'strong { font-size:15px; }';
@@ -50,19 +50,32 @@ if ($data) {
     $str .= '<div class="container" style="margin: 0 auto;">';
         $str .= '<table style="width: 100%;">';
             $str .= '<tr>';
-                $str .= '<td style="border-left: 0;text-align:center;width:100px;"><img src="'.IMAGE_DIR_URL.'dashboard/cybersecurity.png" style="height: 100px;weight:auto; "></td>';
-                $str .= '<td style="vertical-align: top;width:250px;padding-bottom:0;">';
+                $str .= '<td rowspan="2" style="border-left: 0;text-align:center;width:100px;"><img src="'.IMAGE_DIR_URL.'dashboard/cybersecurity.png" style="height: 100px;weight:auto; "></td>';
+                $str .= '<td rowspan="2" style="vertical-align: top;width:300px;padding-bottom:0;">';
                     $str .= '<p style="font-size:18px;">'.$data['company'].'</p>';
-                    $str .= '<p style="margin-top:5px;font-size:14px;">Cloud Maturity Executive Summary</p>';
-                    $str .= '<p style="margin-top:5px;font-size:14px;">'.$data['date'].'</p>';
-                    $str .= '<div style="margin-left:150px;text-align:center;width:110px;">';
+                    $str .= '<p style="margin-top:5px;font-size:14px;">Cloud Vendor Maturity</p>';
+                    $str .= '<p style="margin-top:5px;font-size:14px;">Executive Summary</p>';
+
+                    $str .= '<table>';
+                    $str .= '<tr>';
+                    $str .= '<td style="width:180px;float: left;padding-left: 0;vertical-align: bottom;">';
+                        $str .= '<p style="font-size:14px;margin-top: 20px;">'.$data['date'].'</p>';
+                    $str .= '</td>';
+                    $str .= '<td style="text-align:center;width:110px;float:right;">';
                         $str .= '<p style="font-size:12px;">Category Average:</p>';
-                        $str .= '<p class="'.($data['avg']['cls'] ? $data['avg']['cls'] : '').'" style="margin: 2px auto 0 auto;font-size:11px;padding:5px 10px; border-radius:3px;width:70px;">'.($data['avg']['text'] ? $data['avg']['text'] : '').'</p>';
-                    $str .= '</div>';
+                        $str .= '<p class="'.($data['avg']['cls'] ? $data['avg']['cls'] : '').'" style="margin: 2px auto 0 auto;font-size:11px;padding:5px 10px; border-radius:3px;width:70px;color:#ffffff;">'.($data['avg']['text'] ? $data['avg']['text'] : '').'</p>';
+                    $str .= '</td>';
+                    $str .= '</tr>';
+                    $str .= '</table>';
                 $str .= '</td>';
                 $str .= '<td class="'.($data['function']['bg'] ? $data['function']['bg'] : '').'" style="border-left: 0;vertical-align:top;color:#fff;">';
                     $str .= '<p style="font-size:18px;font-weight:700;margin-bottom:5px;">Category: '.($data['function']['name'] ? $data['function']['name'] : '').'</p>';
                     $str .= '<p style="margin:0;">'.($data['function']['desc'] ? $data['function']['desc'] : '').'</p>';
+                $str .= '</td>';
+            $str .= '</tr>';
+            $str .= '<tr>';
+                $str .= '<td class="'.($data['function']['bg'] ? $data['function']['bg'] : '').'" style="border-left: 0;vertical-align:bottom;color:#fff;">';
+                    $str .= '<p style="font-size:18px;font-weight:700;margin-bottom:5px;text-align: center;">Vendor: '.($data['vendor'] ? $data['vendor'] : '').'</p>';
                 $str .= '</td>';
             $str .= '</tr>';
         $str .= '</table>';

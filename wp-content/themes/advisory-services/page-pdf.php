@@ -207,7 +207,8 @@ if ($postID == 'sfia_missing_skills') {
     $dompdf->get_canvas()->page_text(165, 572, "This document is strictly confidential and may not be reproduced or circulated without ".$company->name." prior written consent.", "helvetica", 8, array(0,0,0));
     
     $dompdf->stream($filename,array("Attachment"=>0));
-} else if ($postID == 'sfia_partial_skills_fit') {
+}
+else if ($postID == 'sfia_partial_skills_fit') {
     $filename   = "SFIA Partial Skills Fit";
     $dompdf     = new Dompdf();
     $company    = advisory_get_user_company();
@@ -425,7 +426,8 @@ if ($postID == 'sfia_missing_skills') {
     $dompdf->get_canvas()->page_text(165, 572, "This document is strictly confidential and may not be reproduced or circulated without ".$company->name." prior written consent.", "helvetica", 8, array(0,0,0));
     
     $dompdf->stream($filename,array("Attachment"=>0));
-} else if ($postID == 'service_criticality_report_card') {
+}
+else if ($postID == 'service_criticality_report_card') {
     $data = $services = [];
     $service_si = 1;
     $catalogue = 'Service Criticality Report Card';
@@ -564,7 +566,8 @@ if ($postID == 'sfia_missing_skills') {
         $dompdf->get_canvas()->page_text(782, 573, "Page : {PAGE_NUM} of {PAGE_COUNT}", '', 8, array(0,0,0));
     }
     $dompdf->stream($filename,array("Attachment"=>0));
-} else if ($postID == 'catelogue_summary') {
+}
+else if ($postID == 'catelogue_summary') {
     $data = $services = [];
     $service_si = 1;
     $title = ['it'=>'IT Service Catalogue', 'desktop'=>'Desktop Service Catalogue', 'cloud'=>'Cloud Service Catalogue'];
@@ -709,7 +712,8 @@ if ($postID == 'sfia_missing_skills') {
         $dompdf->get_canvas()->page_text(782, 573, "Page : {PAGE_NUM} of {PAGE_COUNT}", '', 8, array(0,0,0));
     }
     $dompdf->stream($filename,array("Attachment"=>0));
-} else if ($postID) {
+}
+else if ($postID) {
     $postType   =  get_post_type($postID);
     $filename = "Executive Summary";
     $dompdf = new Dompdf();
@@ -853,7 +857,8 @@ if ($postID == 'sfia_missing_skills') {
           $pdf->line(20,545,822,545,array(0,0,0),1);
         ');
         $dompdf->get_canvas()->page_text(776, 572, "Page : {PAGE_NUM} of {PAGE_COUNT}", '', 8, array(0,0,0));
-    } else if ($postType == 'bia') {
+    }
+    else if ($postType == 'bia') {
         $prefix     = $postType.'_pdf_';
         $company    = advisory_get_user_company();
         $data       = advisory_get_scorecard_data($postID);
@@ -1336,7 +1341,8 @@ if ($postID == 'sfia_missing_skills') {
             $dompdf->get_canvas()->page_text(510, 10, "DEPARTMENTAL BUSINESS CONTINUITY PLAN (CONFIDENTIAL)--Not for External Distribution", '', 7, array(0,0,0));
             $dompdf->get_canvas()->page_text(776, 572, "Page : {PAGE_NUM} of {PAGE_COUNT}", '', 8, array(0,0,0));
         }
-    } else if ($postType == 'sfia') {
+    }
+    else if ($postType == 'sfia') {
         $filename = "SFIA Summary";
         $prefix     = $postType.'_pdf_';
         $user_id    = !empty($_GET['user_id']) ? $_GET['user_id'] : '';

@@ -902,7 +902,8 @@ $options[] = [
 			'title' => 'General',
 			'fields' => [
 				['id' => 'display_name', 'type' => 'text', 'title' => 'Display Name'],
-				['id' => 'desc', 'type' => 'text', 'title' => 'Description']
+				['id' => 'desc', 'type' => 'text', 'title' => 'Description'],
+				['id' => 'vendor', 'type' => 'text', 'title' => 'Vendor']
 			]
 		],
 		[

@@ -602,6 +602,7 @@ function cloud_vendor_pdf_get_data($postId=0, $areaId=0)
         $summaries = advisory_form_default_values( '32218'.$company->term_id, 'area_'.$areaId.'_comments');
         $headerBg = cloudVendorFunctionBackground($areaId);
         $data['summaries'] = !empty(trim($summaries['comment_1'])) || !empty(trim($summaries['comment_2'])) ? $summaries : false;
+        $data['vendor'] = cloud_vendor_pdf_get_vendor_name($postId, $opts);
         $data['function'] = $opts['areas'][$areaId];
         $data['avg'] = cloudVendorAvgStatus($avg);
         $data['date'] = get_the_time(get_option( 'date_format'), $postId);
@@ -609,4 +610,11 @@ function cloud_vendor_pdf_get_data($postId=0, $areaId=0)
         $data['function']['bg'] = $headerBg['func'];
     }
     return $data;
+}
+function cloud_vendor_pdf_get_vendor_name($postId, $opts){
+    $title = '';
+    if ($opts['vendor']) $title = $opts['vendor'];
+    else if ($opts['display_name']) $title = $opts['display_name'];
+    else $title = get_the_title($postId);
+    return $title;
 }

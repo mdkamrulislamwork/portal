@@ -528,6 +528,29 @@ function advisory_init() {
 		'exclude_from_search' => true,
 		'supports' => array('title'),
 	));
+	// Project Prioritization requirements
+	// @since 9.0
+	register_post_type('sfiar', array(
+		'labels' => array(
+			'name' => _x('SFIA Register', 'post type general name', 'advisory'),
+			'singular_name' => _x('SFIA Register', 'post type singular name', 'advisory'),
+			'menu_name' => _x('SFIA Register', 'admin menu', 'advisory'),
+			'name_admin_bar' => _x('SFIA Register', 'add new on admin bar', 'advisory'),
+			'add_new' => _x('Add New', 'sfiar', 'advisory'),
+			'add_new_item' => __('Add New SFIA Register', 'advisory'),
+			'new_item' => __('New SFIA Register', 'advisory'),
+			'edit_item' => __('Edit SFIA Register', 'advisory'),
+			'view_item' => __('View SFIA Register', 'advisory'),
+			'all_items' => __('All SFIA Register', 'advisory'),
+			'search_items' => __('Search SFIA Register', 'advisory'),
+			'parent_item_colon' => __('Parent SFIA Register:', 'advisory'),
+			'not_found' => __('No SFIA Register found.', 'advisory'),
+			'not_found_in_trash' => __('No SFIA Register found in Trash.', 'advisory'),
+		),
+		'public' => true,
+		'exclude_from_search' => true,
+		'supports' => array('title'),
+	));
 
 	// TAXONOMIES
 	register_taxonomy(
