@@ -975,6 +975,49 @@ $options[] = [
 	]
 ];
 // -----------------------------------------
+// Project Prioritization requirements     -
+// -----------------------------------------
+$options[] = [
+	'id' => 'form_opts',
+	'title' => 'Form Options',
+	'post_type' => 'ppr',
+	'context' => 'normal',
+	'priority' => 'default',
+	'sections' => [
+		[
+			'name' => 'general',
+			'title' => 'General',
+			'fields' => [
+				['id' => 'display_name', 'type' => 'text', 'title' => 'Display Name'],
+				['id' => 'desc', 'type' => 'text', 'title' => 'Description'],
+				['id' => 'icon', 'type' => 'upload', 'title' => 'Icon']
+			]
+		],
+		[
+			'name' => 'areas',
+			'title' => 'Attributes',
+			'fields' => [
+				['type' => 'notice', 'class' => 'danger', 'content' => 'Create Categories and save.'],
+				[
+					'id' => 'areas',
+					'type' => 'group',
+					'title' => 'Attributes',
+					'desc' => 'Each Category name should be unique',
+					'button_title' => 'Add New',
+					'accordion_title' => 'Add New Area',
+					'fields' => [
+						[ 'id' => 'name', 'type' => 'text', 'title' => 'Name'],
+						[ 'id' => 'desc', 'type' => 'textarea', 'title' => 'Description'],
+						[ 'id' => 'base', 'type' => 'number', 'title' => 'Base']
+					],
+				]
+			]
+		],
+		['name' => 'threats', 'title' => 'Categories', 'fields' => ppr_form_threatcats()],
+		['name' => 'statements', 'title' => 'Control Statements', 'fields' => ppr_form_statements()],
+	]
+];
+// -----------------------------------------
 // Cyber security Assessment                -
 // -----------------------------------------
 $options[] = [

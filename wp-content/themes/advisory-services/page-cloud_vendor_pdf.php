@@ -50,7 +50,7 @@ if ($data) {
     $str .= '<div class="container" style="margin: 0 auto;">';
         $str .= '<table style="width: 100%;">';
             $str .= '<tr>';
-                $str .= '<td rowspan="2" style="border-left: 0;text-align:center;width:100px;"><img src="'.IMAGE_DIR_URL.'dashboard/cybersecurity.png" style="height: 100px;weight:auto; "></td>';
+                $str .= '<td rowspan="2" style="border-left: 0;text-align:center;width:100px;"><img src="'.IMAGE_DIR_URL.'cloud-vendor/report/'.$areaId.'.png" style="height: 100px;weight:auto; "></td>';
                 $str .= '<td rowspan="2" style="vertical-align: top;width:300px;padding-bottom:0;">';
                     $str .= '<p style="font-size:18px;">'.$data['company'].'</p>';
                     $str .= '<p style="margin-top:5px;font-size:14px;">Cloud Vendor Maturity</p>';

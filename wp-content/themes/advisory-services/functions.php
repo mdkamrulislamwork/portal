@@ -6,7 +6,7 @@
 //     wp_set_auth_cookie( $user_id );
 //     do_action( 'wp_login', $user->user_login );
 // }
-$allPostTypes = ['itcl', 'cma', 'csma', 'cloud_vendor', 'facility', 'mta', 'ihc', 'itsm', 'cra', 'bia', 'risk', 'bcp', 'drm', 'drmrr', 'dmm', 'dmmr', 'ihcr', 'mtar', 'sfia', 'sfiar']; // ['dmmr','ihcr']
+$allPostTypes = ['itcl', 'cma', 'csma', 'cloud_vendor', 'facility', 'mta', 'ihc', 'itsm', 'cra', 'bia', 'risk', 'bcp', 'drm', 'drmrr', 'dmm', 'dmmr', 'ihcr', 'mtar', 'sfia', 'sfiar', 'ppr']; // ['dmmr','ihcr']
 define('P3_TEMPLATE_VERSION', time());
 define('ALL_SCORECARDS', json_encode(['facility', 'csma', 'cma', 'cloud_vendor', 'mta', 'ihc', 'itsm', 'cra', 'bia', 'risk', 'bcp', 'drm', 'dmm', 'itcl']));
 define('ALL_POST_TYPES', json_encode($allPostTypes));
@@ -40,6 +40,7 @@ require_once P3_TEMPLATE_PATH .'/helper/sfiats.php';
 require_once P3_TEMPLATE_PATH .'/helper/sfiar.php';
 require_once P3_TEMPLATE_PATH .'/helper/sfiams.php';
 require_once P3_TEMPLATE_PATH .'/helper/sfiapsf.php';
+require_once P3_TEMPLATE_PATH .'/helper/ppr.php';
 require_once P3_TEMPLATE_PATH .'/helper/metabox.php';
 require_once P3_TEMPLATE_PATH .'/helper/tabletop.php';
 require_once P3_TEMPLATE_PATH .'/helper/recovery_playbook.php';

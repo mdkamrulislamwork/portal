@@ -166,7 +166,8 @@ if ($user_company_data) {
                                             echo '</ul>';
                                         }
                                     echo '</li>';
-                                } else if (get_post_type($form) == 'cma') {
+                                }
+                                else if (get_post_type($form) == 'cma') {
                                     $form_meta = get_post_meta($form, 'form_opts', true);
                                     $form_meta['icon'] = IMAGE_DIR_URL.'icon-cma.png';
                                     $postLink = get_the_permalink($form);
@@ -180,9 +181,11 @@ if ($user_company_data) {
                                             echo '</ul>';
                                         }
                                     echo '</li>';
-                                } else if (get_post_type($form) == 'csma') { 
+                                }
+                                else if (get_post_type($form) == 'csma') {
                                     echo csmaSidebarMenu($form);
-                                } else if (get_post_type($form) == 'cloud_vendor') {
+                                }
+                                else if (get_post_type($form) == 'cloud_vendor') {
                                     $form_meta = get_post_meta($form, 'form_opts', true);
                                     $form_meta['icon'] = IMAGE_DIR_URL.'icon-cloud_vendor.png';
                                     $postLink = get_the_permalink($form);
@@ -196,7 +199,23 @@ if ($user_company_data) {
                                             echo '</ul>';
                                         }
                                     echo '</li>';
-                                } else {
+                                }
+                                else if (get_post_type($form) == 'ppr') {
+                                    $form_meta = get_post_meta($form, 'form_opts', true);
+                                    $form_meta['icon'] = IMAGE_DIR_URL.'icon-ppr.png';
+                                    $postLink = get_the_permalink($form);
+                                    $icon = '<img src="'.IMAGE_DIR_URL.'icon-ppr.png">';
+                                    echo '<li><a href="#">'. $icon .'<span>'. advisory_get_form_name($form) . '</span></a>';
+                                        if (!empty($form_meta['areas'])) {
+                                            echo '<ul class="treeview-menu">';
+                                            foreach ($form_meta['areas'] as $areaSi => $area) {
+                                                echo '<li><a href="'. $postLink .'?area='. $areaSi .'">'.$icon.'<span>' . $area['name'] . '</span></a></li>';
+                                            }
+                                            echo '</ul>';
+                                        }
+                                    echo '</li>';
+                                }
+                                else {
                                     $form_meta = get_post_meta($form, 'form_opts', true);
                                     echo '<li><a href="#"><img src="' . @$form_meta['icon'] .'" alt=""><span>'. advisory_get_form_name($form) . '</span></a>';
                                         if (!empty($form_meta['areas'])) {
@@ -226,9 +245,11 @@ if ($user_company_data) {
                                             echo '</ul>';
                                         }
                                     echo '</li>';
-                                } else if (get_post_type($form) == 'csma') { 
+                                }
+                                else if (get_post_type($form) == 'csma') {
                                     echo csmaSidebarMenu($form);
-                                } else if (get_post_type($form) == 'cma') {
+                                }
+                                else if (get_post_type($form) == 'cma') {
                                     $form_meta = get_post_meta($form, 'form_opts', true);
                                     $icon = IMAGE_DIR_URL.'icon-cma.png';
                                     echo '<li><a href="#"><img src="' . $icon .'" alt=""><span>' . advisory_get_form_name($form) . '</span></a>';
@@ -240,7 +261,8 @@ if ($user_company_data) {
                                             echo '</ul>';
                                         }
                                     echo '</li>';
-                                } else if (get_post_type($form) == 'cloud_vendor') {
+                                }
+                                else if (get_post_type($form) == 'cloud_vendor') {
                                     $form_meta = get_post_meta($form, 'form_opts', true);
                                     $form_meta['icon'] = IMAGE_DIR_URL.'icon-cloud_vendor.png';
                                     echo '<li><a href="#"><img src="' . @$form_meta['icon'] .'" alt=""><span>' . advisory_get_form_name($form) . '</span></a>';
@@ -252,7 +274,21 @@ if ($user_company_data) {
                                             echo '</ul>';
                                         }
                                     echo '</li>';
-                                } else {
+                                }
+                                else if (get_post_type($form) == 'ppr') {
+                                    $form_meta = get_post_meta($form, 'form_opts', true);
+                                    $form_meta['icon'] = IMAGE_DIR_URL.'icon-ppr.png';
+                                    echo '<li><a href="#"><img src="' . @$form_meta['icon'] .'" alt=""><span>' . advisory_get_form_name($form) . '</span></a>';
+                                        if (!empty($form_meta['areas'])) {
+                                            echo '<ul class="treeview-menu">';
+                                            foreach ($form_meta['areas'] as $area) {
+                                                echo '<li><a href="' . get_the_permalink($form) . '?view=true&area=' . advisory_id_from_string($area['name']) . '"><img src="' . (empty($area['icon_menu']) ? $form_meta['icon'] : $area['icon_menu']) .'"><span>' . $area['name'] . '</span></a></li>';
+                                            }
+                                            echo '</ul>';
+                                        }
+                                    echo '</li>';
+                                }
+                                else {
                                     $form_meta = get_post_meta($form, 'form_opts', true);
                                     echo '<li><a href="#"><img src="' . @$form_meta['icon'] .'" alt=""><span>' . advisory_get_form_name($form) . '</span></a>';
                                         if (!empty($form_meta['areas'])) {
@@ -316,6 +352,7 @@ if ($user_company_data) {
                     echo '<li><a href="'. admin_url('edit.php?post_type=csa') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-forms.png"> CSA </a></li>';
                     echo '<li><a href="'. admin_url('edit.php?post_type=sfia') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-forms.png"> SFIA </a></li>';
                     echo '<li><a href="'. admin_url('edit.php?post_type=sfiats') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-forms.png"> Technical Surveys </a></li>';
+                    echo '<li><a href="'. admin_url('edit.php?post_type=ppr') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-forms.png"> Project Prioritization requirements </a></li>';
                     echo '<li><a href="'. admin_url('users.php') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-user.png"> Users</a></li>';
                     echo '<li><a href="'. admin_url('admin.php?page=p3s-options') .'"><img src="' .P3_TEMPLATE_URI.'/images/menu-settings.png"> Options</a></li>';
                 } ?>

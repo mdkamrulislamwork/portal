@@ -530,22 +530,22 @@ function advisory_init() {
 	));
 	// Project Prioritization requirements
 	// @since 9.0
-	register_post_type('sfiar', array(
+	register_post_type('ppr', array(
 		'labels' => array(
-			'name' => _x('SFIA Register', 'post type general name', 'advisory'),
-			'singular_name' => _x('SFIA Register', 'post type singular name', 'advisory'),
-			'menu_name' => _x('SFIA Register', 'admin menu', 'advisory'),
-			'name_admin_bar' => _x('SFIA Register', 'add new on admin bar', 'advisory'),
-			'add_new' => _x('Add New', 'sfiar', 'advisory'),
-			'add_new_item' => __('Add New SFIA Register', 'advisory'),
-			'new_item' => __('New SFIA Register', 'advisory'),
-			'edit_item' => __('Edit SFIA Register', 'advisory'),
-			'view_item' => __('View SFIA Register', 'advisory'),
-			'all_items' => __('All SFIA Register', 'advisory'),
-			'search_items' => __('Search SFIA Register', 'advisory'),
-			'parent_item_colon' => __('Parent SFIA Register:', 'advisory'),
-			'not_found' => __('No SFIA Register found.', 'advisory'),
-			'not_found_in_trash' => __('No SFIA Register found in Trash.', 'advisory'),
+			'name' => _x('Project Prioritization requirements', 'post type general name', 'advisory'),
+			'singular_name' => _x('Project Prioritization requirements', 'post type singular name', 'advisory'),
+			'menu_name' => _x('Project Prioritization requirements', 'admin menu', 'advisory'),
+			'name_admin_bar' => _x('Project Prioritization requirements', 'add new on admin bar', 'advisory'),
+			'add_new' => _x('Add New', 'ppr', 'advisory'),
+			'add_new_item' => __('Add New Project Prioritization requirements', 'advisory'),
+			'new_item' => __('New Project Prioritization requirements', 'advisory'),
+			'edit_item' => __('Edit Project Prioritization requirements', 'advisory'),
+			'view_item' => __('View Project Prioritization requirements', 'advisory'),
+			'all_items' => __('All Project Prioritization requirements', 'advisory'),
+			'search_items' => __('Search Project Prioritization requirements', 'advisory'),
+			'parent_item_colon' => __('Parent Project Prioritization requirements:', 'advisory'),
+			'not_found' => __('No Project Prioritization requirements found.', 'advisory'),
+			'not_found_in_trash' => __('No Project Prioritization requirements found in Trash.', 'advisory'),
 		),
 		'public' => true,
 		'exclude_from_search' => true,
