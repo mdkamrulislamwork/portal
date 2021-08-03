@@ -1486,13 +1486,12 @@ function advisory_ajax_dashboard_scorecard() {
 			    $html .= '<table class="table table-bordered">';
 			        $html .= '<tbody>';
 						foreach ($data as $areaId => $area) {
-							//$reportLink = site_url('cybersecurity-report/').'?pid='.base64_encode($_REQUEST['post_id']).'&area='.base64_encode($areaId);
-							$reportLink = '#';
+							$reportLink = site_url('cloud-vendor-report/').'?pid='.base64_encode($_REQUEST['post_id']).'&area='.base64_encode($areaId);
+                            $areaColor = cloudVendorFunctionBackground($areaId);
 				            $html .= '<tr>';
-				                $html .= '<th class="'.$area['color']['func'].'" style="text-transform: uppercase; font-size: 18px;color:#fff;">'.$area['name'].'</th>';
-				                $html .= '<th class="'.$area['color']['func'].'" style="text-transform: uppercase; font-size: 18px;color:#fff;text-align:center;">Rating</th>';
-				                $html .= '<th class="csmaReport '.$area['color']['func'].'" style="text-align:center;padding: 0;"><a href="'.$reportLink.'" style="display: block;" title="'.$area['name'].' Report" target="_blank"><img src="'.IMAGE_DIR_URL.'pdf/power.png" style="height:35px;"></a></th>';
-				                // $html .= '<th class="csmaReport '.$area['color']['func'].'" style="font-size: 29px;text-align:center;padding: 0;background:#000;"><a href="'.$reportLink.'" style="color: #fff; display: block;" title="'.$area['name'].' Report" target="_blank"><span class="fa fa-file-pdf-o" aria-hidden="true"></span></a></th>';
+				                $html .= '<th class="'. $areaColor['func'] .'" style="text-transform: uppercase; font-size: 18px;color:#fff;">'.$area['name'].'</th>';
+				                $html .= '<th class="'. $areaColor['func'] .'" style="text-transform: uppercase; font-size: 18px;color:#fff;text-align:center;">Rating</th>';
+				                $html .= '<th class="csmaReport '. $areaColor['func'] .'" style="text-align:center;padding: 0;"><a href="'.$reportLink.'" style="display: block;" title="'.$area['name'].' Report" target="_blank"><img src="'.IMAGE_DIR_URL.'pdf/power.png" style="height:35px;"></a></th>';
 				            $html .= '</tr>';
 				            if ( !empty($area['cats'])) {
 				            	foreach ($area['cats'] as $cat) {

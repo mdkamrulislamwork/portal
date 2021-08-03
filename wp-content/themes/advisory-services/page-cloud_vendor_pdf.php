@@ -27,13 +27,10 @@ if ($data) {
         $str .= 'ol { padding-left:25px; margin-bottom:5px; }';
         $str .= 'h1, h2, h3, h4 { margin: 0;line-height: 1; font-weight:700;}';
         // COLORS - FUNCTION AVERAGE
-        $str .= '.bg-red { background-color: #ed2227; }';
-        $str .= '.bg-purple { background: #854599; }';
-        $str .= '.bg-orange { background-color: #f77e28; }';
-        $str .= '.bg-deepblue { background-color: #1176bc; }';
-        $str .= '.bg-green { background-color: #64bc46; }';
-        $str .= '.bg-yellow { background-color: #ffdc5d; }';
-        $str .= '.bg-red { background-color: #ed2227; }';
+        $str .= '.cvbg-1 { background-color: #006997; }';
+        $str .= '.cvbg-2 { background-color: #f08329; }';
+        $str .= '.cvbg-3 { background-color: #84449a; }';
+        $str .= '.cvbg-4 { background-color: #f05135; }';
 
         // COLORS - FUNCTION BACKGROUNDS
         // $str .= '.bg-dark-blue { background-color: #169ad7; }';

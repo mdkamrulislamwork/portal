@@ -14149,6 +14149,11 @@ a.fc-more:hover {
 .bg-dark-grey { background: #404040; }
 .bg-palm-leaf { background: #385623; }
 
+/* CLOUD VENDOR BG*/
+.cvbg-1 { background-color: #006997; }
+.cvbg-2 { background-color: #f08329; }
+.cvbg-3 { background-color: #84449a; }
+.cvbg-4 { background-color: #f05135; }
 /*COLORS*/
 .color-white {color: #ffffff;}
 .color-darkred {color: #8b0000;}
