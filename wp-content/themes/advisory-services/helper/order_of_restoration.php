@@ -75,13 +75,12 @@ function advisory_ajax_orderRestorationAdd()
                 $str .= '<option>Select</option>';
                 if ( !empty($playbooks) ) {
                     foreach ($playbooks as $playbook) {
-                        $str .= '<option value="'.$playbook['id'].'" app_name="'.$playbook['app_name'].'">PL-'.$playbook['serial_no'].'</option>';
+                        $str .= '<option value="'.$playbook['id'].'">PL-'.$playbook['serial_no'].' ('.$playbook['app_name'].')</option>';
                     }
                 }
             $str .= '</select>';
         $str .= '</td>';
-    $str .= '<td class="no-padding app_name"></td>';
-    $str .= '<td class="no-padding"><textarea class="activity"></textarea></td>';
+        $str .= '<td class="no-padding"><textarea class="activity"></textarea></td>';
         $str .= '<td class="no-padding"><textarea class="description"></textarea></td>';
         $str .= '<td class="no-padding bg-green orderRestorationNotes"><textarea class="hidden notes"></textarea></td>';
         $str .= '<td class="no-padding text-center">';
