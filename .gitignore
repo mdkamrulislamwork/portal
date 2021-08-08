@@ -1,4 +1,9 @@
 /DB
 wp-config.php
 /.DS_Store
+<<<<<<< HEAD
 .htaccess
+=======
+.htaccess
+.idea
+>>>>>>> 153fbe1a49d93e906bada81ba5a6ee8155c52fea
