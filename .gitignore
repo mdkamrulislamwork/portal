@@ -1,3 +1,5 @@
 /DB
 wp-config.php
 /.DS_Store
+.htaccess
+.idea
