@@ -5,11 +5,13 @@ global $sfia_premission;
 global $post;
 if ( $post->post_type == 'cloud_vendor' ) {
     if ( !cloud_vendorHasPermission() ) wp_safe_redirect(404);
-} else if ( $post->post_type == 'csma' ) {
+}
+else if ( $post->post_type == 'csma' ) {
     if ( !cmaHasPermission() ) wp_safe_redirect(404);
-} else if ( $post->post_type == 'cma' ) {
-    if ( !cmaHasPermission() ) wp_safe_redirect(404);
-} else if (is_singular(json_decode(ALL_POST_TYPES))) {
+}
+else if ( $post->post_type == 'cma' ) { if ( !cmaHasPermission() ) wp_safe_redirect(404); }
+else if ( $post->post_type == 'ppr' ) { if ( !advisorypprHasPermission() ) wp_safe_redirect(404); }
+else if (is_singular(json_decode(ALL_POST_TYPES))) {
     if (isset($_GET['area']) && !empty($_GET['area'])) {
         if (!advisory_area_exists(get_the_ID(), advisory_id_from_string($_GET['area']))) {
             wp_safe_redirect(404);
@@ -24,7 +26,8 @@ if ( $post->post_type == 'cloud_vendor' ) {
                 if (!advisory_has_survey_view_permission(get_the_ID())) {
                     wp_safe_redirect(404);
                 }
-            } else {
+            }
+            else {
                 wp_safe_redirect(404);
             }
         }
@@ -39,7 +42,8 @@ if ( $post->post_type == 'cloud_vendor' ) {
                 wp_safe_redirect(404);
             }
         }
-    } else {
+    }
+    else {
         wp_safe_redirect(404);
     }
 }
@@ -200,6 +204,7 @@ if ($user_company_data) {
                                         }
                                     echo '</li>';
                                 }
+
                                 else if (get_post_type($form) == 'ppr') {
                                     $form_meta = get_post_meta($form, 'form_opts', true);
                                     $form_meta['icon'] = IMAGE_DIR_URL.'icon-ppr.png';
@@ -228,7 +233,8 @@ if ($user_company_data) {
                                     echo '</li>';
                                 }
                             }
-                        } else {
+                        }
+                        else {
                             foreach ($forms as $form) {
                                 if (get_post_type($form) == 'csa') getActiveCSAMenu($form);
                                 else if (get_post_type($form) == 'sfia') echo advisory_sfia_get_menu_items($form);
@@ -303,6 +309,7 @@ if ($user_company_data) {
                             }
                         }
                     }
+                    echo '<li><a href="'.site_url('project-prioritization').'" class="text-center"><img src="'.IMAGE_DIR_URL.'icon-ppr.png">Project Prioritization</a></li>';
                     // echo '<hr>'; echo '<style>.main-sidebar{height: auto !important; width: 100%; position: relative;}</style>';
                     // echo '<br><pre>'. print_r($forms, true) .'</pre>';
                     // All Registers
@@ -316,6 +323,7 @@ if ($user_company_data) {
                     getDynamicRegisterMenuFor('dmmr', 'DMM Register', 'DMM Register', 'icon-rrR.png');
                     if ($dashboard) getDynamicRegisterMenuFor('mtar', 'MTA Register', 'MTA Register', 'icon-ihcr.png');
                     else getDynamicRegisterMenuFor('ihcr', 'IHC Register', 'IHC Register', 'icon-ihcr.png');
+
                     if (empty($forms)) echo '<li><a class="text-center">' . __('', 'advisory') . '</a></li>';
                     if (get_the_author_meta( 'spuser', $user_data->ID )) {
                         echo '<hr>';

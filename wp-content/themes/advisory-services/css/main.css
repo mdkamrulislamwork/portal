@@ -14532,6 +14532,9 @@ label.error {
 .table.table-bordered.landing th {
     height: 100px;
 }
+.table.table-borderless tbody+tbody, .table.table-borderless td, .table.table-borderless th, .table.table-borderless thead th {
+    border: 0;
+}
 .landing-wrapper .landing-list th {
 	color: #fff;
 }

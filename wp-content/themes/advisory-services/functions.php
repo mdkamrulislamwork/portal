@@ -45,6 +45,7 @@ require_once P3_TEMPLATE_PATH .'/helper/metabox.php';
 require_once P3_TEMPLATE_PATH .'/helper/tabletop.php';
 require_once P3_TEMPLATE_PATH .'/helper/recovery_playbook.php';
 require_once P3_TEMPLATE_PATH .'/helper/order_of_restoration.php';
+require_once P3_TEMPLATE_PATH .'/helper/project_proposal_form.php';
 require_once P3_TEMPLATE_PATH .'/partials/post_types.php';
 require_once P3_TEMPLATE_PATH .'/partials/dynamic_registers.php';
 // require_once P3_TEMPLATE_PATH .'/helper/default_data.php';
@@ -86,7 +87,7 @@ function advisory_enqueue_scripts() {
 	wp_enqueue_script('advisory-utils', P3_TEMPLATE_URI. '/js/plugins/utils.js', array(), false, true);
 	wp_enqueue_script('advisory-main', P3_TEMPLATE_URI. '/js/main.js', array(), false, true);
 	wp_enqueue_script('advisory', P3_TEMPLATE_URI. '/js/script.js', array(), P3_TEMPLATE_VERSION, true);
-	wp_localize_script('advisory', 'object', ['ajaxurl' => admin_url('admin-ajax.php'), 'home_url' => home_url(), 'ajax_nonce' => wp_create_nonce('advisory_nonce'), 'template_dir_url' => P3_TEMPLATE_URI]);
+	wp_localize_script('advisory', 'object', ['ajaxurl' => admin_url('admin-ajax.php'), 'home_url' => home_url(), 'project_prioritization' => home_url('project-prioritization'), 'ajax_nonce' => wp_create_nonce('advisory_nonce'), 'template_dir_url' => P3_TEMPLATE_URI]);
 	wp_enqueue_media();
 }
 add_action('wp_enqueue_scripts', 'advisory_enqueue_scripts');
