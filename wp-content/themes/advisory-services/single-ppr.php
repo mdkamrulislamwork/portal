@@ -1,16 +1,17 @@
 <?php
 get_header();
 global $user_switching;
-$volnerabilityOptions = $threatOptions = ['1'=>'LOW', '2'=>'MED', '3'=>'HIGH'];
-$impactOptions = ['1'=>'VERY LOW', '2'=>'LOW', '3'=>'MODERATE', '4'=>'HIGH', '5'=>'VERY HIGH'];
+$ppf = advisory_ppf_get_form_by($_GET['ppf']);
+if ($ppf) :
 $transient_post_id = get_the_ID();
 $opts = get_post_meta($transient_post_id, 'form_opts', true);
 $permission = advisory_ppr_input_controller();
-$ppf_id = 8;
+$projectStatus = ['not_approved' => 'Not Approved', 'not_started' => 'Not Started', 'in_progress' => 'In Progress', 'complete' => 'Complete'];
+$ppr = advisory_ppr_get_form_by($ppf->id);
+$prioritization_value = !empty($ppr->prioritization_value) ? $ppr->prioritization_value : 0;
 
-
-// help($permission);
-$questionOptions = ['Select', 'Yes', 'No'];
+//help($ppr);
+$questionOptions = ['No', 'Yes'];
 ?>
 <style>
     .table-borderless table.table tr td{ border: 0; }
@@ -25,18 +26,19 @@ $questionOptions = ['Select', 'Yes', 'No'];
 <script src="<?php echo P3_TEMPLATE_URI. '/js/plugins/jquery.tinymce.min.js'; ?>"></script>
 <div class="content-wrapper">
     <div class="page-title">
-        <div> <h1>Project Prioritization requirements</h1> </div>
+        <div> <h1>Project Prioritization Requirements</h1> </div>
         <?php if ($permission['edit']) {
             echo '<div>';
+                echo '<a class="btn btn-lg btn-info" href="'.site_url('project-prioritization/').'">Prioritizations</a>';
                 echo '<a class="btn btn-lg btn-success btn-save" href="#">Save</a>';
                 if ($permission['reset']) echo '<a class="btn btn-lg btn-warning btn-reset-all" href="#">Reset</a>';
-                echo '<a class="btn btn-lg btn-info btn-primary" href="'.site_url('project-proposal-form/').'?id='.@$_GET['ppf'].'&edit='.@$_GET['edit'].'" data-id="' . $transient_post_id . '">Form</a>';
+                echo '<a class="btn btn-lg btn-primary" href="'.site_url('project-proposal-form/').'?id='.$ppf->id.'&edit='.@$_GET['edit'].'">Form</a>';
             echo '</div>';
         } ?>
         <div>
             <ul class="breadcrumb">
                 <li><i class="fa fa-home fa-lg"></i></li>
-                <li><a href="javascript:;">Project Prioritization requirements</a></li>
+                <li><a href="javascript:;">Project Prioritization Requirements</a></li>
             </ul>
         </div>
     </div>
@@ -59,17 +61,17 @@ $questionOptions = ['Select', 'Yes', 'No'];
     echo '</div>';
 
     echo '<div class="row">';
-        echo '<div class="col-md-10">';
+        echo '<div class="col-md-8">';
             echo '<div class="card">';
                 echo '<div class="card-body heading">';
                     echo '<table class="table m-0 table-borderless">';
                         echo '<tr>';
                             echo '<td>';
-                                echo '<h3>Project Name: Project A</h3>';
-                                echo '<div class="status_container">Status: <div id="ppf_status" style=" display: inline-block; background: red; padding: 2px 5px; ">Not Started</div></div>';
+                                echo '<h3>Project Name: '.$ppf->project_name.'</h3>';
+                                echo '<div class="status_container">Status: <div id="ppf_status" class="'.advisory_ppf_project_status_bg($ppf->project_status).'" style="display: inline-block; padding: 2px 5px; ">'.$projectStatus[$ppf->project_status].'</div></div>';
                             echo '</td>';
                             echo '<td style="width: 175px;">Prioritization Value</td>';
-                            echo '<td class="no-padding" style=" width: 65px; text-align: center;"><div id="prioritization_value" class="bg-black">64</div></td>';
+                            echo '<td class="no-padding" style=" width: 65px; text-align: center;"><div id="prioritization_value" class="bg-black">'.$prioritization_value.'</div></td>';
                         echo '</tr>';
                     echo '</table>';
                 echo '</div>';
@@ -77,12 +79,13 @@ $questionOptions = ['Select', 'Yes', 'No'];
         echo '</div>';
     echo '</div>';
     if ( !empty($opts['areas']) ) {
-        echo '<form class="form" method="post" data-meta="'. $ppf_id .'" data-id="'. $transient_post_id .'">';
+        echo '<form class="form" method="post" data-id="'. $ppf->id .'">';
+            //echo '<input type="hidden" id="prioritization_value" value="0">';
             foreach ( $opts['areas'] as $areaSi => $area ) {
                 $threatCatId = 'area_'.$areaSi . '_threatcat';
                 if ( !empty($opts[$threatCatId]) ) {
                     echo '<div class="row">';
-                        echo '<div class="col-md-10">';
+                        echo '<div class="col-md-8">';
                             echo '<div class="card">';
                                 echo '<div class="card-title-w-btn">';
                                     echo '<h4 class="title">Section '.$areaSi.': '. @$area['name'] .'</h4>';
@@ -101,11 +104,13 @@ $questionOptions = ['Select', 'Yes', 'No'];
                                                     echo '</tr>';
                                                     foreach ($opts[$threatId] as $threatSi => $threat) {
                                                         $questionId = $threatId . '_' . $threatSi . '_question';
-                                                        $answer_val = !empty($default[$questionId . '_answer']) ? $default[$questionId . '_answer'] : 1;
+                                                        $answer_weight = $threat['value'] ? $threat['value'] : 0;
+                                                        $answer_val = !empty($ppr->requirements[$questionId . '_answer']) ? $ppr->requirements[$questionId . '_answer'] : 0;
+                                                        $note = !empty($ppr->requirements[$questionId . '_note']) ? $ppr->requirements[$questionId . '_note'] : '';
                                                         echo '<tr>';
                                                             echo '<td>'.$threat['name'].'</td>';
-                                                            echo '<td id="ppr_answer" class="bg-red">'.advisory_opt_select($questionId.'_answer', $questionId.'_answer', 'answer', $permission['attr'], $questionOptions, $answer_val).'</strong></td>';
-                                                            echo '<td id="ppr_note" class="bg-green"></td>';
+                                                            echo '<td id="ppr_answer" class="'.advisory_ppr_answer_bg($answer_val).'" data-weight="'.$answer_weight.'">'.advisory_opt_select($questionId.'_answer', $questionId.'_answer', 'answer', $permission['attr'], $questionOptions, $answer_val).'</strong></td>';
+                                                            echo '<td id="ppr_note" class="'.advisory_ppr_answer_bg($note).'"></td>';
                                                         echo '</tr>';
                                                     }
                                                  echo '</table>';
@@ -140,29 +145,51 @@ $questionOptions = ['Select', 'Yes', 'No'];
 <script>
 jQuery(function($) {
     "use strict"
+    $(document).on('change', '#ppr_answer select', function(event) {
+        event.preventDefault();
+        advisory_ppr_answer_bg($(this));
+        advisory_ppr_prioritization_value();
+    });
+    function advisory_ppr_answer_bg(element) {
+        if ( parseInt(element.val()) ) element.parent().removeClass('bg-green').addClass('bg-red');
+        else element.parent().removeClass('bg-red').addClass('bg-green');
+    }
+    function advisory_ppr_prioritization_value() {
+        let total = 0;
+        $('#ppr_answer select').each(function () {
+            if ( parseInt($(this).val()) ) total = total + parseInt($(this).parent().attr('data-weight'));
+        })
+        $('#prioritization_value').html(total);
+    }
+
+    // FORM
+    $(document).on('submit', 'form.form', function (e){
+        e.preventDefault();
+        let button = $('.btn-success');
+        let data = $(this).serialize();
+        let prioritization_value = parseInt($('#prioritization_value').text());
+        let project_proposal_form_id = parseInt($(this).attr('data-id'));
+
+        $.ajax({
+            type: 'POST',
+            url: object.ajaxurl + '?action=ppr_save',
+            cache: false,
+            data: { 'project_proposal_form_id': project_proposal_form_id, 'data':data, 'prioritization_value':prioritization_value, security: object.ajax_nonce },
+            beforeSend: function() { button.prop('disabled',true).addClass('loading')},
+            success: function(response, status, xhr) {
+                console.log( response )
+                button.prop('disabled',false).removeClass('loading');
+            },
+            error: function(error) {
+                button.prop('disabled',false).removeClass('loading');
+            }
+        })
+    })
+
+
+    // COMMENT
     const commentModal = $('#commentModal');
     const commentModalSave = commentModal.find('.saveBtn');
-    const helpModal = $('#helpModal');
-
-    $(document).on('change', '#itsmLocations', function(event) {
-        event.preventDefault();
-        var url = $(this).val();
-        window.location.href = url;
-    });
-    $(document).on('click', '.pdfIcon, .informationIcon', function(event) {
-        event.preventDefault();
-        if ( $(this).is('.pdfIcon') ) {
-            helpModal.find('.modal-title').text('Asset & Vulnerability Definitions');
-            helpModal.find('.pdfIframe').removeClass('hidden');
-            helpModal.find('.informationImage').addClass('hidden');
-        } else {
-            helpModal.find('.modal-title').text('');
-            helpModal.find('.informationImage').removeClass('hidden');
-            helpModal.find('.pdfIframe').addClass('hidden');
-        }
-        helpModal.modal('show');
-    });
-    // COMMENT
     $(document).on('click', '.bigComment', function(event) {
         event.preventDefault();
         $(this).addClass('active');
@@ -205,95 +232,6 @@ jQuery(function($) {
         $('.bigComment.active').removeClass('active');
         $(this).find('textarea').val('');
     });
-    jQuery('.table-facility').each(function(e) {
-        facility_calc_avg();
-    })
-    // facility Form Calc on Click
-    jQuery('.table-facility select.riskTypes').on('change', function(e) {
-        e.preventDefault()
-        facility_calc(jQuery(this));
-        facility_calc_avg();
-    })
-    function facility_calc(element, register=false) {
-        var data = {}
-        var reverse = element.hasClass('reverse')
-        var increment = element.hasClass('increment')
-        var val = element.val()
-        var type = element.parent('td').attr('data-type');
-        if (reverse) { val = String(Number(val) + 1) }
-        if (increment && val == '0') { val = String(Number(val) + 1) }
-
-        element.parent('td').removeClass('bg-red bg-orange bg-yellow bg-green bg-blue').addClass(facilityBackgroundByValue(val, type))
-        element.parents('tr').find('select.riskTypes').each(function(i, e) {
-            var val = Number(jQuery(this).val())
-            data[i] = val
-        })
-        var calc = facilityRiskCalculation(data);
-        if (register) element.parents('table').find('.bcprAvg').removeClass('bg-red bg-orange bg-yellow bg-green bg-blue').addClass(calc.cls)
-        else element.parents('tr').find('.risk').html(calc.count).parent('td').removeClass().addClass('text-center ' + calc.cls);
-    }
-    function facilityBackgroundByValue(val, type='impact', reverse=false) {
-        let cl = 'color-blue';
-        if ( val && type ) {
-            if ( type == 'impact' ) {
-                switch (val) {
-                    case '1': cl = 'bg-blue'; break;
-                    case '2': cl = 'bg-green'; break;
-                    case '3': cl = 'bg-yellow'; break;
-                    case '4': cl = 'bg-orange'; break;
-                    case '5': cl = 'bg-red'; break;
-                    default:  cl = 'color-blue'; break;
-                }
-            } else if ( type == 'vulnerability' || type == 'threat' ) {
-                switch (val) {
-                    case '1': cl = 'bg-blue'; break;
-                    case '2': cl = 'bg-yellow'; break;
-                    case '3': cl = 'bg-red'; break;
-                    default:  cl = 'color-blue'; break;
-                }
-            } 
-        }
-        return cl
-    }
-    function facilityRiskCalculation(obj) {
-        var data = {count:1, avg:1};
-        data.count = Number(obj[0]) * Number(obj[1]) * Number(obj[2]);
-        if (data.count > 1) data.avg = Number(data.count / 3).toFixed(1);
-        else data.count = 1;
-
-        if ( data.count >= 30 )      { data.cls = 'bg-red'; } 
-        else if ( data.count >= 20 ) { data.cls = 'bg-orange'; } 
-        else if (data.count >= 11 )  { data.cls = 'bg-yellow'; } 
-        else if (data.count >= 2 )   { data.cls = 'bg-green'; } 
-        else                         { data.cls = 'bg-blue'; }
-        return data
-    }
-    function facility_calc_avg() {
-        jQuery('.table-facility').each(function() {
-            var count = 0
-            var total = 0
-            var color
-            var level
-            var card = jQuery(this).parents('.card');
-            jQuery(this).find('.risk').each(function() {
-                count += 1
-                total += Number(jQuery(this).html())
-            })
-            var avg = Math.round(total / count).toFixed(1)
-            if (isNaN(avg)) { avg = (1).toFixed(1); }
-
-            if ( avg >= 30 )      { color = 'bg-red'; level = 'Very High'; } 
-            else if ( avg >= 20 ) { color = 'bg-orange'; level = 'High'; } 
-            else if (avg >= 11 )  { color = 'bg-yellow'; level = 'Moderate'; } 
-            else if (avg >= 2 )   { color = 'bg-green'; level = 'Low'; } 
-            else                  { color = 'bg-blue'; level = 'Very Low'; }
-
-            card.find('.avgContainer').removeClass('bg-red bg-orange bg-yellow bg-green bg-blue').addClass(color);
-            card.find('.total-bcp').find('strong').html(level)
-            card.find('.total-facility-avg').find('span').html(avg)
-            card.find('.threatAvg').val(avg)
-        })
-    }
     function tinymce() {
         tinyMCE.init({
             selector: '#bigCommentModal2 textarea, .tinymce',
@@ -312,4 +250,4 @@ jQuery(function($) {
     }
 });
 </script>
-<?php get_footer(); ?>
+<?php endif; get_footer(); ?>

@@ -181,7 +181,8 @@ if ($postID == 'sfia_missing_skills') {
                 $html .= '</tr>';
             $html .= '</table>';
         }
-    } else if ( !empty($summaries[0]) || !empty($recommendations[0]) ) {
+    }
+    else if ( !empty($summaries[0]) || !empty($recommendations[0]) ) {
         $summaries = !empty( $summaries ) ? $summaries : $recommendations;
         $html .= '<table class="table m-0 no-border summary">';
             $html .= '<tr>';

@@ -1256,3 +1256,4 @@ function advisory_sfia_is_item_empty($item) {
 	}
 	return true;
 }
+// END OF FILE

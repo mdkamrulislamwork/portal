@@ -216,8 +216,8 @@ else {
             switch (value) {
                 case 'strategy_and_architecture':       cls = 'bg-light-red';     break;
                 case 'change_and_transformation':       cls = 'bg-light-pink';     break;
-                case 'development_and_implementation':  cls = 'bg-light-orange';   break;
-                case 'delivery_and_operation':          cls = 'bg-light-yellow';    break;
+                case 'development_and_implementation':  cls = 'bg-light-yellow';   break;
+                case 'delivery_and_operation':          cls = 'bg-light-orange';    break;
                 case 'skills_and_quality':              cls = 'bg-light-blue';    break;
                 case 'relationships_and_engagement':    cls = 'bg-light-green';     break;
                 default:                                cls = '';              break;

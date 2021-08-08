@@ -111,3 +111,34 @@ function advisory_ppr_input_controller() {
     // $data['test'] = ['superUser' => $superUser, 'specialUser' => $specialUser];
     return $data;
 }
+function advisory_ppr_answer_bg($value=0){
+    if ($value) return 'bg-red';
+    return 'bg-green';
+}
+
+add_action('wp_ajax_ppr_save', 'advisory_ajax_ppr_save');
+function advisory_ajax_ppr_save(){
+    check_ajax_referer('advisory_nonce', 'security');
+    global $wpdb;
+    $project_proposal_form_id = $_REQUEST['project_proposal_form_id'] ? intval($_REQUEST['project_proposal_form_id']) : 0;
+    if($project_proposal_form_id) {
+        $arr = [
+            'project_proposal_form_id' => $project_proposal_form_id,
+            'requirements' => $_REQUEST['data'],
+            'prioritization_value' => $_REQUEST['prioritization_value']
+        ];
+        if ( !empty($wpdb->get_row("SELECT * FROM project_prioritization_requirements WHERE project_proposal_form_id = ".$project_proposal_form_id)) ) {
+            if ( $wpdb->update('project_prioritization_requirements', $arr, ['project_proposal_form_id' => $project_proposal_form_id]) ) wp_send_json('updated');
+        }
+        else {
+            if ($wpdb->insert('project_prioritization_requirements', $arr)) wp_send_json('created');
+        }
+    }
+    wp_send_json(false);
+}
+function advisory_ppr_get_form_by($form_id) {
+    global $wpdb;
+    $result = $wpdb->get_row("SELECT * FROM project_prioritization_requirements WHERE project_proposal_form_id=".$form_id);
+    if ( $result ) parse_str($result->requirements, $result->requirements);
+    return $result;
+}

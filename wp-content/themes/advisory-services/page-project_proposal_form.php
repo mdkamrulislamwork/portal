@@ -20,7 +20,7 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                 echo '<a class="btn btn-lg btn-info btn-publish-ppf" href="javascript:;" data-id="'.$default->id.'">Publish</a>';
                 echo '<a class="btn btn-lg btn-success btn-save-all" href="javascript:;" data-id="'.$default->id.'">Save</a>';
                 echo '<a class="btn btn-lg btn-danger btn-delete-ppf" href="javascript:;" data-id="'.$default->id.'">Delete</a>';
-                if ( $default && !empty($form_id[0]) ) echo '<a class="btn btn-lg btn-primary" href="'.site_url('ppr/'.$form_id[0].'/').'?ppf='.$default->id.'&edit='.$_GET['edit'].'">Assessment</a>';
+                if ( $default && !empty($form_id[0]) ) echo '<a class="btn btn-lg btn-primary" href="'.site_url('ppr/'.$form_id[0].'/').'?ppf='.$default->id.'&edit='.$_GET['edit'].'">Requirements</a>';
             echo '</div>';
         } ?>
         <div> <ul class="breadcrumb"> <li><i class="fa fa-home fa-lg"></i></li> <li><a href="javascript:;"><?php echo $page_title; ?></a></li> </ul> </div>
@@ -38,7 +38,6 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                             <div class="col-sm-4 pull-right text-right" style="text-align: right;">
                                 <level>Project Status:</level>
                                 <select class="project_status <?php echo advisory_ppf_project_status_bg($default->project_status); ?>" name="project_status" style="width: 130px;padding: 3px 9px;">
-                                    <option value="not_approved">Not Approved</option>
                                     <?php foreach ($projectStatus as $itemId => $item ) {
                                         $selected = $itemId == $default->project_status ? ' selected' : '';
                                         echo '<option value="'.$itemId.'">'.$item.'</option>';

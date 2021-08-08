@@ -5,6 +5,9 @@ if ( !$companyId ) { wp_redirect(site_url('dashboard'), 302); exit();}
 get_header();
 $page_title = 'Project Prioritization';
 $all = advisory_ppf_get_forms($companyId);
+$assessments = advisory_get_active_forms($companyId, ['ppr']);
+if ( !empty($assessments) ) $assessmentId = $assessments[0];
+else $assessmentId = 0;
 $ppf_page_url = site_url('project-proposal-form/');
 $projectStatus = ['not_approved' => 'Not Approved', 'not_started' => 'Not Started', 'in_progress' => 'In Progress', 'complete' => 'Complete'];
 //help($all);
@@ -45,7 +48,7 @@ $projectStatus = ['not_approved' => 'Not Approved', 'not_started' => 'Not Starte
                     <th style="background: #000;color: #fff;width: 64px;">Status</th>
                     <th style="background: #000;color: #fff;width: 58px;">Rank</th>
                     <th style="background: #000;color: #fff">Description</th>
-                    <th style="background: #000;color: #fff;width: 160px;">&nbsp;</th>
+                    <th style="background: #000;color: #fff;width: 200px;">&nbsp;</th>
                 </tr>
                 <?php if ($all) {
                     foreach ($all as $item) {
@@ -58,6 +61,7 @@ $projectStatus = ['not_approved' => 'Not Approved', 'not_started' => 'Not Starte
                                 echo ' <a class="btn btn-primary" href="'.$ppf_page_url.'?id='.$item->id.'&edit=false" data-toggle="tooltip" title="view"><span class="fa fa-eye"></span></a>';
                                 echo ' <a class="btn btn-warning" href="'.$ppf_page_url.'?id='.$item->id.'&edit=true" data-toggle="tooltip" title="Edit"><span class="fa fa-edit"></span></a>';
                                 echo ' <a class="btn btn-danger btn-delete-ppf" href="#" data-id="'.$item->id.'" data-toggle="tooltip" title="Delete"><span class="fa fa-trash"></span></a>';
+                                echo ' <a class="btn btn-success" href="'.site_url('ppr/'.$assessmentId.'/').'?ppf='.$item->id.'&edit=true" data-toggle="tooltip" title="Requirements">R</a>';
                             echo '</td>';
                         echo '</tr>';
                     }
