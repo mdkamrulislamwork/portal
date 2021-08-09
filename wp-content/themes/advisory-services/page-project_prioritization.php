@@ -58,7 +58,7 @@ $projectStatus = ['not_approved' => 'Not Approved', 'not_started' => 'Not Starte
                     }
                     usort($all, "cmp");
                     foreach ($all as $item) {
-                        $project_prioritization = 0;
+                        $project_prioritization = null;
                         if (property_exists($item,'prioritization_value')) $project_prioritization = $item->prioritization_value;
                         echo '<tr>';
                             echo '<td>'.$item->project_name.'</td>';
