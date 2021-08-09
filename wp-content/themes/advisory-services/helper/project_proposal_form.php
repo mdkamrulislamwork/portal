@@ -69,6 +69,12 @@ function advisory_ppf_get_form_by($form_id) {
     global $wpdb;
     return $wpdb->get_row("SELECT * FROM project_proposal_form WHERE id=".$form_id);
 }
+
+function project_prioritization_requirements($id) {
+    global $wpdb;
+    return $wpdb->get_row("SELECT prioritization_value FROM project_prioritization_requirements WHERE project_proposal_form_id=".$id);
+}
+
 function advisory_ppf_project_status_bg($status) {
     if ($status == 'not_approved') { $cls = 'bg-blue'; }
     else if ($status == 'not_started') { $cls = 'bg-red'; }
@@ -141,4 +147,8 @@ function advisory_ppr_get_form_by($form_id) {
     $result = $wpdb->get_row("SELECT * FROM project_prioritization_requirements WHERE project_proposal_form_id=".$form_id);
     if ( $result ) parse_str($result->requirements, $result->requirements);
     return $result;
+}
+
+function cmp($a, $b) {
+    return $a->prioritization_value < $b->prioritization_value;
 }

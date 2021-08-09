@@ -52,10 +52,18 @@ $projectStatus = ['not_approved' => 'Not Approved', 'not_started' => 'Not Starte
                 </tr>
                 <?php if ($all) {
                     foreach ($all as $item) {
+                        $rank = project_prioritization_requirements($item->id);
+                        if ($rank !=null) $item->prioritization_value = $rank->prioritization_value;;
+
+                    }
+                    usort($all, "cmp");
+                    foreach ($all as $item) {
+                        $project_prioritization = 0;
+                        if (property_exists($item,'prioritization_value')) $project_prioritization = $item->prioritization_value;
                         echo '<tr>';
                             echo '<td>'.$item->project_name.'</td>';
                             echo '<td> <div class="project_status_circle '. advisory_ppf_project_status_bg($item->project_status).'" data-toggle="tooltip" title="'.$projectStatus[$item->project_status].'">&nbsp;</div></td>';
-                            echo '<td>Rank</td>';
+                            echo '<td>'.$project_prioritization.'</td>';
                             echo '<td>'.$item->current_state.'</td>';
                             echo '<td class="text-center">';
                                 echo ' <a class="btn btn-primary" href="'.$ppf_page_url.'?id='.$item->id.'&edit=false" data-toggle="tooltip" title="view"><span class="fa fa-eye"></span></a>';
