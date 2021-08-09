@@ -152,3 +152,11 @@ function advisory_ppr_get_form_by($form_id) {
 function cmp($a, $b) {
     return $a->prioritization_value < $b->prioritization_value;
 }
+add_action('wp_ajax_ppr_delete', 'advisory_ajax_ppr_delete');
+function advisory_ajax_ppr_delete(){
+    check_ajax_referer('advisory_nonce', 'security');
+    global $wpdb;
+    $post_id = $_REQUEST['post_id'];
+    if ( $post_id && $wpdb->delete('project_prioritization_requirements', ['id' => $post_id]) ) wp_send_json(true);
+    wp_send_json(false);
+}

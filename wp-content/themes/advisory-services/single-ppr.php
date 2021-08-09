@@ -31,7 +31,7 @@ $questionOptions = ['No', 'Yes'];
             echo '<div>';
                 echo '<a class="btn btn-lg btn-info" href="'.site_url('project-prioritization/').'">Prioritizations</a>';
                 echo '<a class="btn btn-lg btn-success btn-save" href="#">Save</a>';
-                if ($permission['reset']) echo '<a class="btn btn-lg btn-warning btn-reset-all" href="#">Reset</a>';
+                if ($permission['reset']) echo '<a class="btn btn-lg btn-warning btn-reset" href="javascript:;"  data-id="'.$ppr->id.'">Reset</a>';
                 echo '<a class="btn btn-lg btn-primary" href="'.site_url('project-proposal-form/').'?id='.$ppf->id.'&edit='.@$_GET['edit'].'">Form</a>';
             echo '</div>';
         } ?>
@@ -110,7 +110,9 @@ $questionOptions = ['No', 'Yes'];
                                                         echo '<tr>';
                                                             echo '<td>'.$threat['name'].'</td>';
                                                             echo '<td id="ppr_answer" class="'.advisory_ppr_answer_bg($answer_val).'" data-weight="'.$answer_weight.'">'.advisory_opt_select($questionId.'_answer', $questionId.'_answer', 'answer', $permission['attr'], $questionOptions, $answer_val).'</strong></td>';
-                                                            echo '<td id="ppr_note" class="'.advisory_ppr_answer_bg($note).'"></td>';
+                                                            echo '<td class="bigComment '.advisory_ppr_answer_bg($note).'" isactive="'.$permission['attr'].'">';
+                                                                echo '<textarea class="hidden commentText" name="'.$questionId . '_note'.'">'. htmlentities($note).'</textarea>';
+                                                            echo '</td>';
                                                         echo '</tr>';
                                                     }
                                                  echo '</table>';
@@ -122,7 +124,6 @@ $questionOptions = ['No', 'Yes'];
                         echo '</div>';
                     echo '</div>';
                 }
-
             }
         echo '</form>';
     } ?>
@@ -162,7 +163,8 @@ jQuery(function($) {
             $(catItem).find('#ppr_answer select').each(function (selectIndex) {
                 if ( parseInt($(this).val()) ) ppr_answers_total = ppr_answers_total + parseInt($(this).parent().attr('data-weight'));
             })
-            categories = ppr_answers_total * categories;
+            if( ppr_answers_total > 0 ) categories = ppr_answers_total * categories;
+            //console.log([ppr_answers_total, categories])
         })
         // $('#ppr_answer select').each(function () {
         //     if ( parseInt($(this).val()) ) total = total + parseInt($(this).parent().attr('data-weight'));
@@ -185,15 +187,46 @@ jQuery(function($) {
             data: { 'project_proposal_form_id': project_proposal_form_id, 'data':data, 'prioritization_value':prioritization_value, security: object.ajax_nonce },
             beforeSend: function() { button.prop('disabled',true).addClass('loading')},
             success: function(response, status, xhr) {
-                console.log( response )
+                jQuery.notify({title: "Update Complete : ", message: "Something cool is just updated!", icon: 'fa fa-check'}, {type: "success"})
                 button.prop('disabled',false).removeClass('loading');
             },
             error: function(error) {
+                jQuery.notify({ title: "Update Failed : ", message: "Something wrong! Or you changed nothing!", icon: 'fa fa-times'}, {type: "danger"})
                 button.prop('disabled',false).removeClass('loading');
             }
         })
     })
 
+    // TOP BUTTONS
+    jQuery('.btn-save').on('click', function(e) {
+        e.preventDefault();
+        jQuery('form.form').submit();
+    })
+    jQuery('.btn-reset').on('click', function(e) {
+		e.preventDefault()
+		var postID = jQuery(this).attr('data-id')
+		swal({
+			title: "Are you sure?",
+			text: "You want to delete this Project Prioritization Requirements. You will not be able to revert this action",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#4caf50",
+			confirmButtonText: "Delete",
+			closeOnConfirm: false
+		}, function() {
+			jQuery.post(object.ajaxurl + '?action=ppr_delete', {
+				post_id: postID,
+				security: object.ajax_nonce
+			}, function(response) {
+				if (response == true) {
+					swal("Success!", "Project Prioritization Requirements has been deleted.", "success")
+					setTimeout(function() { window.location.reload() }, 2000)
+				} else {
+					swal("Error!", "Something went wrong.", "error")
+				}
+			})
+		})
+	})
 
     // COMMENT
     const commentModal = $('#commentModal');
@@ -227,13 +260,11 @@ jQuery(function($) {
         var commentArea = $('.bigComment.active');
 
         var commentHTML = tinyMCE.activeEditor.getContent();
-        var commentText = commentHTML.replace(/(<([^>]+)>)/ig,"");
-        var excerptLength = modalTextarea.attr('excerpt_length');
-        var excerpt = commentText.split(" ").length > excerptLength ? commentText.split(" ").splice(0,excerptLength).join(" ") + '...more' : commentText;
 
-        commentArea.find('.commentExcerpt').html(excerpt);
+        if ( commentHTML.length > 0 ) { commentArea.removeClass('bg-green').addClass('bg-red'); }
+        else { commentArea.removeClass('bg-red').addClass('bg-green'); }
         commentArea.find('.commentText').val(commentHTML);
-        console.log( [commentHTML, excerpt] );
+        console.log( [commentHTML] );
         commentModal.modal('hide');
     });
     commentModal.on('hide.bs.modal', function() {
