@@ -206,19 +206,7 @@ if ($user_company_data) {
                                 }
 
                                 else if (get_post_type($form) == 'ppr') {
-                                    $form_meta = get_post_meta($form, 'form_opts', true);
-                                    $form_meta['icon'] = IMAGE_DIR_URL.'icon-ppr.png';
-                                    $postLink = get_the_permalink($form);
-                                    $icon = '<img src="'.IMAGE_DIR_URL.'icon-ppr.png">';
-                                    echo '<li><a href="#">'. $icon .'<span>'. advisory_get_form_name($form) . '</span></a>';
-                                        if (!empty($form_meta['areas'])) {
-                                            echo '<ul class="treeview-menu">';
-                                            foreach ($form_meta['areas'] as $areaSi => $area) {
-                                                echo '<li><a href="'. $postLink .'?area='. $areaSi .'">'.$icon.'<span>' . $area['name'] . '</span></a></li>';
-                                            }
-                                            echo '</ul>';
-                                        }
-                                    echo '</li>';
+                                    echo '<li><a href="'.site_url('project-prioritization').'" class="text-center"><img src="'.IMAGE_DIR_URL.'icon-ppr.png">Project Prioritization</a></li>';
                                 }
                                 else {
                                     $form_meta = get_post_meta($form, 'form_opts', true);
@@ -282,17 +270,7 @@ if ($user_company_data) {
                                     echo '</li>';
                                 }
                                 else if (get_post_type($form) == 'ppr') {
-                                    $form_meta = get_post_meta($form, 'form_opts', true);
-                                    $form_meta['icon'] = IMAGE_DIR_URL.'icon-ppr.png';
-                                    echo '<li><a href="#"><img src="' . @$form_meta['icon'] .'" alt=""><span>' . advisory_get_form_name($form) . '</span></a>';
-                                        if (!empty($form_meta['areas'])) {
-                                            echo '<ul class="treeview-menu">';
-                                            foreach ($form_meta['areas'] as $area) {
-                                                echo '<li><a href="' . get_the_permalink($form) . '?view=true&area=' . advisory_id_from_string($area['name']) . '"><img src="' . (empty($area['icon_menu']) ? $form_meta['icon'] : $area['icon_menu']) .'"><span>' . $area['name'] . '</span></a></li>';
-                                            }
-                                            echo '</ul>';
-                                        }
-                                    echo '</li>';
+                                    echo '<li><a href="'.site_url('project-prioritization').'" class="text-center"><img src="'.IMAGE_DIR_URL.'icon-ppr.png">Project Prioritization</a></li>';
                                 }
                                 else {
                                     $form_meta = get_post_meta($form, 'form_opts', true);
@@ -309,7 +287,7 @@ if ($user_company_data) {
                             }
                         }
                     }
-                    echo '<li><a href="'.site_url('project-prioritization').'" class="text-center"><img src="'.IMAGE_DIR_URL.'icon-ppr.png">Project Prioritization</a></li>';
+
                     // echo '<hr>'; echo '<style>.main-sidebar{height: auto !important; width: 100%; position: relative;}</style>';
                     // echo '<br><pre>'. print_r($forms, true) .'</pre>';
                     // All Registers

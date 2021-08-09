@@ -71,7 +71,7 @@ $questionOptions = ['No', 'Yes'];
                                 echo '<div class="status_container">Status: <div id="ppf_status" class="'.advisory_ppf_project_status_bg($ppf->project_status).'" style="display: inline-block; padding: 2px 5px; ">'.$projectStatus[$ppf->project_status].'</div></div>';
                             echo '</td>';
                             echo '<td style="width: 175px;">Prioritization Value</td>';
-                            echo '<td class="no-padding" style=" width: 65px; text-align: center;"><div id="prioritization_value" class="bg-black">'.$prioritization_value.'</div></td>';
+                            echo '<td class="no-padding" style=" width: 75px; text-align: center;"><div id="prioritization_value" class="bg-black">'.$prioritization_value.'</div></td>';
                         echo '</tr>';
                     echo '</table>';
                 echo '</div>';
@@ -91,7 +91,7 @@ $questionOptions = ['No', 'Yes'];
                                     echo '<h4 class="title">Section '.$areaSi.': '. @$area['name'] .'</h4>';
                                     if ($permission['edit']) echo '<button class="btn btn-success" type="submit"><i class="fa fa-lg fa-floppy-o"></i> Save</button>';
                                 echo '</div>';
-                                echo '<div class="card-body">';
+                                echo '<div class="card-body ppr-categories">';
                                     foreach ( $opts[$threatCatId] as $threatCatSi => $threatCat ) {
                                         $threatId = $threatCatId.'_'.$threatCatSi.'_threat';
                                         if ( !empty($opts[$threatId]) ) {
@@ -156,10 +156,18 @@ jQuery(function($) {
     }
     function advisory_ppr_prioritization_value() {
         let total = 0;
-        $('#ppr_answer select').each(function () {
-            if ( parseInt($(this).val()) ) total = total + parseInt($(this).parent().attr('data-weight'));
+        let categories = 1;
+        $('.ppr-categories').each(function(index, catItem) {
+            let ppr_answers_total = 0;
+            $(catItem).find('#ppr_answer select').each(function (selectIndex) {
+                if ( parseInt($(this).val()) ) ppr_answers_total = ppr_answers_total + parseInt($(this).parent().attr('data-weight'));
+            })
+            categories = ppr_answers_total * categories;
         })
-        $('#prioritization_value').html(total);
+        // $('#ppr_answer select').each(function () {
+        //     if ( parseInt($(this).val()) ) total = total + parseInt($(this).parent().attr('data-weight'));
+        // })
+        $('#prioritization_value').html(categories);
     }
 
     // FORM
