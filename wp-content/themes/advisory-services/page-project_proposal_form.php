@@ -33,7 +33,7 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-6">
-                                <table><tr><td style="width: 120px;background-color: #000;color: #fff;">Project Name:</td> <td><input type="text" name="project_name" style="width: 100%;" value="<?php echo @$default->project_name; ?>"></td></tr></table>
+                                <table><tr><td style="width: 120px;background-color: #000;color: #fff; padding: 5px 0 5px 3px;">Project Name:</td> <td><input type="text" name="project_name" style="width: 100%;" value="<?php echo @$default->project_name; ?>"></td></tr></table>
                             </div>
                             <div class="col-sm-4 pull-right text-right" style="text-align: right;">
                                 <level>Project Status:</level>
@@ -47,44 +47,44 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                         </div>
                         <div class="row mt-20">
                             <div class="col-sm-6">
-                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;">Current State/Contenxt:</p>
+                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Current State/Contenxt:</p>
                                 <textarea name="current_state" cols="30" rows="5"><?php echo @$default->current_state; ?></textarea>
                             </div>
                             <div class="col-sm-6">
-                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;">Future State:</p>
+                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Future State:</p>
                                 <textarea name="future_state" cols="30" rows="5"><?php echo @$default->future_state; ?></textarea>
                             </div>
                             <div class="col-sm-12 mt-20">
-                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;">Proposed Solution:</p>
+                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Proposed Solution:</p>
                                 <textarea name="proposed_solution" cols="30" rows="5"><?php echo @$default->proposed_solution; ?></textarea>
                             </div>
                         </div>
                         <div class="row mt-20">
                             <div class="col-sm-3">
-                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;">Budget Impact</p>
+                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Budget Impact</p>
                                 <table class="table table-borderless m-0">
                                     <tr>
-                                        <td style="width: 75px; background-color: #aad6f0;color: #fff;border: 4px solid;"><small>Operating:</small></td>
+                                        <td style="width: 75px; background-color: #aad6f0;border-bottom: 10px solid #fff;border-top: 10px solid #fff;color: #000;"><small>Operating:</small></td>
                                         <td><input name="operating" type="text" style="width: 100%" value="<?php echo @$default->operating; ?>"></td>
                                     </tr>
                                     <tr>
-                                        <td style="width: 75px; background-color: #aad6f0;color: #fff;"><small>Capital:</small></td>
+                                        <td style="width: 75px; background-color: #aad6f0;color: #000;border-bottom: 10px solid #fff;border-top: 10px solid #fff;"><small>Capital:</small></td>
                                         <td><input name="capital" type="text" style="width: 100%" value="<?php echo @$default->capital; ?>"></td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="col-sm-9">
-                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;">Options:</p>
+                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Options:</p>
                                 <textarea name="options" cols="30" rows="3"><?php echo @$default->options; ?></textarea>
                             </div>
                         </div>
                         <div class="row mt-20">
                             <div class="col-sm-8">
-                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;">Benefits and Measures:</p>
+                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Benefits and Measures:</p>
                                 <textarea name="benefits_and_measures" cols="30" rows="5"><?php echo @$default->benefits_and_measures; ?></textarea>
                             </div>
                             <div class="col-sm-4">
-                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;">Resource Impacts:</p>
+                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Resource Impacts:</p>
                                 <textarea name="resource_impacts" cols="30" rows="5"><?php echo @$default->resource_impacts; ?></textarea>
                             </div>
                         </div>
