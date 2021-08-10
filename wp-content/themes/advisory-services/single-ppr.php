@@ -26,7 +26,7 @@ $questionOptions = ['No', 'Yes'];
 <script src="<?php echo P3_TEMPLATE_URI. '/js/plugins/jquery.tinymce.min.js'; ?>"></script>
 <div class="content-wrapper">
     <div class="page-title">
-        <div> <h1>Project Prioritization Requirements</h1> </div>
+        <div> <h1>Project Evaluation</h1> </div>
         <?php if ($permission['edit']) {
             echo '<div>';
                 echo '<a class="btn btn-lg btn-info" href="'.site_url('project-prioritization/').'">Prioritizations</a>';
