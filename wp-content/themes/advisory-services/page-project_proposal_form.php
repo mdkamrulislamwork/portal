@@ -11,6 +11,8 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
 <style>
     .content-wrapper { font-size: 18px; font-weight: bold; color: #000; }
     .content-wrapper textarea {width: 100%;}
+    .content-wrapper textarea:focus-visible { outline: none; }
+
 </style>
 <div class="content-wrapper">
     <div class="page-title">
@@ -33,7 +35,7 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-6">
-                                <table><tr><td style="width: 120px;background-color: #000;color: #fff; padding: 5px 0 5px 3px;">Project Name:</td> <td><input type="text" name="project_name" style="width: 100%;" value="<?php echo @$default->project_name; ?>"></td></tr></table>
+                                <table><tr><td style="width: 120px;background-color: #000;color: #fff; padding: 5px 0 5px 3px;">Project Name:</td> <td style="padding: 0"><input type="text" name="project_name" style="width: 100%;height:40px;" value="<?php echo @$default->project_name; ?>"></td></tr></table>
                             </div>
                             <div class="col-sm-4 pull-right text-right" style="text-align: right;">
                                 <level>Project Status:</level>
@@ -65,11 +67,11 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                                 <table class="table table-borderless m-0">
                                     <tr>
                                         <td style="width: 75px; background-color: #aad6f0;border-bottom: 10px solid #fff;border-top: 10px solid #fff;color: #000;"><small>Operating:</small></td>
-                                        <td><input name="operating" type="text" style="width: 100%" value="<?php echo @$default->operating; ?>"></td>
+                                        <td style="padding: 0 0 0 8px;"><input name="operating" type="text" style="width: 100%;height: 40px;" value="<?php echo @$default->operating; ?>"></td>
                                     </tr>
                                     <tr>
                                         <td style="width: 75px; background-color: #aad6f0;color: #000;border-bottom: 10px solid #fff;border-top: 10px solid #fff;"><small>Capital:</small></td>
-                                        <td><input name="capital" type="text" style="width: 100%" value="<?php echo @$default->capital; ?>"></td>
+                                        <td style="padding: 0 0 0 8px;"><input name="capital" type="text" style="width: 100%;height: 40px;" value="<?php echo @$default->capital; ?>"></td>
                                     </tr>
                                 </table>
                             </div>
