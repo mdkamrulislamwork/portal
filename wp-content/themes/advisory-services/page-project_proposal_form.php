@@ -12,6 +12,7 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
     .content-wrapper { font-size: 18px; font-weight: bold; color: #000; }
     .content-wrapper textarea {width: 100%;}
     .content-wrapper textarea:focus-visible { outline: none; }
+    textarea,input{font-weight: normal;}
 
 </style>
 <div class="content-wrapper">
@@ -22,7 +23,7 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                 echo '<a class="btn btn-lg btn-info btn-publish-ppf" href="javascript:;" data-id="'.$default->id.'">Publish</a>';
                 echo '<a class="btn btn-lg btn-success btn-save-all" href="javascript:;" data-id="'.$default->id.'">Save</a>';
                 echo '<a class="btn btn-lg btn-danger btn-delete-ppf" href="javascript:;" data-id="'.$default->id.'">Delete</a>';
-                if ( $default && !empty($form_id[0]) ) echo '<a class="btn btn-lg btn-primary" href="'.site_url('ppr/'.$form_id[0].'/').'?ppf='.$default->id.'&edit='.$_GET['edit'].'">Requirements</a>';
+                if ( $default && !empty($form_id[0]) ) echo '<a class="btn btn-lg btn-primary" href="'.site_url('ppr/'.$form_id[0].'/').'?ppf='.$default->id.'&edit='.$_GET['edit'].'">Evaluation</a>';
             echo '</div>';
         } ?>
         <div> <ul class="breadcrumb"> <li><i class="fa fa-home fa-lg"></i></li> <li><a href="javascript:;"><?php echo $page_title; ?></a></li> </ul> </div>
@@ -35,7 +36,7 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-6">
-                                <table><tr><td style="width: 120px;background-color: #000;color: #fff; padding: 5px 0 5px 3px;">Project Name:</td> <td style="padding: 0"><input type="text" name="project_name" style="width: 100%;height:40px;" value="<?php echo @$default->project_name; ?>"></td></tr></table>
+                                <table><tr><td style="width: 120px;background-color: #000;color: #fff; padding: 5px 0 5px 3px;">Project Name:</td> <td style="padding: 0"><input type="text" name="project_name" style="width: fit-content;height:40px;" value="<?php echo @$default->project_name; ?>"></td></tr></table>
                             </div>
                             <div class="col-sm-4 pull-right text-right" style="text-align: right;">
                                 <level>Project Status:</level>
@@ -50,15 +51,15 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                         <div class="row mt-20">
                             <div class="col-sm-6">
                                 <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Current State/Contenxt:</p>
-                                <textarea name="current_state" cols="30" rows="5"><?php echo @$default->current_state; ?></textarea>
+                                <textarea required name="current_state" cols="30" rows="5"><?php echo @$default->current_state; ?></textarea>
                             </div>
                             <div class="col-sm-6">
                                 <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Future State:</p>
-                                <textarea name="future_state" cols="30" rows="5"><?php echo @$default->future_state; ?></textarea>
+                                <textarea required name="future_state" cols="30" rows="5"><?php echo @$default->future_state; ?></textarea>
                             </div>
                             <div class="col-sm-12 mt-20">
                                 <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Proposed Solution:</p>
-                                <textarea name="proposed_solution" cols="30" rows="5"><?php echo @$default->proposed_solution; ?></textarea>
+                                <textarea required name="proposed_solution" cols="30" rows="5"><?php echo @$default->proposed_solution; ?></textarea>
                             </div>
                         </div>
                         <div class="row mt-20">
@@ -77,17 +78,17 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                             </div>
                             <div class="col-sm-9">
                                 <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Options:</p>
-                                <textarea name="options" cols="30" rows="3"><?php echo @$default->options; ?></textarea>
+                                <textarea required name="options" cols="30" rows="3"><?php echo @$default->options; ?></textarea>
                             </div>
                         </div>
                         <div class="row mt-20">
                             <div class="col-sm-8">
                                 <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Benefits and Measures:</p>
-                                <textarea name="benefits_and_measures" cols="30" rows="5"><?php echo @$default->benefits_and_measures; ?></textarea>
+                                <textarea required name="benefits_and_measures" cols="30" rows="5"><?php echo @$default->benefits_and_measures; ?></textarea>
                             </div>
                             <div class="col-sm-4">
                                 <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Resource Impacts:</p>
-                                <textarea name="resource_impacts" cols="30" rows="5"><?php echo @$default->resource_impacts; ?></textarea>
+                                <textarea required name="resource_impacts" cols="30" rows="5"><?php echo @$default->resource_impacts; ?></textarea>
                             </div>
                         </div>
                         <div class="row text-right mt-10">

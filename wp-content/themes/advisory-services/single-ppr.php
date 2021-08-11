@@ -22,6 +22,7 @@ $questionOptions = ['No', 'Yes'];
     .table-responsive table.table tr td#ppr_answer select.answer{padding: 0px;text-align-last:center;}
     .table-responsive table.table tr td#ppr_note{padding: 0px;}
     .border-bottom-only{ border-top-color: transparent !important; border-left-color: transparent !important; border-right-color: transparent !important; }
+    .card{padding: 20px 20px 20px 10px;}
 </style>
 <script src="<?php echo P3_TEMPLATE_URI. '/js/plugins/jquery.tinymce.min.js'; ?>"></script>
 <div class="content-wrapper">
@@ -43,9 +44,9 @@ $questionOptions = ['No', 'Yes'];
         </div>
     </div>
     <!--PAGE TITLE END-->
-
+    <img src="<?=get_template_directory_uri().'/images/single-ppr/header_image_evaluation.png'?>" alt="">
     <?php
-    echo '<div class="row">';
+    /*echo '<div class="row">';
         echo '<div class="col-md-8">';
             echo '<div class="card">';
                 echo '<div class="card-body heading">';
@@ -67,7 +68,7 @@ $questionOptions = ['No', 'Yes'];
                     echo '<table class="table m-0 table-borderless">';
                         echo '<tr>';
                             echo '<td>';
-                                echo '<h3 style="background-color: #0c0c0c;color: #f9f9f9;padding: 8px 3px;margin-bottom: 10px;">Project Name: '.$ppf->project_name.'</h3>';
+                                echo '<div style="background-color: #0c0c0c;color: #f9f9f9;padding: 8px 3px;margin-bottom: 10px;font-weight: normal;"><b>Project Name:</h3></b><span style="font-weight: normal;"> '.$ppf->project_name.'</span></div>';
                                 echo '<div class="status_container"><span style="color: #f9f9f9;background-color: #0c0c0c;padding: 4px 3px;">Status:</span> <div id="ppf_status" class="'.advisory_ppf_project_status_bg($ppf->project_status).'" style="display: inline-block; padding: 2px 5px; ">'.$projectStatus[$ppf->project_status].'</div></div>';
                             echo '</td>';
                             echo '<td style="width: 175px;">Prioritization Value</td>';
@@ -77,7 +78,7 @@ $questionOptions = ['No', 'Yes'];
                 echo '</div>';
             echo '</div>';
         echo '</div>';
-    echo '</div>';
+    echo '</div>';*/
     if ( !empty($opts['areas']) ) {
         echo '<form class="form" method="post" data-id="'. $ppf->id .'">';
             //echo '<input type="hidden" id="prioritization_value" value="0">';
@@ -87,18 +88,18 @@ $questionOptions = ['No', 'Yes'];
                     echo '<div class="row">';
                         echo '<div class="col-md-8">';
                             echo '<div class="card">';
-                                echo '<div class="card-title-w-btn mb-0">';
+                                echo '<div class="card-title-w-btn mb-5"">';
                                     echo '<h4 class="title" style="background-color: #0c0c0c;color: #f9f9f9;padding: 10px 150px 10px 5px;min-width: 400px;">'. @$area['name'] .'</h4>';
                                     if ($permission['edit']) echo '<button class="btn btn-success" type="submit"><i class="fa fa-lg fa-floppy-o"></i> Save</button>';
                                 echo '</div>';
-                                echo '<div class="card-body ppr-categories">';
+                                echo '<div class="card-body ppr-categories" style="padding-bottom: 10px;">';
                                     foreach ( $opts[$threatCatId] as $threatCatSi => $threatCat ) {
                                         $threatId = $threatCatId.'_'.$threatCatSi.'_threat';
                                         if ( !empty($opts[$threatId]) ) {
                                             echo '<div class="table-responsive">';
                                                  echo '<table class="table table-bordered">';
                                                     echo '<tr>';
-                                                        echo '<td class="border-bottom-only pl-0"><strong style="background-color: #a45000;color: #f9f9f9;padding: 10px 140px 10px 5px;">'.$threatCat['name'].'</strong></td>';
+                                                        echo '<td class="border-bottom-only pl-0" style="padding-bottom: 20px;"><strong style="background-color: #a45000;color: #f9f9f9;padding: 15px 140px 15px 5px;">'.$threatCat['name'].'</strong></td>';
                                                         echo '<td class="border-bottom-only" style="width: 70px;"><strong>Yes/No</strong></td>';
                                                         echo '<td class="border-bottom-only" style="width: 70px;"><strong>Notes</strong></td>';
                                                     echo '</tr>';
