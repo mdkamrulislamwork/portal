@@ -36,7 +36,7 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-6">
-                                <table><tr><td style="width: 120px;background-color: #000;color: #fff; padding: 5px 0 5px 3px;">Project Name:</td> <td style="padding: 0"><input type="text" name="project_name" style="width: fit-content;height:40px;" value="<?php echo @$default->project_name; ?>"></td></tr></table>
+                                <table><tr><td style="width: 120px;background-color: #000;color: #fff; padding: 5px 0 5px 3px;">Project Name:</td> <td style="padding: 0"><input required type="text" name="project_name" style="width: fit-content;height:40px;" value="<?php echo @$default->project_name; ?>"></td></tr></table>
                             </div>
                             <div class="col-sm-4 pull-right text-right" style="text-align: right;">
                                 <level>Project Status:</level>
