@@ -32,7 +32,13 @@ function advisory_ajax_ppf_save(){
     global $wpdb;
     $post_id = $_REQUEST['post_id'];
     parse_str($_REQUEST['data'], $data);
+
     if($post_id) {
+        foreach ($data as $key=>$value) {
+            if ($value == "") {
+                wp_send_json('validation error');
+            }
+        }
         $arr = [
             'company_id'=>$post_id,
             'project_name'=>$data['project_name'],
