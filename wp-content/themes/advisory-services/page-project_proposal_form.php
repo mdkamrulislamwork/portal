@@ -36,7 +36,7 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-6">
-                                <table><tr><td style="width: 120px;background-color: #000;color: #fff; padding: 5px 0 5px 3px;">Project Name:</td> <td style="padding: 0"><input required type="text" name="project_name" style="width: fit-content;height:40px;" value="<?php echo @$default->project_name; ?>"></td></tr></table>
+                                <table><tr><td style="width: 120px;background-color: #000;color: #fff; padding: 5px 0 5px 3px;">Project Name:</td> <td style="padding: 0"><input required type="text" id="project_name" name="project_name" style="width: fit-content;height:40px;" value="<?php echo @$default->project_name; ?>"></td></tr></table>
                             </div>
                             <div class="col-sm-4 pull-right text-right" style="text-align: right;">
                                 <level>Project Status:</level>
@@ -51,15 +51,15 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                         <div class="row mt-20">
                             <div class="col-sm-6">
                                 <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Current State/Contenxt:</p>
-                                <textarea required name="current_state" cols="30" rows="5"><?php echo @$default->current_state; ?></textarea>
+                                <textarea required id="current_state" name="current_state" cols="30" rows="5"><?php echo @$default->current_state; ?></textarea>
                             </div>
                             <div class="col-sm-6">
                                 <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Future State:</p>
-                                <textarea required name="future_state" cols="30" rows="5"><?php echo @$default->future_state; ?></textarea>
+                                <textarea required id="future_state" name="future_state" cols="30" rows="5"><?php echo @$default->future_state; ?></textarea>
                             </div>
                             <div class="col-sm-12 mt-20">
                                 <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Proposed Solution:</p>
-                                <textarea required name="proposed_solution" cols="30" rows="5"><?php echo @$default->proposed_solution; ?></textarea>
+                                <textarea required id="proposed_solution" name="proposed_solution" cols="30" rows="5"><?php echo @$default->proposed_solution; ?></textarea>
                             </div>
                         </div>
                         <div class="row mt-20">
@@ -68,27 +68,27 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                                 <table class="table table-borderless m-0">
                                     <tr>
                                         <td style="width: 75px; background-color: #aad6f0;border-bottom: 10px solid #fff;border-top: 10px solid #fff;color: #000;"><small>Operating:</small></td>
-                                        <td style="padding: 0 0 0 8px;"><input name="operating" type="text" style="width: 100%;height: 40px;" value="<?php echo @$default->operating; ?>"></td>
+                                        <td style="padding: 0 0 0 8px;"><input id="operating" name="operating" type="text" style="width: 100%;height: 40px;" value="<?php echo @$default->operating; ?>"></td>
                                     </tr>
                                     <tr>
                                         <td style="width: 75px; background-color: #aad6f0;color: #000;border-bottom: 10px solid #fff;border-top: 10px solid #fff;"><small>Capital:</small></td>
-                                        <td style="padding: 0 0 0 8px;"><input name="capital" type="text" style="width: 100%;height: 40px;" value="<?php echo @$default->capital; ?>"></td>
+                                        <td style="padding: 0 0 0 8px;"><input id="capital" name="capital" type="text" style="width: 100%;height: 40px;" value="<?php echo @$default->capital; ?>"></td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="col-sm-9">
                                 <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Options:</p>
-                                <textarea required name="options" cols="30" rows="3"><?php echo @$default->options; ?></textarea>
+                                <textarea required id="options" name="options" cols="30" rows="3"><?php echo @$default->options; ?></textarea>
                             </div>
                         </div>
                         <div class="row mt-20">
                             <div class="col-sm-8">
                                 <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Benefits and Measures:</p>
-                                <textarea required name="benefits_and_measures" cols="30" rows="5"><?php echo @$default->benefits_and_measures; ?></textarea>
+                                <textarea required id="benefits_and_measures" name="benefits_and_measures" cols="30" rows="5"><?php echo @$default->benefits_and_measures; ?></textarea>
                             </div>
                             <div class="col-sm-4">
                                 <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Resource Impacts:</p>
-                                <textarea required name="resource_impacts" cols="30" rows="5"><?php echo @$default->resource_impacts; ?></textarea>
+                                <textarea required id="resource_impacts" name="resource_impacts" cols="30" rows="5"><?php echo @$default->resource_impacts; ?></textarea>
                             </div>
                         </div>
                         <div class="row text-right mt-10">
@@ -180,10 +180,16 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
 		})
 	})
     jQuery('.projectProposalForm').on('submit', function(e) {
-		e.preventDefault()
-		var formData = jQuery(this).serialize()
-		var postID = jQuery(this).attr('data-id')
-		jQuery(this).find('.btn-success').addClass('loading')
+		e.preventDefault();
+		var validate = validateProjectProposalForm();
+		if (validate != true) {
+		    jQuery.notify({ title: "Validation Error : ", message: "You must need to fill all the fields!", icon: 'fa fa-times'}, {type: "danger"});
+		    return false;
+        }
+		var formData = jQuery(this).serialize();
+		console.log(formData);
+		var postID = jQuery(this).attr('data-id');
+		jQuery(this).find('.btn-success').addClass('loading');
 		jQuery.post(object.ajaxurl + '?action=ppf_save', {
 			data: formData,
 			post_id: postID,
@@ -194,8 +200,36 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
 			if (response == 'created') { jQuery.notify({title: "Update Complete : ", message: "Something cool is created!", icon: 'fa fa-check'}, {type: "success"}); setTimeout(function() {window.location.href = object.project_prioritization}, 2000); }
 			else if (response == 'updated') { jQuery.notify({title: "Update Complete : ", message: "Something cool is just updated!", icon: 'fa fa-check'}, {type: "success"})}
 			else { jQuery.notify({ title: "Update Failed : ", message: "Something wrong! Or you changed nothing!", icon: 'fa fa-times'}, {type: "danger"})}
-		})
-	})
+		});
+	});
+
+    function validateProjectProposalForm() {
+        var validate = false;
+        var project_name = $('#project_name').val();
+        var current_state = $('#current_state').val();
+        var future_state = $('#future_state').val();
+        var proposed_solution = $('#proposed_solution').val();
+        var operating = $('#operating').val();
+        var capital = $('#capital').val();
+        var options = $('#options').val();
+        var benefits_and_measures = $('#benefits_and_measures').val();
+        var resource_impacts = $('#resource_impacts').val();
+
+        if (
+            project_name.trim()=="" ||
+            current_state.trim()=="" ||
+            future_state.trim()=="" ||
+            proposed_solution.trim()=="" ||
+            operating.trim()=="" ||
+            capital.trim()=="" ||
+            options.trim()=="" ||
+            benefits_and_measures.trim()=="" ||
+            resource_impacts.trim()==""
+        ) {
+             return validate = false;
+        }
+        return validate = true;
+    }
 })</script>
 <?php
 get_footer();
