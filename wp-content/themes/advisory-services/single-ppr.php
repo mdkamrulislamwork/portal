@@ -16,7 +16,7 @@ $questionOptions = ['No', 'Yes'];
 <style>
     .table-borderless table.table tr td{ border: 0; }
     .heading table.table tr td{ font-size: 18px; font-weight: bold; }
-    .heading table.table tr td #prioritization_value{ font-size: 22px; color: #fff;padding: 5px 0;}
+    .heading table.table tr td #prioritization_value{ font-size: 19px;color: #fff;padding: 5px 0;height: 45px;line-height: 35px; border-radius: 50%; }
     .table-responsive table.table tr td{ font-size: 17px; }
     .table-responsive table.table tr td#ppr_answer{padding:  0px;}
     .table-responsive table.table tr td#ppr_answer select.answer{padding: 0px;text-align-last:center;}
@@ -44,18 +44,13 @@ $questionOptions = ['No', 'Yes'];
         </div>
     </div>
     <!--PAGE TITLE END-->
-    <img src="<?=get_template_directory_uri().'/images/single-ppr/header_image_evaluation.png'?>" alt="">
+
     <?php
-    /*echo '<div class="row">';
+    echo '<div class="row">';
         echo '<div class="col-md-8">';
             echo '<div class="card">';
                 echo '<div class="card-body heading">';
-                    echo '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>';
-                    echo '<div class="bg-black" style="height: 6px;margin-bottom: 15px;"></div>';
-                    echo '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.</p>';
-                    echo '<p>Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>';
-                    echo '<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>';
-                    echo '<div class="bg-black" style="height: 15px;margin-bottom: 0px;"></div>';
+                    echo '<img src="'.IMAGE_DIR_URL.'single-ppr/header_image_evaluation.png">';
                 echo '</div>';
             echo '</div>';
         echo '</div>';
@@ -63,22 +58,24 @@ $questionOptions = ['No', 'Yes'];
 
     echo '<div class="row">';
         echo '<div class="col-md-8">';
-            echo '<div class="card">';
+            echo '<div style="margin-bottom: 10px;font-weight: normal;font-size: 25px;"><span style="font-weight: 700; color: #000;">Project Name:</span><span style="font-weight: normal;"> '.$ppf->project_name.'</span></div>';
+         echo '</div>';
+        echo '<div class="col-md-8">';
+            echo '<div class="card" style=" width: 525px; ">';
                 echo '<div class="card-body heading">';
                     echo '<table class="table m-0 table-borderless">';
                         echo '<tr>';
                             echo '<td>';
-                                echo '<div style="background-color: #0c0c0c;color: #f9f9f9;padding: 8px 3px;margin-bottom: 10px;font-weight: normal;"><b>Project Name:</h3></b><span style="font-weight: normal;"> '.$ppf->project_name.'</span></div>';
-                                echo '<div class="status_container"><span style="color: #f9f9f9;background-color: #0c0c0c;padding: 4px 3px;">Status:</span> <div id="ppf_status" class="'.advisory_ppf_project_status_bg($ppf->project_status).'" style="display: inline-block; padding: 2px 5px; ">'.$projectStatus[$ppf->project_status].'</div></div>';
+                                echo '<div class="status_container"><span>Status:</span> <div id="ppf_status" class="'.advisory_ppf_project_status_bg($ppf->project_status).'" style="display: inline-block; padding: 2px 5px; ">'.$projectStatus[$ppf->project_status].'</div></div>';
                             echo '</td>';
                             echo '<td style="width: 175px;">Prioritization Value</td>';
-                            echo '<td class="no-padding" style=" width: 75px; text-align: center;"><div id="prioritization_value" class="bg-black">'.$prioritization_value.'</div></td>';
+                            echo '<td class="no-padding" style=" width: 45px; text-align: center;"><div id="prioritization_value" class="bg-black">'.$prioritization_value.'</div></td>';
                         echo '</tr>';
                     echo '</table>';
                 echo '</div>';
             echo '</div>';
         echo '</div>';
-    echo '</div>';*/
+    echo '</div>';
     if ( !empty($opts['areas']) ) {
         echo '<form class="form" method="post" data-id="'. $ppf->id .'">';
             //echo '<input type="hidden" id="prioritization_value" value="0">';
@@ -86,22 +83,24 @@ $questionOptions = ['No', 'Yes'];
                 $threatCatId = 'area_'.$areaSi . '_threatcat';
                 if ( !empty($opts[$threatCatId]) ) {
                     echo '<div class="row">';
-                        echo '<div class="col-md-8">';
+                        echo '<div class="col-md-10">';
                             echo '<div class="card">';
-                                echo '<div class="card-title-w-btn mb-5"">';
-                                    echo '<h4 class="title" style="background-color: #0c0c0c;color: #f9f9f9;padding: 10px 150px 10px 5px;min-width: 400px;">'. @$area['name'] .'</h4>';
-                                    if ($permission['edit']) echo '<button class="btn btn-success" type="submit"><i class="fa fa-lg fa-floppy-o"></i> Save</button>';
-                                echo '</div>';
                                 echo '<div class="card-body ppr-categories" style="padding-bottom: 10px;">';
+                                    echo '<table class="table mb-0"">';
+                                        echo '<tr>';
+                                            echo '<td class="title" style="background-color: #0c0c0c;color: #f9f9f9;font-size: 20px;">'. @$area['name'] .'</td>';
+                                            if ($permission['edit']) echo '<td style=" width: 100px; border-top-color: transparent;"><button class="btn btn-success" type="submit"><i class="fa fa-lg fa-floppy-o"></i> Save</button></td>';
+                                        echo '</tr>';
+                                    echo '</table>';
                                     foreach ( $opts[$threatCatId] as $threatCatSi => $threatCat ) {
                                         $threatId = $threatCatId.'_'.$threatCatSi.'_threat';
                                         if ( !empty($opts[$threatId]) ) {
                                             echo '<div class="table-responsive">';
                                                  echo '<table class="table table-bordered">';
                                                     echo '<tr>';
-                                                        echo '<td class="border-bottom-only pl-0" style="padding-bottom: 20px;"><strong style="background-color: #a45000;color: #f9f9f9;padding: 15px 140px 15px 5px;">'.$threatCat['name'].'</strong></td>';
-                                                        echo '<td class="border-bottom-only" style="width: 70px;"><strong>Yes/No</strong></td>';
-                                                        echo '<td class="border-bottom-only" style="width: 70px;"><strong>Notes</strong></td>';
+                                                        echo '<td class="border-bottom-only" style="background-color: #c2c285;color: #000;font-size: 19px;font-weight: 400;">'.$threatCat['name'].'</td>';
+                                                        echo '<td class="border-bottom-only" style="width: 70px;background-color: #c2c285;">Yes/No</td>';
+                                                        echo '<td class="border-bottom-only" style="width: 70px;background-color: #c2c285;">Notes</td>';
                                                     echo '</tr>';
                                                     foreach ($opts[$threatId] as $threatSi => $threat) {
                                                         $questionId = $threatId . '_' . $threatSi . '_question';
@@ -109,7 +108,7 @@ $questionOptions = ['No', 'Yes'];
                                                         $answer_val = !empty($ppr->requirements[$questionId . '_answer']) ? $ppr->requirements[$questionId . '_answer'] : 0;
                                                         $note = !empty($ppr->requirements[$questionId . '_note']) ? $ppr->requirements[$questionId . '_note'] : '';
                                                         echo '<tr>';
-                                                            echo '<td>'.$threat['name'].'</td>';
+                                                            echo '<td style="font-weight: 400;">'.$threat['name'].'</td>';
                                                             echo '<td id="ppr_answer" class="'.advisory_ppr_answer_bg($answer_val).'" data-weight="'.$answer_weight.'">'.advisory_opt_select($questionId.'_answer', $questionId.'_answer', 'answer', $permission['attr'], $questionOptions, $answer_val).'</strong></td>';
                                                             echo '<td class="bigComment '.advisory_ppr_answer_bg($note).'" isactive="'.$permission['attr'].'">';
                                                                 echo '<textarea class="hidden commentText" name="'.$questionId . '_note'.'">'. htmlentities($note).'</textarea>';

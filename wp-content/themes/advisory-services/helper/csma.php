@@ -362,6 +362,17 @@ function csmaFunctionBackground($functionId = 1)
     $data = null;
     if ( $functionId == 5 ) $data = ['func' => 'bg-dark-olive', 'cat' => 'bg-light-olive'];
     else if ( $functionId == 4 ) $data = ['func' => 'bg-dark-red', 'cat' => 'bg-light-red'];
+    else if ( $functionId == 3 ) $data = ['func' => 'bg-dark-purple', 'cat' => 'bg-light-purple'];
+    else if ( $functionId == 2 ) $data = ['func' => 'bg-dark-brandyPunch', 'cat' => 'bg-light-brandyPunch'];
+    else $data = ['func' => 'bg-dark-blue', 'cat' => 'bg-blue'];
+    return $data;
+}
+
+function csmaFunctionBackground_old($functionId = 1)
+{
+    $data = null;
+    if ( $functionId == 5 ) $data = ['func' => 'bg-dark-olive', 'cat' => 'bg-light-olive'];
+    else if ( $functionId == 4 ) $data = ['func' => 'bg-dark-red', 'cat' => 'bg-light-red'];
     else if ( $functionId == 3 ) $data = ['func' => 'bg-dark-brandyPunch', 'cat' => 'bg-light-brandyPunch'];
     else if ( $functionId == 2 ) $data = ['func' => 'bg-dark-purple', 'cat' => 'bg-light-purple'];
     else $data = ['func' => 'bg-dark-blue', 'cat' => 'bg-blue'];

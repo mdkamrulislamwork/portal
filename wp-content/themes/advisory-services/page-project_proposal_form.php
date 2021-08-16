@@ -13,7 +13,6 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
     .content-wrapper textarea {width: 100%;}
     .content-wrapper textarea:focus-visible { outline: none; }
     textarea,input{font-weight: normal;}
-
 </style>
 <div class="content-wrapper">
     <div class="page-title">
@@ -36,7 +35,7 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-6">
-                                <table><tr><td style="width: 120px;background-color: #000;color: #fff; padding: 5px 0 5px 3px;">Project Name:</td> <td style="padding: 0"><input type="text" required id="project_name" name="project_name" style="width: fit-content;height:40px;font-size: 20px;" value="<?php echo @$default->project_name; ?>"></td></tr></table>
+                                <table><tr><td style="width: 150px; background-color: #000; color: #fff; padding: 5px 0 5px 3px; font-size: 22px;">Project Name:</td> <td style="padding: 0"><input type="text" required id="project_name" name="project_name" style="width: fit-content;height:40px;font-size: 20px;" value="<?php echo @$default->project_name; ?>"></td></tr></table>
                             </div>
                             <div class="col-sm-4 pull-right text-right" style="text-align: right;">
                                 <level>Project Status:</level>
@@ -120,7 +119,7 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
             data: formData,
 			security: object.ajax_nonce
 		}, function(response) {
-            console.log(response);
+            // console.log(response);
 			if (response == true) {
 				swal({
 					title: "Are you sure?",
@@ -152,6 +151,11 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
 	})
     jQuery('.btn-save-all').on('click', function(e) {
         e.preventDefault();
+        var validate = validateProjectProposalForm();
+		if (validate != true) {
+		    jQuery.notify({ title: "Validation Error : ", message: "You must need to fill all the fields!", icon: 'fa fa-times'}, {type: "danger"});
+		    return false;
+        }
         jQuery('.projectProposalForm').submit();
     })
     jQuery('.btn-delete-ppf').on('click', function(e) {
