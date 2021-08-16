@@ -17,14 +17,15 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
 <div class="content-wrapper">
     <div class="page-title">
         <div> <h1><img class="dashboardIcon" src="<?php echo get_template_directory_uri(); ?>/images/icon-rr.png" alt=""><?php echo $page_title; ?></h1> </div>
-        <?php if (!empty($default)) {
-            echo '<div>';
+        <?php echo '<div>';
+           echo '<a class="btn btn-lg btn-warning" href="'.site_url('project-prioritization/').'">Proposals</a>';
+            if (!empty($default)) {
                 echo '<a class="btn btn-lg btn-info btn-publish-ppf" href="javascript:;" data-id="'.$default->id.'">Publish</a>';
                 echo '<a class="btn btn-lg btn-success btn-save-all" href="javascript:;" data-id="'.$default->id.'">Save</a>';
                 echo '<a class="btn btn-lg btn-danger btn-delete-ppf" href="javascript:;" data-id="'.$default->id.'">Delete</a>';
                 if ( $default && !empty($form_id[0]) ) echo '<a class="btn btn-lg btn-primary" href="'.site_url('ppr/'.$form_id[0].'/').'?ppf='.$default->id.'&edit='.$_GET['edit'].'">Evaluation</a>';
-            echo '</div>';
-        } ?>
+            }
+        echo '</div>'; ?>
         <div> <ul class="breadcrumb"> <li><i class="fa fa-home fa-lg"></i></li> <li><a href="javascript:;"><?php echo $page_title; ?></a></li> </ul> </div>
     </div>
     <div class="row">
@@ -49,7 +50,7 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                         </div>
                         <div class="row mt-20">
                             <div class="col-sm-6">
-                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Current State/Contenxt:</p>
+                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Current State/Context:</p>
                                 <textarea required id="current_state" name="current_state" cols="30" rows="5"><?php echo @$default->current_state; ?></textarea>
                             </div>
                             <div class="col-sm-6">
@@ -63,7 +64,7 @@ $form_id = advisory_get_active_forms($companyId, ['ppr']);
                         </div>
                         <div class="row mt-20">
                             <div class="col-sm-3">
-                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Budget Impact</p>
+                                <p style="background-color: #003d9b;color: #fff;margin-bottom: 0;padding: 8px 0 8px 8px;">Budget Impact:</p>
                                 <table class="table table-borderless m-0">
                                     <tr>
                                         <td style="width: 75px; background-color: #aad6f0;border-bottom: 10px solid #fff;border-top: 10px solid #fff;color: #000;"><small>Operating:</small></td>

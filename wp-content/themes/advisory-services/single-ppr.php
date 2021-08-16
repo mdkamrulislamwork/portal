@@ -30,9 +30,9 @@ $questionOptions = ['No', 'Yes'];
         <div> <h1>Project Evaluation</h1> </div>
         <?php if ($permission['edit']) {
             echo '<div>';
-                echo '<a class="btn btn-lg btn-info" href="'.site_url('project-prioritization/').'">Prioritizations</a>';
+                echo '<a class="btn btn-lg btn-warning" href="'.site_url('project-prioritization/').'">Proposals</a>';
                 echo '<a class="btn btn-lg btn-success btn-save" href="#">Save</a>';
-                if ($permission['reset']) echo '<a class="btn btn-lg btn-warning btn-reset" href="javascript:;"  data-id="'.$ppr->id.'">Reset</a>';
+                if ($permission['reset']) echo '<a class="btn btn-lg btn-danger btn-reset" href="javascript:;"  data-id="'.$ppr->id.'">Reset</a>';
                 echo '<a class="btn btn-lg btn-primary" href="'.site_url('project-proposal-form/').'?id='.$ppf->id.'&edit='.@$_GET['edit'].'">Form</a>';
             echo '</div>';
         } ?>
