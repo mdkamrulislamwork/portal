@@ -297,7 +297,7 @@ else if ($postID == 'sfia_partial_skills_fit') {
         $html .= ' table.skills table.skillItems tr .evaluation{width:55px;}';
         // SUMMARY
         $html .= ' table.summary {margin-top: 10px;border-bottom: 2px solid #000;}';
-        $html .= ' table.summary tr th {font-size:12px;font-weight:bold;margin: 0;font-size: 13px;line-height:1;text-align:left;}';
+        $html .= ' table.summary tr th {font-weight:bold;margin: 0;font-size: 13px;line-height:1;text-align:left;}';
         $html .= ' table.summary tr th {vertical-align:top; padding:0 0 10px 0;}';
         $html .= ' table.summary tr td.half{width:50%;}';
         $html .= ' table.summary tr td{ padding:0 0 10px 0;vertical-align: top;}';

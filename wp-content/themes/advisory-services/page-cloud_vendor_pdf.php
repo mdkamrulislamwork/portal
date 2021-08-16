@@ -16,7 +16,7 @@ if ($data) {
     
     $str .= '<style type="text/css">';
         $str .= '@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");';
-        $str .= ' *{font-family: "Roboto", sans-serif !important;line-height:1.1;font-size: 11px; font-weight:bold;}';
+        $str .= ' *{font-family: "Roboto", sans-serif !important;line-height:1.1;font-size: 11px;}';
         $str .= '*{margin: 0;padding: 0;line-height:1.1;}';
         $str .= 'body { margin: 0;padding: 0; font-size:14px;}';
         $str .= 'strong { font-size:15px; }';
@@ -42,6 +42,12 @@ if ($data) {
         $str .= '.bg-dark-purple { background-color:#633d5f; }';
         // SUMMARY
         $str .= '.summary p { margin-bottom:5px; }';
+        $str .= ' table.summary {margin-top: 10px;border-bottom: 2px solid #000;}';
+        $str .= ' table.summary tr td{ vertical-align: top; padding:10px;}';
+        $str .= ' table.summary tr td *{font-size:13px;}';
+        $str .= ' table.summary tr td p.title{font-weight:bold}';
+        $str .= ' table.summary tr td ul, table.summary tr td ol{margin-top:0;padding-left:20px;}';
+        $str .= ' table.summary tr td ul li, table.summary tr td ol li{margin: 0 0 5px 0;}';
        
     $str .= '</style>';
     $str .= '<div class="container" style="margin: 0 auto;">';
@@ -59,7 +65,7 @@ if ($data) {
                         $str .= '<p style="font-size:14px;margin-top: 20px;">'.$data['date'].'</p>';
                     $str .= '</td>';
                     $str .= '<td style="text-align:center;width:110px;float:right;">';
-                        $str .= '<p style="font-size:12px;">Category Average:</p>';
+                        $str .= '<p style="font-size:14px;">Category Average:</p>';
                         $str .= '<p class="'.($data['avg']['cls'] ? $data['avg']['cls'] : '').'" style="margin: 2px auto 0 auto;font-size:11px;padding:5px 10px; border-radius:3px;width:70px;color:#ffffff;">'.($data['avg']['text'] ? $data['avg']['text'] : '').'</p>';
                     $str .= '</td>';
                     $str .= '</tr>';

@@ -66,7 +66,7 @@ $questionOptions = ['No', 'Yes'];
                     echo '<table class="table m-0 table-borderless">';
                         echo '<tr>';
                             echo '<td>';
-                                echo '<div class="status_container"><span>Status:</span> <div id="ppf_status" class="'.advisory_ppf_project_status_bg($ppf->project_status).'" style="display: inline-block; padding: 2px 5px; ">'.$projectStatus[$ppf->project_status].'</div></div>';
+                                echo '<div class="status_container"><span>Status:</span> <div id="ppf_status" class="'.advisory_ppf_project_status_bg($ppf->project_status).'" style="display: inline-block;padding: 2px 5px;font-weight: 400;font-size: 14px;padding: 3px 7px;">'.$projectStatus[$ppf->project_status].'</div></div>';
                             echo '</td>';
                             echo '<td style="width: 175px;">Prioritization Value</td>';
                             echo '<td class="no-padding" style=" width: 45px; text-align: center;"><div id="prioritization_value" class="bg-black">'.$prioritization_value.'</div></td>';
